@@ -1,0 +1,6 @@
+<Modules>
+  <Module PersistentId="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9" ModuleId="PhoneSubscriptionCalculator" />
+  <Module PersistentId="D7B25947-3DD3-40F7-8A74-7609AB296768" ModuleId="UnitTest" />
+  <Module PersistentId="7028D94B-3212-487C-B2C1-9F8787340E94" ModuleId="IntegrationTest" />
+  <Module PersistentId="021D6774-2FEF-4BFB-A740-D2B286A8189B" ModuleId="AcceptanceTest" />
+</Modules>

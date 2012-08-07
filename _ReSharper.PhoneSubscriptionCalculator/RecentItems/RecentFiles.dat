@@ -1,0 +1,61 @@
+﻿<RecentFiles>
+  <RecentFiles>
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/f:Class1.cs" caret="0" fromTop="0" />
+    <File id="7028D94B-3212-487C-B2C1-9F8787340E94/f:Class1.cs" caret="0" fromTop="0" />
+    <File id="D7B25947-3DD3-40F7-8A74-7609AB296768/f:Class1.cs" caret="0" fromTop="0" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:VoiceCallServiceFeature.cs" caret="722" fromTop="22" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:Voice Call Service.feature.cs" caret="2" fromTop="0" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:CustomerPhoneSubscription.feature" caret="357" fromTop="9" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:IService.cs" caret="173" fromTop="8" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:CustomerStatus.cs" caret="171" fromTop="7" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:CustomerStatus.feature" caret="675" fromTop="15" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:ICall.cs" caret="152" fromTop="7" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="2086" fromTop="20" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCallService.cs" caret="204" fromTop="11" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:CustomerPhoneSubscription.feature.cs" caret="953" fromTop="14" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:PhoneSubscription.feature" caret="240" fromTop="6" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:CustomerTests/f:CustomerPhoneSubscriptionTest.cs" caret="764" fromTop="17" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCall.cs" caret="15" fromTop="1" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:Voice Call Service.feature" caret="255" fromTop="7" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:RegisterServiceUsage.feature" caret="0" fromTop="0" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:PhoneSubscription.feature.cs" caret="2787" fromTop="13" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:PhoneSubscriptionTest.cs" caret="0" fromTop="0" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:CustomerStatus.feature.cs" caret="2962" fromTop="14" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/f:RegisterServiceUsage.feature.cs" caret="2820" fromTop="14" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:Customer.cs" caret="776" fromTop="19" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="400" fromTop="0" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:CustomerTests/f:CustomerStatusTest.cs" caret="15" fromTop="0" />
+  </RecentFiles>
+  <RecentEdits>
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:Customer.cs" caret="536" fromTop="16" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:ICall.cs" caret="152" fromTop="7" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCall.cs" caret="715" fromTop="16" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCall.cs" caret="715" fromTop="20" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCall.cs" caret="251" fromTop="11" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCall.cs" caret="695" fromTop="21" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:VoiceCall.cs" caret="15" fromTop="1" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="1011" fromTop="15" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="352" fromTop="10" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="699" fromTop="17" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="1240" fromTop="9" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="2058" fromTop="13" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="2649" fromTop="22" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="557" fromTop="12" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="761" fromTop="12" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="2101" fromTop="27" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="2184" fromTop="20" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="2628" fromTop="26" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="386" fromTop="12" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:PhoneSubscription.cs" caret="2086" fromTop="20" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="1846" fromTop="15" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="2498" fromTop="21" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:CustomerTests/f:CustomerPhoneSubscriptionTest.cs" caret="342" fromTop="9" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:CustomerTests/f:CustomerPhoneSubscriptionTest.cs" caret="748" fromTop="19" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:CustomerTests/f:CustomerPhoneSubscriptionTest.cs" caret="1126" fromTop="26" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:Customer.cs" caret="1085" fromTop="22" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:Customer.cs" caret="330" fromTop="11" />
+    <File id="7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9/d:Models/f:Customer.cs" caret="776" fromTop="19" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:SubscriptionTests/f:RegisterServiceUsageTest.cs" caret="190" fromTop="8" />
+    <File id="021D6774-2FEF-4BFB-A740-D2B286A8189B/d:CustomerTests/f:CustomerStatusTest.cs" caret="15" fromTop="1" />
+  </RecentEdits>
+</RecentFiles>
