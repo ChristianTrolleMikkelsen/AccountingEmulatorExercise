@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTestFixtureBase.cs" />
     <Compile Include="Voice Call Service - Foreign Calls.feature.cs">
       <DependentUpon>Voice Call Service - Foreign Calls.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -106,11 +107,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubscriptionTests\PhoneSubscriptionTest.cs" />
     <Compile Include="SubscriptionTests\RegisterServiceUsageTest.cs" />
-    <Compile Include="Voice Call Service.feature.cs">
+    <Compile Include="Voice Call Service - Register Call.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Voice Call Service.feature</DependentUpon>
+      <DependentUpon>Voice Call Service - Register Call.feature</DependentUpon>
     </Compile>
+    <Compile Include="VoiceCallTests\RegisterVoiceCallTests.cs" />
     <Compile Include="VoiceCallServiceFeature.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +142,9 @@
       <LastGenOutput>PhoneSubscription.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="Voice Call Service.feature">
+    <None Include="Voice Call Service - Register Call.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Voice Call Service.feature.cs</LastGenOutput>
+      <LastGenOutput>Voice Call Service - Register Call.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +153,7 @@
       <Name>PhoneSubscriptionCalculator</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Voice Call Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

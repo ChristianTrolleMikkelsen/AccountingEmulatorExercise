@@ -31,13 +31,13 @@ namespace AcceptanceTest.SubscriptionTests
         {
             var customer = ScenarioContext.Current.Get<Customer>();
 
-            customer.GetPhoneSubscription(fathersPhoneNumber)
+          /*  customer.GetPhoneSubscription(fathersPhoneNumber)
                         .RegisterACall(new VoiceCall(new DateTime(1, 1, 1, 8, 0, 2), new TimeSpan(0, 3, 0), daughtersPhoneNumber, "DK", "DK"));
 
             customer.GetPhoneSubscription(daughtersPhoneNumber)
                         .RegisterACall(new VoiceCall(new DateTime(1, 1, 1, 12, 3, 0), new TimeSpan(0, 2, 0), fathersPhoneNumber, "DK", "DK"))
                         .RegisterACall(new VoiceCall(new DateTime(1, 1, 1, 14, 3, 0), new TimeSpan(0, 42, 0), fathersPhoneNumber, "DK", "DK"))
-                        .RegisterACall(new VoiceCall(new DateTime(1, 1, 1, 17, 3, 0), new TimeSpan(0, 32, 0), fathersPhoneNumber, "DK", "DK"));
+                        .RegisterACall(new VoiceCall(new DateTime(1, 1, 1, 17, 3, 0), new TimeSpan(0, 32, 0), fathersPhoneNumber, "DK", "DK"));*/
         }
     
         [When(@"I want to create a bill for the subscriptions")]

@@ -7,6 +7,6 @@ namespace PhoneSubscriptionCalculator.Models
 {
     public interface ICall
     {
-
+        string SourcePhoneNumber { get; }
     }
 }
