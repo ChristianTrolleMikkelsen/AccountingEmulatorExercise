@@ -1,5 +1,0 @@
-D:\My Projects\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator\bin\Debug\PhoneSubscriptionCalculator.dll
-D:\My Projects\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator\bin\Debug\PhoneSubscriptionCalculator.pdb
-D:\My Projects\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator\obj\Debug\ResolveAssemblyReference.cache
-D:\My Projects\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator\obj\Debug\PhoneSubscriptionCalculator.dll
-D:\My Projects\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator\obj\Debug\PhoneSubscriptionCalculator.pdb
