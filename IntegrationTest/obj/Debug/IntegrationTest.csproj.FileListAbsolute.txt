@@ -1,5 +1,0 @@
-D:\My Projects\PhoneSubscriptionCalculator\IntegrationTest\bin\Debug\IntegrationTest.dll
-D:\My Projects\PhoneSubscriptionCalculator\IntegrationTest\bin\Debug\IntegrationTest.pdb
-D:\My Projects\PhoneSubscriptionCalculator\IntegrationTest\obj\Debug\ResolveAssemblyReference.cache
-D:\My Projects\PhoneSubscriptionCalculator\IntegrationTest\obj\Debug\IntegrationTest.dll
-D:\My Projects\PhoneSubscriptionCalculator\IntegrationTest\obj\Debug\IntegrationTest.pdb
