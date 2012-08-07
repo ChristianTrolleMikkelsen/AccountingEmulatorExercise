@@ -5,56 +5,53 @@ namespace PhoneSubscriptionCalculator.Models
 {
     public interface IPhoneSubscription
     {
-        IEnumerable<IService> GetInLandServices();
-        IEnumerable<IService> GetAbroadServices();
-        void AddInLandService(IService service);
-        void AddAbroadService(IService service);
+        void AddService(IService service);
+        IEnumerable<IService> GetServices();
 
         IPhoneSubscription RegisterACall(ICall call);
 
         string PhoneNumber { get; }
+        Country LocalCountry { get; }
         IEnumerable<ICall> GetCalls();
     }
 
     public class PhoneSubscription : IPhoneSubscription
     {
-        private List<IService> _inlandServices;
-        private List<IService> _abroadServices;
+        private List<IService> _services;
         private List<ICall> _calls;
 
         public string PhoneNumber { get; private set; }
 
+        public Country LocalCountry { get; private set; }
+
         public PhoneSubscription(string phoneNumber)
         {
+            Initialize(phoneNumber, "DKK");//TODO: In better version remove magic strings
+        }
+
+        public PhoneSubscription(string phoneNumber, string countryIsoCode)
+        {
+            Initialize(phoneNumber, countryIsoCode);
+        }
+
+        private void Initialize(string phoneNumber, string countryIsoCode)
+        {
             PhoneNumber = phoneNumber;
-            _inlandServices = new List<IService>();
-            _abroadServices = new List<IService>();
+            _services = new List<IService>();
             _calls = new List<ICall>();
+            LocalCountry = new Country(countryIsoCode);
         }
 
-        public IEnumerable<IService> GetInLandServices()
+        public IEnumerable<IService> GetServices()
         {
-            return _inlandServices;
+            return _services;
         }
 
-        public IEnumerable<IService> GetAbroadServices()
+        public void AddService(IService service)
         {
-            return _abroadServices;
-        }
-
-        public void AddInLandService(IService service)
-        {
-            if (ListDoNotContainAServiceOfSameType(_inlandServices, service))
+            if (ListDoNotContainAServiceOfSameType(_services, service))
             {
-                _inlandServices.Add(service);
-            }
-        }
-
-        public void AddAbroadService(IService service)
-        {
-            if (ListDoNotContainAServiceOfSameType(_abroadServices, service))
-            {
-                _abroadServices.Add(service);
+                _services.Add(service);
             }
         }
 

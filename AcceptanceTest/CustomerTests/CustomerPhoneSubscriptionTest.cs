@@ -18,7 +18,6 @@ namespace AcceptanceTest.CustomerTests
         public void GivenIHaveCreatedANewCustomer()
         {
             customer = new Customer("John Doe");
-//            ScenarioContext.Current.Set<Customer>(new Customer("John Doe"));
         }
 
         [When(@"I sell the customer a phone subscription")]
@@ -26,14 +25,12 @@ namespace AcceptanceTest.CustomerTests
         {
             var subscription = new PhoneSubscription(phoneNumber);
             customer.AddPhoneSubscription(subscription);
-//            ScenarioContext.Current.Get<Customer>().AddPhoneSubscription(subscription);
         }
 
         [Then(@"the phone subscription is added to the customers inventory")]
         public void ThenThePhoneSubscriptionIsAddedToTheCustomersInventory()
         {
             customer.GetPhoneSubscription(phoneNumber).Should().NotBeNull();
-//            ScenarioContext.Current.Get<Customer>().GetPhoneSubscription(phoneNumber).Should().NotBeNull();
         }
     }
 }

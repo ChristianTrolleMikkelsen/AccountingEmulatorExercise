@@ -33,8 +33,7 @@ namespace AcceptanceTest
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Voice Call Service", "In order to make a profit on voice calls\r\nAs an accountant\r\nI must be able to reg" +
-                    "ister voice calls \r\nand I must be able to choose between different kinds of char" +
-                    "ges for voice calls", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ister voice calls by a set of parameters to calculate the bill for a customer", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,37 +73,37 @@ namespace AcceptanceTest
         public virtual void RegisterVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Voice Call", exampleTags);
-#line 7
+#line 6
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 7
  testRunner.Given("a customer has a subscription linked to a mobile phone with the phone number \"778" +
                     "89955\"");
-#line 9
+#line 8
  testRunner.And("the subscription includes the Voice Call Service");
-#line 10
- testRunner.And(string.Format("the subscription has {0} as local country", sourceCountry));
-#line 11
+#line 9
  testRunner.And(string.Format("the customer makes a Voice Call at {0}", startTime));
-#line 12
+#line 10
  testRunner.And(string.Format("the call lasts {0}", duration));
-#line 13
+#line 11
  testRunner.And(string.Format("the call is made to number: {0}", receiver));
-#line 14
+#line 12
  testRunner.And(string.Format("the call is made from: {0}", sourceCountry));
-#line 15
+#line 13
  testRunner.And(string.Format("the call is made to: {0}", destinationCountry));
-#line 16
+#line 14
  testRunner.When("the call ends");
+#line 15
+ testRunner.Then("I must be able to find the call using the subscription");
+#line 16
+ testRunner.And(string.Format("the start time of the call must be registered at {0}", startTime));
 #line 17
- testRunner.Then("I must have registered the call by start time");
+ testRunner.And(string.Format("the duration of the call must be registered to have lasted {0}", duration));
 #line 18
- testRunner.And("duration");
+ testRunner.And(string.Format("the receiver of the call must be registered as {0}", receiver));
 #line 19
- testRunner.And("receiver");
+ testRunner.And(string.Format("the country from which the call was made must be registered as {0}", sourceCountry));
 #line 20
- testRunner.And("country from which the call was made");
-#line 21
- testRunner.And("country for which the call was made");
+ testRunner.And(string.Format("the country for which the call was made to must be registered as {0}", destinationCountry));
 #line hidden
             this.ScenarioCleanup();
         }

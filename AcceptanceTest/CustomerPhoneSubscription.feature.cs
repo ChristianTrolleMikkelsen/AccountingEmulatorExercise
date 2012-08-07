@@ -19,7 +19,7 @@ namespace AcceptanceTest
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.8.1.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Customer Phone PhoneSubscription")]
+    [NUnit.Framework.DescriptionAttribute("Customer Phone Subscription")]
     public partial class CustomerPhoneSubscriptionFeature
     {
         
@@ -32,7 +32,7 @@ namespace AcceptanceTest
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customer Phone PhoneSubscription", "In order to fullfill the needs of our customers\r\nAs a salesman\r\nI must be able to" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customer Phone Subscription", "In order to fullfill the needs of our customers\r\nAs a salesman\r\nI must be able to" +
                     " add phone subscriptions to a customer", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }

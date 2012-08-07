@@ -71,16 +71,18 @@ namespace AcceptanceTest
         public virtual void CreateANewSubscription()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create A New Subscription", ((string[])(null)));
-#line 7
-this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I want to create a new subscription");
+this.ScenarioSetup(scenarioInfo);
 #line 9
- testRunner.When("I have created the subscription");
+ testRunner.Given("I want to create a new subscription for phone \"51948896\"");
 #line 10
- testRunner.Then("the subscription always consists of an empty list of Inland services");
+ testRunner.When("I have created the subscription");
 #line 11
- testRunner.And("an empty list of Abroad services");
+ testRunner.Then("the subscription is registered for phone \"51948896\"");
+#line 12
+ testRunner.And("the subscription has default local country \"DKK\"");
+#line 13
+ testRunner.And("the subscription contains an empty list of services");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -90,18 +92,14 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CanAddAServiceToASubscription()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Can add a service to a subscription", ((string[])(null)));
-#line 13
-this.ScenarioSetup(scenarioInfo);
-#line 14
- testRunner.Given("I have a subscription");
-#line 15
- testRunner.When("I add a new Voice Call service to the Inland services");
 #line 16
- testRunner.And("I add a new Voice Call service to the Abroad services");
+this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Then("the Voice Call service must be added the Inland services");
+ testRunner.Given("I have created a subscription for phone \"51948896\"");
 #line 18
- testRunner.And("the Voice Call service must be added the Abroad services");
+ testRunner.When("I add a new Voice Call service to the subcription");
+#line 19
+ testRunner.Then("the Voice Call service must be added to the list of services");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -111,22 +109,39 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CannotAddAServiceToASubscriptionWithExistingServiceOfSameType()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot add a service to a subscription with existing service of same type", ((string[])(null)));
-#line 20
-this.ScenarioSetup(scenarioInfo);
-#line 21
- testRunner.Given("I have a subscription");
 #line 22
- testRunner.And("the Inland services allready contains a Voice Call service");
+this.ScenarioSetup(scenarioInfo);
 #line 23
- testRunner.And("the Abroad services allready contains a Voice Call service");
+ testRunner.Given("I have created a subscription for phone \"51948896\"");
 #line 24
- testRunner.When("I add a new Voice Call service to the Inland services");
+ testRunner.And("the subscription allready contains a Voice Call service");
 #line 25
- testRunner.And("I add a new Voice Call service to the Abroad services");
+ testRunner.When("I add a new Voice Call service to the subscription");
 #line 26
- testRunner.Then("the Voice Call service is not added the Inland services");
-#line 27
- testRunner.And("the Voice Call service is not added the Abroad services");
+ testRunner.Then("the Voice Call service is not added to the list of services");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create A New Subscription With Local Country")]
+        public virtual void CreateANewSubscriptionWithLocalCountry()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create A New Subscription With Local Country", ((string[])(null)));
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 30
+ testRunner.Given("I want to create a new subscription for phone \"51948896\"");
+#line 31
+ testRunner.And("I want the local country of the subscription to be \"USD\"");
+#line 32
+ testRunner.When("I have created the subscription with a not default country");
+#line 33
+ testRunner.Then("the subscription is registered for phone \"51948896\"");
+#line 34
+ testRunner.And("the subscription has local country \"USD\"");
+#line 35
+ testRunner.And("the subscription contains an empty list of services");
 #line hidden
             this.ScenarioCleanup();
         }
