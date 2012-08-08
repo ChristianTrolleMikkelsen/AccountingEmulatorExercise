@@ -99,6 +99,23 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Deny usage of services if the call is outside the allow country range")]
+        public virtual void DenyUsageOfServicesIfTheCallIsOutsideTheAllowCountryRange()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if the call is outside the allow country range", ((string[])(null)));
+#line 16
+this.ScenarioSetup(scenarioInfo);
+#line 17
+ testRunner.Given("a customer has a phone subscription with the Voice Call Service");
+#line 18
+ testRunner.When("the customer tries to make a Voice Call with the phone to \"DE\" from \"DK\"");
+#line 19
+ testRunner.Then("the service is denied when contacting the Call Central");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

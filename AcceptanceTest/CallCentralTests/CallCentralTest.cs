@@ -2,12 +2,9 @@
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator;
-using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Repositories;
 using PhoneSubscriptionCalculator.Service_Calls;
+using PhoneSubscriptionCalculator.Service_Charges;
 using PhoneSubscriptionCalculator.Services;
-using StructureMap;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTest.CallCentralTests
@@ -23,6 +20,7 @@ namespace AcceptanceTest.CallCentralTests
             var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
 
             _serviceRepository.SaveService(new VoiceCallService(phoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(phoneNumber, 1.1M));
 
             _subscriptionRepository.SaveSubscription(subscription);
         }
@@ -61,6 +59,13 @@ namespace AcceptanceTest.CallCentralTests
             var call = ScenarioContext.Current.Get<VoiceServiceCall>();
 
             Assert.Throws<Exception>(delegate { _callCentral.RegisterACall(call); });
+        }
+
+        [When(@"the customer tries to make a Voice Call with the phone to ""DE"" from ""DK""")]
+        public void WhenTheCustomerTriesToMakeAVoiceCallWithThePhoneToDEFromDK()
+        {
+            var call = new VoiceServiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DE");
+            ScenarioContext.Current.Set(call);
         }
     }
 }

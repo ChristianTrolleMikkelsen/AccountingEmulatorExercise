@@ -3,16 +3,18 @@ using PhoneSubscriptionCalculator.Service_Calls;
 
 namespace PhoneSubscriptionCalculator.Service_Charges
 {
-    public class VoiceCallSecondCharge : VoiceCallCharge
+    public class VoiceCallMinuteCharge : VoiceCallCharge
     {
-        public VoiceCallSecondCharge(string phoneNumber, decimal charge)
+        public VoiceCallMinuteCharge(string phoneNumber, decimal charge)
             : base(phoneNumber, charge) { }
 
         public override decimal CalculateCharge(IServiceCall call)
         {
             var voiceCall = ConvertToVoiceCall(call);
 
-            return Convert.ToDecimal(voiceCall.Duration.TotalSeconds) * _charge;
+            var totalMinutesAsDecimal = Convert.ToDecimal(voiceCall.Duration.TotalMinutes);
+            return Math.Ceiling(totalMinutesAsDecimal) * _charge;
         }
+
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Service_Calls;
 using PhoneSubscriptionCalculator.Service_Charges;
 using PhoneSubscriptionCalculator.Services;
@@ -35,6 +34,16 @@ namespace UnitTest
             {
                 get { return "I Am A Dummy"; }
             }
+
+            public string FromCountry
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            public string ToCountry
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
 
         [Test]
@@ -62,7 +71,7 @@ namespace UnitTest
                 get { return "I Am A Dummy"; }
             }
 
-            public Record GenerateBill(IServiceCall call)
+            public decimal CalculateCharge(IServiceCall call)
             {
                 throw new NotImplementedException();
             }

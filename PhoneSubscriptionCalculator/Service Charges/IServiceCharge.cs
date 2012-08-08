@@ -1,11 +1,10 @@
-﻿using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Service_Calls;
+﻿using PhoneSubscriptionCalculator.Service_Calls;
 
 namespace PhoneSubscriptionCalculator.Service_Charges
 {
     public interface IServiceCharge
     {
         string PhoneNumber { get; }
-        Record GenerateBill(IServiceCall call);
+        decimal CalculateCharge(IServiceCall call);
     }
 }

@@ -6,6 +6,7 @@ using PhoneSubscriptionCalculator;
 using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Repositories;
 using PhoneSubscriptionCalculator.Service_Calls;
+using PhoneSubscriptionCalculator.Service_Charges;
 using PhoneSubscriptionCalculator.Services;
 using StructureMap;
 using TechTalk.SpecFlow;
@@ -21,7 +22,6 @@ namespace AcceptanceTest.VoiceCallTests
         private string _receiver;
         private string _sourceCountry;
         private string _destinationCountry;
-
 
         [Given(@"a subscription with phone number ""(.*)"" exists")]
         public void GivenASubscriptionWithPhoneNumber77889955Exists(string phoneNumber)
@@ -39,8 +39,8 @@ namespace AcceptanceTest.VoiceCallTests
         {
             var subscription = ScenarioContext.Current.Get<ISubscription>();
 
-            var serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
-            serviceRepository.SaveService(new VoiceCallService(subscription.PhoneNumber));
+            _serviceRepository.SaveService(new VoiceCallService(subscription.PhoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(subscription.PhoneNumber, 1.1M));
         }
 
         [Given(@"the customer makes a Voice Call at ""(.*)""")]
@@ -76,8 +76,7 @@ namespace AcceptanceTest.VoiceCallTests
         [When(@"the call ends")]
         public void WhenTheCallEnds()
         {
-            var callRepository = ObjectFactory.GetInstance<ICallCentral>();
-            callRepository.RegisterACall(new VoiceServiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
+            _callCentral.RegisterACall(new VoiceServiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
         }
 
         [Then(@"I must be able to find the call using the subscription")]
@@ -85,8 +84,7 @@ namespace AcceptanceTest.VoiceCallTests
         {
             var subscription = ScenarioContext.Current.Get<ISubscription>();
 
-            var callRepository = ObjectFactory.GetInstance<ICallCentral>();
-            var calls = callRepository.GetCallsMadeFromPhoneNumber(subscription.PhoneNumber);
+            var calls = _callCentral.GetCallsMadeFromPhoneNumber(subscription.PhoneNumber);
 
             calls.Count().Should().Be(1);
 
@@ -126,6 +124,18 @@ namespace AcceptanceTest.VoiceCallTests
         {
             var call = ScenarioContext.Current.Get<VoiceServiceCall>();
             call.ToCountry.Should().Be(expectedCountry);
+        }
+
+        [Given(@"the subscription includes support for calling from country: ""(.*)""")]
+        public void GivenTheSubscriptionIncludesSupportForCallingFromCountryDE(string country)
+        {
+            _foreignServiceChargeRepository.SaveServiceCharge(country, new VoiceCallSecondCharge(_phoneNumber,1.1M));
+        }
+
+        [Given(@"the subscription includes support for calling to country: ""(.*)""")]
+        public void GivenTheSubscriptionIncludesSupportForCallingToCountryDK(string country)
+        {
+            _foreignServiceChargeRepository.SaveServiceCharge(country, new VoiceCallSecondCharge(_phoneNumber, 1.1M));
         }
     }
 }

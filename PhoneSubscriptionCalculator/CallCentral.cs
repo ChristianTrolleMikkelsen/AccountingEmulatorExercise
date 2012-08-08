@@ -17,21 +17,25 @@ namespace PhoneSubscriptionCalculator
     {
         private readonly ICallRepository _callRepository;
         private readonly IServiceRepository _serviceRepository;
+        private readonly IServiceChargeSelector _serviceChargeSelector;
 
-        public CallCentral(ICallRepository callRepository, IServiceRepository serviceRepository)
+        public CallCentral(ICallRepository callRepository, IServiceRepository serviceRepository, IServiceChargeSelector serviceChargeSelector)
         {
             _callRepository = callRepository;
             _serviceRepository = serviceRepository;
+            _serviceChargeSelector = serviceChargeSelector;
         }
 
         public void RegisterACall(IServiceCall serviceCall)
         {
-            CheckIfTheCallerHasASubscriptionWithTheNeededService(serviceCall);
+            CheckIfCallIsAllowToUseTheSerivceAsDefinedByTheSubscription(serviceCall);
+
+            CheckIfCallIsWithinTheCountryRangeDefinedByTheSubscription(serviceCall);
 
             _callRepository.RegisterACallForPhone(serviceCall);
         }
 
-        private void CheckIfTheCallerHasASubscriptionWithTheNeededService(IServiceCall serviceCall)
+        private void CheckIfCallIsAllowToUseTheSerivceAsDefinedByTheSubscription(IServiceCall serviceCall)
         {
             if (HasServicesWhichSupportsCall(serviceCall) == false)
             {
@@ -43,6 +47,14 @@ namespace PhoneSubscriptionCalculator
         {
             return _serviceRepository.GetServicesForPhoneNumber(serviceCall.PhoneNumber)
                                         .Any(service => service.HasSupportForCall(serviceCall));
+        }
+
+        private void CheckIfCallIsWithinTheCountryRangeDefinedByTheSubscription(IServiceCall serviceCall)
+        {
+            if(_serviceChargeSelector.GetServiceChargesForServiceBasedOnCallSourceAndDestination(serviceCall).Any() == false)
+            {
+                throw new Exception(string.Format("Your subscription do not support calls from {0} to {1}. ", serviceCall.FromCountry, serviceCall.ToCountry));
+            }
         }
 
         public IEnumerable<IServiceCall> GetCallsMadeFromPhoneNumber(string phoneNumber)

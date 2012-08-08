@@ -13,3 +13,7 @@ Scenario: Deny usage of services not provided by the subscription
 	When the customer tries to make a Voice Call with the phone
 	Then the service is denied when contacting the Call Central
 
+Scenario: Deny usage of services if the call is outside the allow country range
+	Given a customer has a phone subscription with the Voice Call Service
+	When the customer tries to make a Voice Call with the phone to "DE" from "DK"
+	Then the service is denied when contacting the Call Central

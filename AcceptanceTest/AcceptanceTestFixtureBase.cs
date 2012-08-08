@@ -7,16 +7,16 @@ using TechTalk.SpecFlow;
 
 namespace AcceptanceTest
 {
-    [TestFixture]
     internal abstract class AcceptanceTestFixtureBase
     {
         protected IPhoneSubscriptionFactory _subscriptionFactory;
         protected ISubscriptionRepository _subscriptionRepository;
         protected IServiceRepository _serviceRepository;
         protected ICallCentral _callCentral;
-        protected IServiceChargeRepository _serviceChargeRepository;
+        protected ILocalServiceChargeRepository _localServiceChargeRepository;
         protected IAccountingMachine _accountingMachine;
         protected IRecordRepository _recordRepository;
+        protected IForeignServiceChargeRepository _foreignServiceChargeRepository;
 
         [BeforeScenario]
         public void InitializeApplication()
@@ -31,9 +31,10 @@ namespace AcceptanceTest
             _subscriptionRepository = ObjectFactory.GetInstance<ISubscriptionRepository>();
             _serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
             _callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            _serviceChargeRepository = ObjectFactory.GetInstance<IServiceChargeRepository>();
+            _localServiceChargeRepository = ObjectFactory.GetInstance<ILocalServiceChargeRepository>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
             _recordRepository = ObjectFactory.GetInstance<IRecordRepository>();
+            _foreignServiceChargeRepository = ObjectFactory.GetInstance<IForeignServiceChargeRepository>();
         }
     }
 }

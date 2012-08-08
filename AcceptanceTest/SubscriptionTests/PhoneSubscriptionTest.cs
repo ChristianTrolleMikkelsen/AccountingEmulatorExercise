@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Service_Calls;
+using PhoneSubscriptionCalculator.Service_Charges;
 using PhoneSubscriptionCalculator.Services;
 using TechTalk.SpecFlow;
 
@@ -50,12 +51,14 @@ namespace AcceptanceTest.SubscriptionTests
         public void GivenIHaveCreatedASubscriptionForPhone51948896(string phoneNumber)
         {
             _subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            _subscriptionRepository.SaveSubscription(_subscription);
         }
 
         [When(@"I add a new Voice Call service to the subcription")]
         public void WhenIAddANewVoiceCallServiceToTheSubcription()
         {
             _serviceRepository.SaveService(new VoiceCallService(_subscription.PhoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
         }
 
         [Then(@"the Voice Call service must be added to the list of services")]
@@ -87,6 +90,7 @@ namespace AcceptanceTest.SubscriptionTests
         public void GivenTheSubscriptionIncludesAVoiceCallService()
         {
             _serviceRepository.SaveService(new VoiceCallService(_subscription.PhoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
         }
 
         [When(@"I make a Voice Call with the phone ""51948896""")]

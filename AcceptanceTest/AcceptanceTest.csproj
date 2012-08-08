@@ -72,13 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTestFixtureBase.cs" />
-    <Compile Include="Voice Call Service - Foreign Calls.feature.cs">
-      <DependentUpon>Voice Call Service - Foreign Calls.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Voice Call Service - Local Calls.feature.cs">
-      <DependentUpon>Voice Call Service - Local Calls.feature</DependentUpon>
+    <Compile Include="Voice Call Service - Charges.feature.cs">
+      <DependentUpon>Voice Call Service - Charges.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -113,17 +108,13 @@
       <DependentUpon>Voice Call Service - Register Call.feature</DependentUpon>
     </Compile>
     <Compile Include="VoiceCallTests\RegisterVoiceCallTests.cs" />
-    <Compile Include="VoiceCallTests\LocalCallChargeTests.cs" />
+    <Compile Include="VoiceCallTests\VoiceCallChargesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Voice Call Service - Foreign Calls.feature">
+    <None Include="Voice Call Service - Charges.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Voice Call Service - Foreign Calls.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Voice Call Service - Local Calls.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Voice Call Service - Local Calls.feature.cs</LastGenOutput>
+      <LastGenOutput>Voice Call Service - Charges.feature.cs</LastGenOutput>
     </None>
     <None Include="CallCental.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

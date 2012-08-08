@@ -66,13 +66,13 @@ namespace AcceptanceTest
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Register Voice Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "27206617", "DK", "DE", new string[0])]
+        [NUnit.Framework.DescriptionAttribute("Register Local Voice Call")]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "27206617", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "51948896", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "27206617", "DE", "US", new string[0])]
-        public virtual void RegisterVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "27206617", "DK", "DK", new string[0])]
+        public virtual void RegisterLocalVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Voice Call", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Local Voice Call", exampleTags);
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -102,6 +102,52 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
  testRunner.And(string.Format("the country from which the call was made must be registered as \"{0}\"", sourceCountry));
 #line 20
+ testRunner.And(string.Format("the country for which the call was made to must be registered as \"{0}\"", destinationCountry));
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Register Foreign Voice Call")]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "27206617", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "51948896", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "27206617", "DE", "DE", new string[0])]
+        public virtual void RegisterForeignVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Foreign Voice Call", exampleTags);
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 30
+ testRunner.Given("a subscription with phone number \"77889955\" exists");
+#line 31
+ testRunner.And("the subscription includes the Voice Call Service");
+#line 32
+ testRunner.And(string.Format("the subscription includes support for calling from country: \"{0}\"", sourceCountry));
+#line 33
+ testRunner.And(string.Format("the subscription includes support for calling to country: \"{0}\"", destinationCountry));
+#line 34
+ testRunner.And(string.Format("the customer makes a Voice Call at \"{0}\"", startTime));
+#line 35
+ testRunner.And(string.Format("the call lasts \"{0}\"", duration));
+#line 36
+ testRunner.And(string.Format("the call is made to number: \"{0}\"", receiver));
+#line 37
+ testRunner.And(string.Format("the call is made from: \"{0}\"", sourceCountry));
+#line 38
+ testRunner.And(string.Format("the call is made to: \"{0}\"", destinationCountry));
+#line 39
+ testRunner.When("the call ends");
+#line 40
+ testRunner.Then("I must be able to find the call using the subscription");
+#line 41
+ testRunner.And(string.Format("the start time of the call must be registered at \"{0}\"", startTime));
+#line 42
+ testRunner.And(string.Format("the duration of the call must be registered to have lasted \"{0}\" m:s", duration));
+#line 43
+ testRunner.And(string.Format("the receiver of the call must be registered as \"{0}\"", receiver));
+#line 44
+ testRunner.And(string.Format("the country from which the call was made must be registered as \"{0}\"", sourceCountry));
+#line 45
  testRunner.And(string.Format("the country for which the call was made to must be registered as \"{0}\"", destinationCountry));
 #line hidden
             this.ScenarioCleanup();

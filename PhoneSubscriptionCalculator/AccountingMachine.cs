@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using MoreLinq;
+using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Repositories;
 using PhoneSubscriptionCalculator.Service_Calls;
 using PhoneSubscriptionCalculator.Service_Charges;
-using PhoneSubscriptionCalculator.Services;
 
 namespace PhoneSubscriptionCalculator
 {
@@ -16,53 +15,58 @@ namespace PhoneSubscriptionCalculator
     public class AccountingMachine : IAccountingMachine
     {
         private readonly ICallCentral _callCentral;
-        private readonly ICallRepository _callRepository;
-        private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IServiceRepository _serviceRepository;
-        private readonly IServiceChargeRepository _serviceChargeRepository;
         private readonly IRecordRepository _recordRepository;
+        private readonly IServiceChargeSelector _serviceChargeSelector;
 
         public AccountingMachine(   ICallCentral callCentral,
-                                    ICallRepository callRepository,
-                                    ISubscriptionRepository subscriptionRepository, 
                                     IServiceRepository serviceRepository, 
-                                    IServiceChargeRepository serviceChargeRepository,
-                                    IRecordRepository recordRepository)
+                                    IRecordRepository recordRepository,
+                                    IServiceChargeSelector serviceChargeSelector)
         {
             _callCentral = callCentral;
-            _callRepository = callRepository;
-            _subscriptionRepository = subscriptionRepository;
             _serviceRepository = serviceRepository;
-            _serviceChargeRepository = serviceChargeRepository;
             _recordRepository = recordRepository;
+            _serviceChargeSelector = serviceChargeSelector;
         }
 
         public void GenerateBillForPhoneNumber(string phoneNumber)
         {
             var calls = _callCentral.GetCallsMadeFromPhoneNumber(phoneNumber);
 
-            calls.ForEach(ProcessCall);
+            calls.ForEach(GenerateRecordsForBill);
+
+            GenerateBill(phoneNumber);
         }
 
-        private void ProcessCall(IServiceCall call)
+        private void GenerateRecordsForBill(IServiceCall call)
         {
             var services = _serviceRepository.GetServicesForPhoneNumber(call.PhoneNumber);
 
             var servicesWhichSupportTheCall = services.Where(service => service.HasSupportForCall(call)).ToList();
 
-            servicesWhichSupportTheCall.ForEach(service => CalculateServiceCharge(service, call));
+            servicesWhichSupportTheCall.ForEach(service => CalculateServiceCharge(call));
         }
 
-        private void CalculateServiceCharge(IService service, IServiceCall call)
+        private void CalculateServiceCharge(IServiceCall call)
         {
-            var charges = _serviceChargeRepository.GetServiceChargesForPhoneNumberAndService(call.PhoneNumber, service);
+            var charges = _serviceChargeSelector.GetServiceChargesForServiceBasedOnCallSourceAndDestination(call);
 
             charges.ForEach(charge => GenerateRecord(charge, call));
         }
 
         private void GenerateRecord(IServiceCharge charge, IServiceCall call)
         {
-            _recordRepository.SaveRecord(charge.GenerateBill(call));
+            var newRecord = new Record(call.PhoneNumber,
+                                       call.ToString(),
+                                       charge.CalculateCharge(call));
+
+            _recordRepository.SaveRecord(newRecord);
+        }
+
+        private void GenerateBill(string phoneNumber)
+        {
+            //TODO
         }
     }
 }

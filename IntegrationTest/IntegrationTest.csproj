@@ -54,8 +54,9 @@
     <Compile Include="IntegrationTestBaseFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CallRepositoryTests.cs" />
-    <Compile Include="Repositories\BillRepositoryTests.cs" />
-    <Compile Include="Repositories\ServiceChargeRepositoryTests.cs" />
+    <Compile Include="Repositories\ForeignServiceChargeRepositoryTests.cs" />
+    <Compile Include="Repositories\RecordRepositoryTests.cs" />
+    <Compile Include="Repositories\LocalServiceChargeRepositoryTests.cs" />
     <Compile Include="Repositories\ServiceRepositoryTests.cs" />
     <Compile Include="Repositories\SubscriptionRepositoryTests.cs" />
     <Compile Include="StructureMapTests.cs" />
