@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using FluentAssertions;
 using PhoneSubscriptionCalculator.Models;
 using TechTalk.SpecFlow;
@@ -9,7 +6,7 @@ using TechTalk.SpecFlow;
 namespace AcceptanceTest.CustomerTests
 {
     [Binding]
-    class CustomerPhoneSubscriptionTest
+    class CustomerPhoneSubscriptionTest : AcceptanceTestFixtureBase
     {
         private string phoneNumber = "99998888";
         private Customer customer;
@@ -23,14 +20,14 @@ namespace AcceptanceTest.CustomerTests
         [When(@"I sell the customer a phone subscription")]
         public void WhenISellTheCustomerAPhoneSubscription()
         {
-            var subscription = new PhoneSubscription(phoneNumber);
+            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
             customer.AddPhoneSubscription(subscription);
         }
 
         [Then(@"the phone subscription is added to the customers inventory")]
         public void ThenThePhoneSubscriptionIsAddedToTheCustomersInventory()
         {
-            customer.GetPhoneSubscription(phoneNumber).Should().NotBeNull();
+            customer.GetPhoneSubscriptions().Count(sub => sub.PhoneNumber == phoneNumber).Should().Be(1);
         }
     }
 }

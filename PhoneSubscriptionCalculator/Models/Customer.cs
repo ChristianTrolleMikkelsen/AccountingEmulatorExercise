@@ -8,8 +8,8 @@ namespace PhoneSubscriptionCalculator.Models
         string Name { get; }
         CustomerStatus Status { get; }
 
-        void AddPhoneSubscription(IPhoneSubscription phoneSubscription);
-        IPhoneSubscription GetPhoneSubscription(string phoneNumber);
+        void AddPhoneSubscription(ISubscription subscription);
+        IEnumerable<ISubscription> GetPhoneSubscriptions();
     }
 
     public class Customer : ICustomer
@@ -17,23 +17,23 @@ namespace PhoneSubscriptionCalculator.Models
         public string Name { get; private set; }
         public CustomerStatus Status { get; private set; }
 
-        private List<IPhoneSubscription> _phoneSubscriptions;
+        private List<ISubscription> _phoneSubscriptions;
 
         public Customer(string name)
         {
             Name = name;
             Status = CustomerStatus.Normal;
-            _phoneSubscriptions = new List<IPhoneSubscription>();
+            _phoneSubscriptions = new List<ISubscription>();
         }
 
-        public void AddPhoneSubscription(IPhoneSubscription phoneSubscription)
+        public void AddPhoneSubscription(ISubscription subscription)
         {
-            _phoneSubscriptions.Add(phoneSubscription);
+            _phoneSubscriptions.Add(subscription);
         }
 
-        public IPhoneSubscription GetPhoneSubscription(string phoneNumber)
+        public IEnumerable<ISubscription> GetPhoneSubscriptions()
         {
-            return _phoneSubscriptions.First(sub => sub.PhoneNumber == phoneNumber);
+            return _phoneSubscriptions;
         }
 
         public void SetCustomerStatus(CustomerStatus status)

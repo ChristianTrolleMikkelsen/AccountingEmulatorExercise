@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
+using PhoneSubscriptionCalculator;
 using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Repositories;
+using PhoneSubscriptionCalculator.Service_Calls;
+using PhoneSubscriptionCalculator.Services;
 using StructureMap;
 using TechTalk.SpecFlow;
 
-namespace AcceptanceTest.Voice_Call_Service
+namespace AcceptanceTest.VoiceCallTests
 {
     [Binding]
     class VoiceCallTests : AcceptanceTestFixtureBase
@@ -24,15 +25,15 @@ namespace AcceptanceTest.Voice_Call_Service
         public void GivenASubscriptionWithPhoneNumber77889955Exists(string phoneNumber)
         {
             _phoneNumber = phoneNumber;
-            var subscription = new PhoneSubscription(_phoneNumber);
+            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(_phoneNumber);
             ScenarioContext.Current.Set(subscription);
         }
 
         [Given(@"the subscription includes the Voice Call Service")]
         public void GivenTheSubscriptionIncludesTheVoiceCallService()
         {
-            var subscription = ScenarioContext.Current.Get<PhoneSubscription>();
-            subscription.AddService(new VoiceCallService());
+            var subscription = ScenarioContext.Current.Get<ISubscription>();
+            subscription.AddService(new VoiceCallService(_phoneNumber));
         }
 
         [Given(@"the customer makes a Voice Call at ""(.*)""")]
@@ -68,8 +69,8 @@ namespace AcceptanceTest.Voice_Call_Service
         [When(@"the call ends")]
         public void WhenTheCallEnds()
         {
-            var callRepository = ObjectFactory.GetInstance<IPhoneCallRepository>();
-            callRepository.RegisterACallForPhone(new VoiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
+            var callRepository = ObjectFactory.GetInstance<ICallCentral>();
+            callRepository.RegisterACall(new VoiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
         }
 
         [Then(@"I must be able to find the call using the subscription")]

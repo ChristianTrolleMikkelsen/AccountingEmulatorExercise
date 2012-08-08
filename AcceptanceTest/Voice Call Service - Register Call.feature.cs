@@ -67,9 +67,9 @@ namespace AcceptanceTest
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Register Voice Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "01:37", "27206617", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("15:41:02", "02:15", "51948896", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "28:09", "27206617", "DE", "US", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "27206617", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "51948896", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "27206617", "DE", "US", new string[0])]
         public virtual void RegisterVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Voice Call", exampleTags);

@@ -50,9 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\PhoneSubscriptionFactory.cs" />
     <Compile Include="IntegrationTestBaseFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\PhoneCallRepositoryTests.cs" />
+    <Compile Include="Repositories\CallRepositoryTests.cs" />
+    <Compile Include="Repositories\ServiceRepositoryTests.cs" />
+    <Compile Include="Repositories\SubscriptionRepositoryTests.cs" />
     <Compile Include="StructureMapTests.cs" />
   </ItemGroup>
   <ItemGroup>

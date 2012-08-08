@@ -80,7 +80,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
  testRunner.Then("the subscription is registered for phone \"51948896\"");
 #line 12
- testRunner.And("the subscription has default local country \"DKK\"");
+ testRunner.And("the subscription has default local country \"DK\"");
 #line 13
  testRunner.And("the subscription contains an empty list of services");
 #line hidden
@@ -142,6 +142,23 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("the subscription has local country \"USD\"");
 #line 35
  testRunner.And("the subscription contains an empty list of services");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Find all calls related to a subscription")]
+        public virtual void FindAllCallsRelatedToASubscription()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find all calls related to a subscription", ((string[])(null)));
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 39
+ testRunner.Given("I have created a subscription for phone \"51948896\"");
+#line 40
+ testRunner.When("I make a Voice Call with the phone \"51948896\"");
+#line 41
+ testRunner.Then("I can find the call using the subscription phone number");
 #line hidden
             this.ScenarioCleanup();
         }

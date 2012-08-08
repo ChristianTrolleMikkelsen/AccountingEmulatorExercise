@@ -9,7 +9,7 @@ Scenario: Create A New Subscription
 	Given I want to create a new subscription for phone "51948896"
 	When I have created the subscription
 	Then the subscription is registered for phone "51948896"
-	And the subscription has default local country "DKK"
+	And the subscription has default local country "DK"
 	And the subscription contains an empty list of services
 
 
@@ -33,3 +33,9 @@ Scenario: Create A New Subscription With Local Country
 	Then the subscription is registered for phone "51948896"
 	And the subscription has local country "USD"
 	And the subscription contains an empty list of services
+
+
+Scenario: Find all calls related to a subscription
+	Given I have created a subscription for phone "51948896"
+	When I make a Voice Call with the phone "51948896"
+	Then I can find the call using the subscription phone number

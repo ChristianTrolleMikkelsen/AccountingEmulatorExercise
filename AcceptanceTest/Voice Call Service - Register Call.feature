@@ -21,7 +21,7 @@ Scenario Outline: Register Voice Call
 
 	Examples: 
 	| StartTime | Duration | Receiver | SourceCountry | DestinationCountry |
-	| 09:00:00  | 01:37    | 27206617 | DK            | DE                 |
-	| 15:41:02  | 02:15    | 51948896 | DK            | DK                 |
-	| 18:29:56  | 28:09    | 27206617 | DE            | US                 |
+	| 09:00:00  | 00:01:37 | 27206617 | DK            | DE                 |
+	| 15:41:02  | 00:02:15 | 51948896 | DK            | DK                 |
+	| 18:29:56  | 00:28:09 | 27206617 | DE            | US                 |
 
