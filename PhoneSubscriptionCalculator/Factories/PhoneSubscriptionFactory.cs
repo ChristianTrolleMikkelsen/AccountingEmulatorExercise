@@ -1,5 +1,4 @@
 ﻿using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
 
 namespace PhoneSubscriptionCalculator.Factories
 {
@@ -10,16 +9,9 @@ namespace PhoneSubscriptionCalculator.Factories
 
     public class PhoneSubscriptionFactory : IPhoneSubscriptionFactory
     {
-        private readonly IServiceRepository _serviceRepository;
-
-        public PhoneSubscriptionFactory(IServiceRepository serviceRepository)
-        {
-            _serviceRepository = serviceRepository;
-        }
-
         public ISubscription CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(string phoneNumber, string localCountryIsoCode)
         {
-            return new Subscription(_serviceRepository, phoneNumber, localCountryIsoCode);
+            return new Subscription(phoneNumber, localCountryIsoCode);
         }
     }
 }

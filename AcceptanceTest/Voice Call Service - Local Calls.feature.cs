@@ -79,11 +79,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Given("I have a registered a Voice Call");
 #line 9
- testRunner.And("the supscription has \"DKK\" as local country");
+ testRunner.And("the supscription has \"DK\" as local country");
 #line 10
- testRunner.And("the call is from \"DKK\"");
+ testRunner.And("the call is from \"DK\"");
 #line 11
- testRunner.And("the call is made to \"DKK\"");
+ testRunner.And("the call is made to \"DK\"");
 #line 12
  testRunner.And(string.Format("I have specified a local call charge of {0}", callCharge));
 #line 13
@@ -107,24 +107,23 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 25
- testRunner.Given("I have a registered a Voice Call");
+ testRunner.Given("I have a subscription which has \"DK\" as local country");
 #line 26
- testRunner.And("the supscription has \"DKK\" as local country");
+ testRunner.And("I have added a Voice Call service to the subscription");
 #line 27
- testRunner.And("the call is from \"DKK\"");
+ testRunner.And(string.Format("I have specified a second charge of: \"{0}\" for the Voice Call service", charge));
 #line 28
- testRunner.And("the call is made to \"DKK\"");
+ testRunner.And("start a call from \"DK\"");
 #line 29
- testRunner.And(string.Format("I have specified a second charge of: {0}", charge));
+ testRunner.And("the call is made to \"DK\"");
 #line 30
- testRunner.And(string.Format("the call lasted: {0}", duration));
+ testRunner.And(string.Format("the call lasts: \"{0}\"", duration));
 #line 31
- testRunner.When("I calculate the price of a call");
+ testRunner.When("the call is completed");
 #line 32
- testRunner.Then("I must be able to calculate the price of the call by each started second of the d" +
-                    "uration of the call");
+ testRunner.And("the accounting machine has processed the call");
 #line 33
- testRunner.And(string.Format("the price must be: {0}", cost));
+ testRunner.Then(string.Format("the price must be: \"{0}\"", cost));
 #line hidden
             this.ScenarioCleanup();
         }
@@ -142,11 +141,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 43
  testRunner.Given("I have a registered a Voice Call");
 #line 44
- testRunner.And("the supscription has \"DKK\" as local country");
+ testRunner.And("the supscription has \"DK\" as local country");
 #line 45
- testRunner.And("the call is from \"DKK\"");
+ testRunner.And("the call is from \"DK\"");
 #line 46
- testRunner.And("the call is made to \"DKK\"");
+ testRunner.And("the call is made to \"DK\"");
 #line 47
  testRunner.And(string.Format("I have specified a minute charge of: {0}", charge));
 #line 48
@@ -154,10 +153,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 49
  testRunner.When("I calculate the price of a call");
 #line 50
- testRunner.Then("I must be able to calculate the price of the call by each started minute of the d" +
-                    "uration of the call");
-#line 51
- testRunner.And(string.Format("the price must be: {0}", cost));
+ testRunner.Then(string.Format("the price must be: {0}", cost));
 #line hidden
             this.ScenarioCleanup();
         }
@@ -170,27 +166,24 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void IntervalCharge(string interval, string charge, string duration, string cost, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interval Charge", exampleTags);
-#line 60
+#line 59
 this.ScenarioSetup(scenarioInfo);
-#line 61
+#line 60
  testRunner.Given("I have a registered a Voice Call");
+#line 61
+ testRunner.And("the Voice Call is supscription has \"DK\" as local country");
 #line 62
- testRunner.And("the Voice Call is supscription has \"DKK\" as local country");
+ testRunner.And("the call is from \"DK\"");
 #line 63
- testRunner.And("the call is from \"DKK\"");
+ testRunner.And("the call is made to \"DK\"");
 #line 64
- testRunner.And("the call is made to \"DKK\"");
-#line 65
  testRunner.And(string.Format("the Voice Call Service is set to charge {0} for every {1} begun", charge, interval));
-#line 66
+#line 65
  testRunner.And(string.Format("the Voice Call lasted {0}", duration));
-#line 67
+#line 66
  testRunner.When("I calculate the price of a call");
-#line 68
- testRunner.Then(string.Format("I must be able to calculate the price of the call by each started {0} of the dura" +
-                        "tion of the call", interval));
-#line 69
- testRunner.And(string.Format("the price must be: {0}", cost));
+#line 67
+ testRunner.Then(string.Format("the price must be: {0}", cost));
 #line hidden
             this.ScenarioCleanup();
         }

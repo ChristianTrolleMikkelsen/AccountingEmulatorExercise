@@ -1,5 +1,4 @@
-﻿using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
+﻿using PhoneSubscriptionCalculator.Repositories;
 using PhoneSubscriptionCalculator.Service_Calls;
 using StructureMap;
 
@@ -19,10 +18,12 @@ namespace PhoneSubscriptionCalculator
                                              x.For<ICallRepository>().Singleton();
                                              x.For<IServiceRepository>().Singleton();
                                              x.For<ISubscriptionRepository>().Singleton();
+                                             x.For<IServiceChargeRepository>().Singleton();
+                                             x.For<IRecordRepository>().Singleton();
 
                                              x.Scan(scan =>
                                                         {
-                                                            scan.AssemblyContainingType<ICall>();
+                                                            scan.AssemblyContainingType<IServiceCall>();
                                                             scan.WithDefaultConventions();
                                                         });
                                          });

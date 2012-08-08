@@ -105,42 +105,23 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Cannot add a service to a subscription with existing service of same type")]
-        public virtual void CannotAddAServiceToASubscriptionWithExistingServiceOfSameType()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cannot add a service to a subscription with existing service of same type", ((string[])(null)));
-#line 22
-this.ScenarioSetup(scenarioInfo);
-#line 23
- testRunner.Given("I have created a subscription for phone \"51948896\"");
-#line 24
- testRunner.And("the subscription allready contains a Voice Call service");
-#line 25
- testRunner.When("I add a new Voice Call service to the subscription");
-#line 26
- testRunner.Then("the Voice Call service is not added to the list of services");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Create A New Subscription With Local Country")]
         public virtual void CreateANewSubscriptionWithLocalCountry()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create A New Subscription With Local Country", ((string[])(null)));
-#line 29
+#line 22
 this.ScenarioSetup(scenarioInfo);
-#line 30
+#line 23
  testRunner.Given("I want to create a new subscription for phone \"51948896\"");
-#line 31
+#line 24
  testRunner.And("I want the local country of the subscription to be \"USD\"");
-#line 32
+#line 25
  testRunner.When("I have created the subscription with a not default country");
-#line 33
+#line 26
  testRunner.Then("the subscription is registered for phone \"51948896\"");
-#line 34
+#line 27
  testRunner.And("the subscription has local country \"USD\"");
-#line 35
+#line 28
  testRunner.And("the subscription contains an empty list of services");
 #line hidden
             this.ScenarioCleanup();
@@ -151,13 +132,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void FindAllCallsRelatedToASubscription()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find all calls related to a subscription", ((string[])(null)));
-#line 38
+#line 31
 this.ScenarioSetup(scenarioInfo);
-#line 39
+#line 32
  testRunner.Given("I have created a subscription for phone \"51948896\"");
-#line 40
+#line 33
+ testRunner.And("the subscription includes a Voice Call service");
+#line 34
  testRunner.When("I make a Voice Call with the phone \"51948896\"");
-#line 41
+#line 35
  testRunner.Then("I can find the call using the subscription phone number");
 #line hidden
             this.ScenarioCleanup();

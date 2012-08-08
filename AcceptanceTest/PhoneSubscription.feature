@@ -19,13 +19,6 @@ Scenario: Can add a service to a subscription
 	Then the Voice Call service must be added to the list of services
 
 
-Scenario: Cannot add a service to a subscription with existing service of same type
-	Given I have created a subscription for phone "51948896"
-	And the subscription allready contains a Voice Call service
-	When I add a new Voice Call service to the subscription
-	Then the Voice Call service is not added to the list of services
-
-	
 Scenario: Create A New Subscription With Local Country
 	Given I want to create a new subscription for phone "51948896"
 	And I want the local country of the subscription to be "USD"
@@ -37,5 +30,6 @@ Scenario: Create A New Subscription With Local Country
 
 Scenario: Find all calls related to a subscription
 	Given I have created a subscription for phone "51948896"
+	And the subscription includes a Voice Call service
 	When I make a Voice Call with the phone "51948896"
 	Then I can find the call using the subscription phone number

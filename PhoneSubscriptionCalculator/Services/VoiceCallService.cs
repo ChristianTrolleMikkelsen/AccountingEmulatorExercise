@@ -1,5 +1,5 @@
-﻿using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Service_Calls;
+﻿using PhoneSubscriptionCalculator.Service_Calls;
+using PhoneSubscriptionCalculator.Service_Charges;
 
 namespace PhoneSubscriptionCalculator.Services
 {
@@ -12,9 +12,14 @@ namespace PhoneSubscriptionCalculator.Services
             PhoneNumber = phoneNumber;
         }
 
-        public bool HasSupportForCall(ICall call)
+        public bool HasSupportForCall(IServiceCall serviceCall)
         {
-            return call.GetType() == typeof(VoiceCall);
+            return serviceCall.GetType() == typeof(VoiceServiceCall);
+        }
+
+        public bool HasSupportForCharge(IServiceCharge charge)
+        {
+            return charge is IVoiceCallCharge;
         }
     }
 }

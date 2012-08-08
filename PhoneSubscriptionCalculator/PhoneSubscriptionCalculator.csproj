@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MoreLinq">
+      <HintPath>..\packages\morelinq.1.0\lib\net35\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
     </Reference>
@@ -44,21 +47,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountingMachine.cs" />
     <Compile Include="AppConfigurator.cs" />
     <Compile Include="CallCentral.cs" />
     <Compile Include="Factories\PhoneSubscriptionFactory.cs" />
+    <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerStatus.cs" />
-    <Compile Include="Service Calls\ICall.cs" />
+    <Compile Include="Repositories\RecordRepository.cs" />
+    <Compile Include="Repositories\ServiceChargeRepository.cs" />
+    <Compile Include="Service Calls\IServiceCall.cs" />
+    <Compile Include="Service Charges\IServiceCharge.cs" />
+    <Compile Include="Service Charges\IVoiceCallCharge.cs" />
+    <Compile Include="Service Charges\VoiceCallSecondCharge.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Models\PhoneSubscription.cs" />
-    <Compile Include="Service Calls\VoiceCall.cs" />
+    <Compile Include="Service Calls\VoiceServiceCall.cs" />
     <Compile Include="Services\VoiceCallService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CallRepository.cs" />
     <Compile Include="Repositories\SubscriptionRepository.cs" />
     <Compile Include="Repositories\ServiceRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

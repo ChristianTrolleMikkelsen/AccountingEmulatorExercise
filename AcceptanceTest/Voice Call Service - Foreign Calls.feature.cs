@@ -67,42 +67,6 @@ namespace AcceptanceTest
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Register Voice Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "01:37", "27206617", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("15:41:02", "02:15", "51948896", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "28:09", "27206617", "DE", "US", new string[0])]
-        public virtual void RegisterVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Voice Call", exampleTags);
-#line 7
-this.ScenarioSetup(scenarioInfo);
-#line 8
- testRunner.Given(string.Format("a customer makes a Voice Call at {0}", startTime));
-#line 9
- testRunner.And(string.Format("the call lasts {0}", duration));
-#line 10
- testRunner.And(string.Format("the call is made to number: {0}", receiver));
-#line 11
- testRunner.And(string.Format("the call is made from: {0}", sourceCountry));
-#line 12
- testRunner.And(string.Format("the call is made to: {0}", destinationCountry));
-#line 13
- testRunner.When("the call ends");
-#line 14
- testRunner.Then("I must have registered the call by start time");
-#line 15
- testRunner.And("duration");
-#line 16
- testRunner.And("receiver");
-#line 17
- testRunner.And("country from which the call was made");
-#line 18
- testRunner.And("country for which the call was made");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Call Charge")]
         [NUnit.Framework.TestCaseAttribute("1.0", "0.29", "1.29", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "24.30", "25.30", new string[0])]
@@ -110,17 +74,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CallCharge(string callCharge, string cost, string costWithCharge, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call Charge", exampleTags);
-#line 26
+#line 7
 this.ScenarioSetup(scenarioInfo);
-#line 27
+#line 8
  testRunner.Given("I have a registered a Voice Call");
-#line 28
+#line 9
  testRunner.And(string.Format("I have specified a call charge of {0}", callCharge));
-#line 29
+#line 10
  testRunner.When(string.Format("I calculate the price of a call to: {0}", cost));
-#line 30
+#line 11
  testRunner.Then("an the initial call cost must be added to the calculated price");
-#line 31
+#line 12
  testRunner.And(string.Format("the final cost must be: {0}", costWithCharge));
 #line hidden
             this.ScenarioCleanup();
@@ -134,20 +98,18 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SecondCharge(string charge, string duration, string cost, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Second Charge", exampleTags);
-#line 39
+#line 20
 this.ScenarioSetup(scenarioInfo);
-#line 40
- testRunner.Given("I have a registered a Voice Call");
-#line 41
+#line 21
+ testRunner.Given(string.Format("I have a registered a Voice Call that lasted: {0}", duration));
+#line 22
  testRunner.And(string.Format("I have specified a second charge of: {0}", charge));
-#line 42
- testRunner.And(string.Format("the call lasted: {0}", duration));
-#line 43
+#line 23
  testRunner.When("I calculate the price of a call");
-#line 44
+#line 24
  testRunner.Then("I must be able to calculate the price of the call by each started second of the d" +
                     "uration of the call");
-#line 45
+#line 25
  testRunner.And(string.Format("the price must be: {0}", cost));
 #line hidden
             this.ScenarioCleanup();
@@ -161,20 +123,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void MinuteCharge(string charge, string duration, string cost, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Minute Charge", exampleTags);
-#line 53
+#line 33
 this.ScenarioSetup(scenarioInfo);
-#line 54
+#line 34
  testRunner.Given("I have a registered a Voice Call");
-#line 55
+#line 35
  testRunner.And(string.Format("I have specified a minute charge of: {0}", charge));
-#line 56
+#line 36
  testRunner.And(string.Format("the call lasted: {0}", duration));
-#line 57
+#line 37
  testRunner.When("I calculate the price of a call");
-#line 58
+#line 38
  testRunner.Then("I must be able to calculate the price of the call by each started minute of the d" +
                     "uration of the call");
-#line 59
+#line 39
  testRunner.And(string.Format("the price must be: {0}", cost));
 #line hidden
             this.ScenarioCleanup();
@@ -188,22 +150,22 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void IntervalCharge(string interval, string charge, string duration, string cost, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interval Charge", exampleTags);
-#line 67
+#line 47
 this.ScenarioSetup(scenarioInfo);
-#line 68
+#line 48
  testRunner.Given("I have a registered a Voice Call");
-#line 69
+#line 49
  testRunner.And(string.Format("the Voice Call Service is set to charge by every {0} begun", interval));
-#line 70
+#line 50
  testRunner.And(string.Format("the charge is: {0}", charge));
-#line 71
+#line 51
  testRunner.And(string.Format("the Voice Call lasted {0}", duration));
-#line 72
+#line 52
  testRunner.When("I calculate the price of a call");
-#line 73
+#line 53
  testRunner.Then(string.Format("I must be able to calculate the price of the call by each started {0} of the dura" +
                         "tion of the call", interval));
-#line 74
+#line 54
  testRunner.And(string.Format("the price must be: {0}", cost));
 #line hidden
             this.ScenarioCleanup();

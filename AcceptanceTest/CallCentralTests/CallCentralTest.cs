@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using PhoneSubscriptionCalculator;
 using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Repositories;
 using PhoneSubscriptionCalculator.Service_Calls;
 using PhoneSubscriptionCalculator.Services;
@@ -22,54 +20,47 @@ namespace AcceptanceTest.CallCentralTests
         [Given(@"a customer has a phone subscription with the Voice Call Service")]
         public void GivenACustomerHasAPhoneSubscriptionWithTheVoiceCallService()
         {
-            var subscription = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>()
-                                                .CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
 
-            subscription.AddService(new VoiceCallService(phoneNumber));
+            _serviceRepository.SaveService(new VoiceCallService(phoneNumber));
 
-            ObjectFactory.GetInstance<ISubscriptionRepository>()
-                            .SaveSubscription(subscription);
+            _subscriptionRepository.SaveSubscription(subscription);
         }
 
         [When(@"the customer makes a Voice Call with the phone")]
         public void WhenTheCustomerMakesAVoiceCallWithThePhone()
         {
-            var callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            callCentral.RegisterACall(new VoiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK"));
+            _callCentral.RegisterACall(new VoiceServiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK"));
         }
 
 
         [Then(@"the call has been registred at the Call Central")]
         public void ThenTheCallHasBeenRegistredAtTheCallCentral()
         {
-            var callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            callCentral.GetCallsMadeFromPhoneNumber(phoneNumber).Count().Should().Be(1);
+            _callCentral.GetCallsMadeFromPhoneNumber(phoneNumber).Count().Should().Be(1);
         }
 
         [Given(@"a customer has a phone subscriptions without any services")]
         public void GivenACustomerHasAPhoneSubscriptionsWithoutAnyServices()
         {
-            var subscription = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>()
-                                                .CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
 
-            ObjectFactory.GetInstance<ISubscriptionRepository>()
-                            .SaveSubscription(subscription);
+            _subscriptionRepository.SaveSubscription(subscription);
         }
 
         [When(@"the customer tries to make a Voice Call with the phone")]
         public void WhenTheCustomerTriesToMakeAVoiceCallWithThePhone()
         {
-            var call = new VoiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK");
+            var call = new VoiceServiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK");
             ScenarioContext.Current.Set(call);
         }
 
         [Then(@"the service is denied when contacting the Call Central")]
         public void ThenTheServiceIsDeniedWhenContactingTheCallCentral()
         {
-            var call = ScenarioContext.Current.Get<VoiceCall>();
+            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
 
-            var callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            Assert.Throws<Exception>(delegate { callCentral.RegisterACall(call); });
+            Assert.Throws<Exception>(delegate { _callCentral.RegisterACall(call); });
         }
     }
 }

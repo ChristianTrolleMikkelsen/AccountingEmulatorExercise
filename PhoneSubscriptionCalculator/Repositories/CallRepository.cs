@@ -6,28 +6,28 @@ namespace PhoneSubscriptionCalculator.Repositories
 {
     public interface ICallRepository
     {
-        IEnumerable<ICall> GetCallsMadeByPhone(string phoneNumber);
-        void RegisterACallForPhone(ICall call);
+        IEnumerable<IServiceCall> GetCallsMadeByPhone(string phoneNumber);
+        void RegisterACallForPhone(IServiceCall serviceCall);
     }
 
     public class CallRepository : ICallRepository
     {
-        private List<ICall> _calls;
+        private List<IServiceCall> _calls;
 
         public CallRepository()
         {
-            _calls = new List<ICall>();
+            _calls = new List<IServiceCall>();
         }
 
-        public IEnumerable<ICall> GetCallsMadeByPhone(string phoneNumber)
+        public IEnumerable<IServiceCall> GetCallsMadeByPhone(string phoneNumber)
         {
-            return _calls.Where(call => call.SourcePhoneNumber == phoneNumber)
+            return _calls.Where(call => call.PhoneNumber == phoneNumber)
                             .ToList();
         }
 
-        public void RegisterACallForPhone(ICall call)
+        public void RegisterACallForPhone(IServiceCall serviceCall)
         {
-            _calls.Add(call);
+            _calls.Add(serviceCall);
         }
     }
 }

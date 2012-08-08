@@ -19,7 +19,7 @@ namespace IntegrationTest.Repositories
 
             var repo = ObjectFactory.GetInstance<ICallRepository>();
 
-            repo.RegisterACallForPhone(new VoiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "11112222", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "11112222", "DK", "DK"));
 
             repo.GetCallsMadeByPhone(phoneNumber).Count().Should().Be(1);
         }
@@ -31,10 +31,10 @@ namespace IntegrationTest.Repositories
 
             var repo = ObjectFactory.GetInstance<ICallRepository>();
 
-            repo.RegisterACallForPhone(new VoiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "11111111", "DK", "DK"));
-            repo.RegisterACallForPhone(new VoiceCall("11111111", DateTime.Now, DateTime.Now.TimeOfDay, "22222222", "DK", "DK"));
-            repo.RegisterACallForPhone(new VoiceCall("44556671", DateTime.Now, DateTime.Now.TimeOfDay, "33333333", "DK", "DK"));
-            repo.RegisterACallForPhone(new VoiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "44444444", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "11111111", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall("11111111", DateTime.Now, DateTime.Now.TimeOfDay, "22222222", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall("44556671", DateTime.Now, DateTime.Now.TimeOfDay, "33333333", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall(phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "44444444", "DK", "DK"));
 
             repo.GetCallsMadeByPhone(phoneNumber).Count().Should().Be(2);
         }
@@ -46,14 +46,14 @@ namespace IntegrationTest.Repositories
 
             var repo = ObjectFactory.GetInstance<ICallRepository>();
 
-            repo.RegisterACallForPhone(new VoiceCall("11111111", DateTime.Now, DateTime.Now.TimeOfDay, "22222222", "DK", "DK"));
-            repo.RegisterACallForPhone(new VoiceCall("44556671", DateTime.Now, DateTime.Now.TimeOfDay, "33333333", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall("11111111", DateTime.Now, DateTime.Now.TimeOfDay, "22222222", "DK", "DK"));
+            repo.RegisterACallForPhone(new VoiceServiceCall("44556671", DateTime.Now, DateTime.Now.TimeOfDay, "33333333", "DK", "DK"));
 
             repo.GetCallsMadeByPhone(phoneNumber).Count().Should().Be(0);
         }
 
         [Test]
-        public void PhoneCallRepository_Must_Be_A_Singleton_To_Allow_Sharing_Of_Repository_Across_Subscriptions_Until_MVC_Application_Can_Be_Setup()
+        public void PhoneCallRepository_Must_Be_A_Singleton_To_Allow_Sharing_Of_Repository_Until_MVC_Application_Can_Be_Setup()
         {
             var firstRepo = ObjectFactory.GetInstance<ICallRepository>();
             var secondRepo = ObjectFactory.GetInstance<ICallRepository>();

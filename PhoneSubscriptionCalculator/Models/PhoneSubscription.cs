@@ -8,9 +8,9 @@ namespace PhoneSubscriptionCalculator.Models
 {
     public interface ISubscription
     {
-        void AddService(IService service);
+       /* void AddService(IService service);
         IEnumerable<IService> GetServices();
-        bool HasServicesWhichSupportsCall(ICall call);
+        bool HasServicesWhichSupportsCall(IServiceCall call);*/
 
         string PhoneNumber { get; }
         Country LocalCountry { get; }
@@ -18,18 +18,16 @@ namespace PhoneSubscriptionCalculator.Models
 
     public class Subscription : ISubscription
     {
-        private readonly IServiceRepository _serviceRepository;
         public string PhoneNumber { get; private set; }
         public Country LocalCountry { get; private set; }
 
-        public Subscription(IServiceRepository serviceRepository, string phoneNumber, string countryIsoCode = "DK")
+        public Subscription(string phoneNumber, string countryIsoCode = "DK")
         {
-            _serviceRepository = serviceRepository;
             PhoneNumber = phoneNumber;
             LocalCountry = new Country(countryIsoCode);
         }
 
-        public IEnumerable<IService> GetServices()
+        /*public IEnumerable<IService> GetServices()
         {
             return _serviceRepository.GetServicesForPhoneNumber(PhoneNumber);
         }
@@ -48,10 +46,10 @@ namespace PhoneSubscriptionCalculator.Models
                                         .Any(listedService => listedService.GetType() == service.GetType());
         }
 
-        public bool HasServicesWhichSupportsCall(ICall call)
+        public bool HasServicesWhichSupportsCall(IServiceCall call)
         {
             return _serviceRepository.GetServicesForPhoneNumber(PhoneNumber)
                 .Any(service => service.HasSupportForCall(call));
-        }
+        }*/
     }
 }

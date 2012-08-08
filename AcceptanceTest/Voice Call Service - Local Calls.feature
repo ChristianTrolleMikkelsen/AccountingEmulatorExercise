@@ -6,9 +6,9 @@
 
 Scenario Outline: Call Charge
 	Given I have a registered a Voice Call
-	And the supscription has "DKK" as local country
-	And the call is from "DKK"
-	And the call is made to "DKK"
+	And the supscription has "DK" as local country
+	And the call is from "DK"
+	And the call is made to "DK"
 	And I have specified a local call charge of <CallCharge>
 	When I calculate the price of a call to be: <Cost>
 	Then an the initial call cost must be added to the calculated price
@@ -22,15 +22,15 @@ Scenario Outline: Call Charge
 
 
 Scenario Outline: Second Charge
-	Given I have a registered a Voice Call
-	And the supscription has "DKK" as local country
-	And the call is from "DKK"
-	And the call is made to "DKK"
-	And I have specified a second charge of: <Charge>
-	And the call lasted: <Duration>
-	When I calculate the price of a call
-	Then I must be able to calculate the price of the call by each started second of the duration of the call
-	And the price must be: <Cost>
+	Given I have a subscription which has "DK" as local country
+	And I have added a Voice Call service to the subscription
+	And I have specified a second charge of: "<Charge>" for the Voice Call service
+	And start a call from "DK"
+	And the call is made to "DK"
+	And the call lasts: "<Duration>"
+	When the call is completed
+	And the accounting machine has processed the call
+	Then the price must be: "<Cost>"
 
 	Examples: 
 	| Charge | Duration | Cost |
@@ -41,14 +41,13 @@ Scenario Outline: Second Charge
 
 Scenario Outline: Minute Charge
 	Given I have a registered a Voice Call
-	And the supscription has "DKK" as local country
-	And the call is from "DKK"
-	And the call is made to "DKK"
+	And the supscription has "DK" as local country
+	And the call is from "DK"
+	And the call is made to "DK"
 	And I have specified a minute charge of: <Charge>
 	And the call lasted: <Duration>
 	When I calculate the price of a call
-	Then I must be able to calculate the price of the call by each started minute of the duration of the call
-	And the price must be: <Cost>
+	Then the price must be: <Cost>
 
 	Examples: 
 	| Charge | Duration | Cost |
@@ -59,14 +58,13 @@ Scenario Outline: Minute Charge
 
 Scenario Outline: Interval Charge
 	Given I have a registered a Voice Call
-	And the Voice Call is supscription has "DKK" as local country
-	And the call is from "DKK"
-	And the call is made to "DKK"
+	And the Voice Call is supscription has "DK" as local country
+	And the call is from "DK"
+	And the call is made to "DK"
 	And the Voice Call Service is set to charge <Charge> for every <Interval> begun
 	And the Voice Call lasted <Duration>
 	When I calculate the price of a call
-	Then I must be able to calculate the price of the call by each started <Interval> of the duration of the call
-	And the price must be: <Cost>
+	Then the price must be: <Cost>
 
 	Examples: 
 	| Interval | Charge | Duration | Cost |

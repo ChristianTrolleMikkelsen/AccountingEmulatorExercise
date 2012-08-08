@@ -113,6 +113,7 @@
       <DependentUpon>Voice Call Service - Register Call.feature</DependentUpon>
     </Compile>
     <Compile Include="VoiceCallTests\RegisterVoiceCallTests.cs" />
+    <Compile Include="VoiceCallTests\LocalCallChargeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
+using FluentAssertions;
 using PhoneSubscriptionCalculator;
 using PhoneSubscriptionCalculator.Models;
 using PhoneSubscriptionCalculator.Repositories;
@@ -26,6 +28,9 @@ namespace AcceptanceTest.VoiceCallTests
         {
             _phoneNumber = phoneNumber;
             var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(_phoneNumber);
+
+            _subscriptionRepository.SaveSubscription(subscription);
+
             ScenarioContext.Current.Set(subscription);
         }
 
@@ -33,7 +38,9 @@ namespace AcceptanceTest.VoiceCallTests
         public void GivenTheSubscriptionIncludesTheVoiceCallService()
         {
             var subscription = ScenarioContext.Current.Get<ISubscription>();
-            subscription.AddService(new VoiceCallService(_phoneNumber));
+
+            var serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
+            serviceRepository.SaveService(new VoiceCallService(subscription.PhoneNumber));
         }
 
         [Given(@"the customer makes a Voice Call at ""(.*)""")]
@@ -70,43 +77,55 @@ namespace AcceptanceTest.VoiceCallTests
         public void WhenTheCallEnds()
         {
             var callRepository = ObjectFactory.GetInstance<ICallCentral>();
-            callRepository.RegisterACall(new VoiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
+            callRepository.RegisterACall(new VoiceServiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
         }
 
         [Then(@"I must be able to find the call using the subscription")]
         public void ThenIMustBeAbleToFindTheCallUsingTheSubscription()
         {
-            ScenarioContext.Current.Pending();
+            var subscription = ScenarioContext.Current.Get<ISubscription>();
+
+            var callRepository = ObjectFactory.GetInstance<ICallCentral>();
+            var calls = callRepository.GetCallsMadeFromPhoneNumber(subscription.PhoneNumber);
+
+            calls.Count().Should().Be(1);
+
+            ScenarioContext.Current.Set(calls.First() as VoiceServiceCall);
         }
 
-        [Then(@"the start time of the call must be registered at 09:00:00")]
-        public void ThenTheStartTimeOfTheCallMustBeRegisteredAt090000()
+        [Then(@"the start time of the call must be registered at ""(.*)""")]
+        public void ThenTheStartTimeOfTheCallMustBeRegisteredAt090000(string expectedStartTime)
         {
-            ScenarioContext.Current.Pending();
+            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
+            call.Start.Should().Be(DateTime.Parse(expectedStartTime));
         }
 
-        [Then(@"the duration of the call must be registered to have lasted 01:37")]
-        public void ThenTheDurationOfTheCallMustBeRegisteredToHaveLasted0137()
+        [Then(@"the duration of the call must be registered to have lasted ""(.*)"" m:s")]
+        public void ThenTheDurationOfTheCallMustBeRegisteredToHaveLasted000137MS(string expectedDuration)
         {
-            ScenarioContext.Current.Pending();
+            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
+            call.Duration.Should().Be(TimeSpan.Parse(expectedDuration));
         }
 
-        [Then(@"the receiver of the call must be registered as 27206617")]
-        public void ThenTheReceiverOfTheCallMustBeRegisteredAs27206617()
+        [Then(@"the receiver of the call must be registered as ""(.*)""")]
+        public void ThenTheReceiverOfTheCallMustBeRegisteredAs27206617(string expectedPhoneNumber)
         {
-            ScenarioContext.Current.Pending();
+            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
+            call.DestinationPhoneNumber.Should().Be(expectedPhoneNumber);
         }
 
-        [Then(@"the country from which the call was made must be registered as DK")]
-        public void ThenTheCountryFromWhichTheCallWasMadeMustBeRegisteredAsDK()
+        [Then(@"the country from which the call was made must be registered as ""(.*)""")]
+        public void ThenTheCountryFromWhichTheCallWasMadeMustBeRegisteredAsDK(string expectedCountry)
         {
-            ScenarioContext.Current.Pending();
+            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
+            call.FromCountry.Should().Be(expectedCountry);
         }
 
-        [Then(@"the country for which the call was made to must be registered as DE")]
-        public void ThenTheCountryForWhichTheCallWasMadeToMustBeRegisteredAsDE()
+        [Then(@"the country for which the call was made to must be registered as ""(.*)""")]
+        public void ThenTheCountryForWhichTheCallWasMadeToMustBeRegisteredAsDE(string expectedCountry)
         {
-            ScenarioContext.Current.Pending();
+            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
+            call.ToCountry.Should().Be(expectedCountry);
         }
     }
 }
