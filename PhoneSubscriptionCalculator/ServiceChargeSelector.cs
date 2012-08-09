@@ -56,13 +56,13 @@ namespace PhoneSubscriptionCalculator
 
         private string GetForeignCountryIsoCode(IServiceCall call)
         {
-            return (call.FromCountry != _subscription.LocalCountry.ISOCode ? call.FromCountry : call.ToCountry);
+            return (call.FromCountry != _subscription.LocalCountry ? call.FromCountry : call.ToCountry);
         }
 
         private bool CallIsForeign(IServiceCall call)
         {
-            return (call.FromCountry != _subscription.LocalCountry.ISOCode ||
-                    call.ToCountry != _subscription.LocalCountry.ISOCode);
+            return (call.FromCountry != _subscription.LocalCountry ||
+                    call.ToCountry != _subscription.LocalCountry);
         }
     }
 }

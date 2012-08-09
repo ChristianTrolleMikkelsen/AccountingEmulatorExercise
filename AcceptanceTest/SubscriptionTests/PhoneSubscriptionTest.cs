@@ -37,7 +37,7 @@ namespace AcceptanceTest.SubscriptionTests
         [Then(@"the subscription has default local country ""DK""")]
         public void ThenTheSubscriptionHasDefaultLocalCountryDK()
         {
-            _subscription.LocalCountry.ISOCode.Should().Be("DK");
+            _subscription.LocalCountry.Should().Be("DK");
         }
 
         [Then(@"the subscription contains an empty list of services")]
@@ -83,7 +83,7 @@ namespace AcceptanceTest.SubscriptionTests
         [Then(@"the subscription has local country ""USD""")]
         public void ThenTheSubscriptionHasLocalCountryUSD()
         {
-            _subscription.LocalCountry.ISOCode.Should().Be(_subscription.LocalCountry.ISOCode);
+            _subscription.LocalCountry.Should().Be(_subscription.LocalCountry);
         }
 
         [Given(@"the subscription includes a Voice Call service")]
@@ -100,8 +100,8 @@ namespace AcceptanceTest.SubscriptionTests
                                           new DateTime(2012, 1, 1),
                                           new TimeSpan(0, 3, 45),
                                           "33334444",
-                                          _subscription.LocalCountry.ISOCode,
-                                          _subscription.LocalCountry.ISOCode);
+                                          _subscription.LocalCountry,
+                                          _subscription.LocalCountry);
             ScenarioContext.Current.Set(voiceCall);
 
             _callCentral.RegisterACall(voiceCall);
