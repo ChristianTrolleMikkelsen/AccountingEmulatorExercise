@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using CallCentral.Repositories;
-
 using Core.ServiceCalls;
 using FluentAssertions;
 using NUnit.Framework;

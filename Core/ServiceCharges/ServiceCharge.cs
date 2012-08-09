@@ -25,7 +25,7 @@ namespace Core.ServiceCharges
         protected ServiceCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, string description, string country)
         {
             Country = country;
-            Description = description;
+            Description = string.Format("({0}) {1}",country, description);
             PhoneNumber = phoneNumber;
             ServiceType = typeOfService;
             ChargePrUnit = chargePrUnit;

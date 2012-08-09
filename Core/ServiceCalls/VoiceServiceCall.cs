@@ -21,9 +21,19 @@ namespace Core.ServiceCalls
             ToCountry = toCountry;
         }
 
+        public DateTime GetStartTime()
+        {
+            return Start;
+        }
+
         public decimal GetUnitSize()
         {
             return Convert.ToDecimal(Duration.TotalSeconds);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("VoiceCall to {0}, lasted {1}.", DestinationPhoneNumber, Duration);
         }
     }
 }

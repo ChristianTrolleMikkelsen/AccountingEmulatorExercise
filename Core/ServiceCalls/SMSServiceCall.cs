@@ -21,9 +21,19 @@ namespace Core.ServiceCalls
             ToCountry = toCountry;
         }
 
+        public DateTime GetStartTime()
+        {
+            return SendTime;
+        }
+
         public decimal GetUnitSize()
         {
             return NoOfCharacters;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("SMS sent to {0}, lenght {1} characters.", DestinationPhoneNumber, NoOfCharacters);
         }
     }
 }

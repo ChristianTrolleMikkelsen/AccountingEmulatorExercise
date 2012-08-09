@@ -21,9 +21,19 @@ namespace Core.ServiceCalls
             ToCountry = toCountry;
         }
 
+        public DateTime GetStartTime()
+        {
+            return TransferStart;
+        }
+
         public decimal GetUnitSize()
         {
             return Size;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("DataTransfer {0}, {1} bytes.", TransferUrl, Size);
         }
     }
 }

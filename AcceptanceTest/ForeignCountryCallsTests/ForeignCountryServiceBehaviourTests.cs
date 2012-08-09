@@ -8,7 +8,7 @@ using FluentAssertions;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
-namespace AcceptanceTest.ForeignCountryServiceBehaviourTests
+namespace AcceptanceTest.ForeignCountryCallsTests
 {
     [Binding]
     class ForeignCountryServiceBehaviourTests : AcceptanceTestFixtureBase

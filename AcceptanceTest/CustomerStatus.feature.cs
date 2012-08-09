@@ -68,7 +68,7 @@ namespace AcceptanceTest
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Customer Status Discount")]
         [NUnit.Framework.TestCaseAttribute("Normal", "0", "100", "100", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("HighRoller", "15", "100", "85", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("HighRoller", "10", "100", "90", new string[0])]
         [NUnit.Framework.TestCaseAttribute("VIP", "20", "100", "80", new string[0])]
         public virtual void CustomerStatusDiscount(string customerStatus, string discount, string calculatedBill, string billWithDiscount, string[] exampleTags)
         {
@@ -76,12 +76,16 @@ namespace AcceptanceTest
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("I have given a customer the \"<Status>\" status on the customers subscription");
+ testRunner.Given(string.Format("I have given a customer the \"{0}\" status", customerStatus));
 #line 8
- testRunner.When(string.Format("I calculate the cost of the customers bill to {0}", calculatedBill));
+ testRunner.And(string.Format("I charge {0} pr Voice Call", calculatedBill));
 #line 9
- testRunner.Then(string.Format("bill receives a {0}% discount", discount));
+ testRunner.And("the customer has finished a call");
 #line 10
+ testRunner.When(string.Format("I calculate the cost of the customers bill to {0}", calculatedBill));
+#line 11
+ testRunner.Then(string.Format("bill receives a {0}% discount", discount));
+#line 12
  testRunner.And(string.Format("the final bill is {0}", billWithDiscount));
 #line hidden
             this.ScenarioCleanup();

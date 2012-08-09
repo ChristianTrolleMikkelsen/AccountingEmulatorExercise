@@ -1,4 +1,5 @@
-﻿using AccountingMachine.Repositories;
+﻿using AccountingMachine.Generators;
+using AccountingMachine.Repositories;
 using Core.Repositories;
 using Core.ServiceCalls;
 using StructureMap;
@@ -20,6 +21,7 @@ namespace AccountingMachine
                                              x.For<ISubscriptionRepository>().Singleton();
                                              x.For<IServiceChargeRepository>().Singleton();
                                              x.For<IRecordRepository>().Singleton();
+                                             x.For<IDiscountRepository>().Singleton();
 
                                              x.Scan(scan =>
                                                         {

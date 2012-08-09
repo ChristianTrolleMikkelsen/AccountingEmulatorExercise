@@ -48,9 +48,13 @@
   <ItemGroup>
     <Compile Include="AccountingMachine.cs" />
     <Compile Include="AppConfigurator.cs" />
+    <Compile Include="Generators\BillGenerator.cs" />
     <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Generators\RecordGenerator.cs" />
+    <Compile Include="Repositories\DiscountRepository.cs" />
     <Compile Include="Repositories\RecordRepository.cs" />
   </ItemGroup>
   <ItemGroup>

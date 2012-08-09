@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using FluentAssertions;
@@ -17,7 +18,7 @@ namespace IntegrationTest.Repositories
 
             var repo = ObjectFactory.GetInstance<IRecordRepository>();
 
-            repo.SaveRecord(new Record(phoneNumber, "This is a test bill", 1.2M));
+            repo.SaveRecord(new Record(phoneNumber, DateTime.Now, "This is a test bill", "", 1.2M));
 
             repo.GetRecordsForPhoneNumber(phoneNumber).Count().Should().Be(1);
         }
@@ -29,10 +30,10 @@ namespace IntegrationTest.Repositories
 
             var repo = ObjectFactory.GetInstance<IRecordRepository>();
 
-            repo.SaveRecord(new Record(phoneNumber, "This is a test bill", 1.2M));
-            repo.SaveRecord(new Record("11111111", "This is a test bill", 2.2M));
-            repo.SaveRecord(new Record(phoneNumber, "This is a test bill", 3.2M));
-            repo.SaveRecord(new Record("22222222", "This is a test bill", 4.2M));
+            repo.SaveRecord(new Record(phoneNumber, DateTime.Now, "This is a test bill", "", 1.2M));
+            repo.SaveRecord(new Record("11111111", DateTime.Now, "This is a test bill", "", 2.2M));
+            repo.SaveRecord(new Record(phoneNumber, DateTime.Now, "This is a test bill", "", 3.2M));
+            repo.SaveRecord(new Record("22222222", DateTime.Now, "This is a test bill", "", 4.2M));
 
             repo.GetRecordsForPhoneNumber(phoneNumber).Count().Should().Be(2);
         }
@@ -44,8 +45,8 @@ namespace IntegrationTest.Repositories
 
             var repo = ObjectFactory.GetInstance<IRecordRepository>();
 
-            repo.SaveRecord(new Record("11111111", "This is a test bill", 2.2M));
-            repo.SaveRecord(new Record("22222222", "This is a test bill", 4.2M));
+            repo.SaveRecord(new Record("11111111", DateTime.Now, "This is a test bill", "", 2.2M));
+            repo.SaveRecord(new Record("22222222", DateTime.Now, "This is a test bill", "", 4.2M));
 
             repo.GetRecordsForPhoneNumber(phoneNumber).Count().Should().Be(0);
         }

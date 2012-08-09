@@ -44,6 +44,11 @@ namespace UnitTest
                 get { throw new NotImplementedException(); }
             }
 
+            public DateTime GetStartTime()
+            {
+                throw new NotImplementedException();
+            }
+
             public decimal GetUnitSize()
             {
                 throw new NotImplementedException();
