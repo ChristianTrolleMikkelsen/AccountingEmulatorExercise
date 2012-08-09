@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CallCentral.Repositories;
-using Core;
 using Core.Repositories;
 using Core.ServiceCalls;
 
@@ -18,13 +17,13 @@ namespace CallCentral
     {
         private readonly ICallRepository _callRepository;
         private readonly IServiceRepository _serviceRepository;
-        private readonly IServiceChargeSelector _serviceChargeSelector;
+        private readonly IServiceChargeRepository _serviceChargeRepository;
 
-        public CallCentral(ICallRepository callRepository, IServiceRepository serviceRepository, IServiceChargeSelector serviceChargeSelector)
+        public CallCentral(ICallRepository callRepository, IServiceRepository serviceRepository, IServiceChargeRepository serviceChargeRepository)
         {
             _callRepository = callRepository;
             _serviceRepository = serviceRepository;
-            _serviceChargeSelector = serviceChargeSelector;
+            _serviceChargeRepository = serviceChargeRepository;
         }
 
         public void RegisterACall(IServiceCall serviceCall)
@@ -36,26 +35,33 @@ namespace CallCentral
             _callRepository.RegisterACallForPhone(serviceCall);
         }
 
-        private void CheckIfCallIsAllowToUseTheSerivceAsDefinedByTheSubscription(IServiceCall serviceCall)
+        private void CheckIfCallIsAllowToUseTheSerivceAsDefinedByTheSubscription(IServiceCall call)
         {
-            if (HasServicesWhichSupportsCall(serviceCall) == false)
+            if (HasServicesWhichSupportsCall(call) == false)
             {
-                throw new Exception(string.Format("Your subscription do not support usage of {0}. ", serviceCall.GetType().Name));
+                throw new Exception(string.Format("Your subscription do not support usage of {0}. ", call.GetType().Name));
             }
         }
 
-        private bool HasServicesWhichSupportsCall(IServiceCall serviceCall)
+        private bool HasServicesWhichSupportsCall(IServiceCall call)
         {
-            return _serviceRepository.GetServicesForPhoneNumber(serviceCall.PhoneNumber)
-                                        .Any(service => service.HasSupportForCall(serviceCall));
+            return _serviceRepository.GetServicesForPhoneNumber(call.PhoneNumber)
+                                        .Any(service => service.HasSupportForCall(call));
         }
 
-        private void CheckIfCallIsWithinTheCountryRangeDefinedByTheSubscription(IServiceCall serviceCall)
+        private void CheckIfCallIsWithinTheCountryRangeDefinedByTheSubscription(IServiceCall call)
         {
-            if(_serviceChargeSelector.GetServiceChargesForServiceBasedOnCallSourceAndDestination(serviceCall).Any() == false)
+            if (   CountryIsSupported(call.FromCountry, call.PhoneNumber) == false
+                || CountryIsSupported(call.ToCountry, call.PhoneNumber) == false
+                )
             {
-                throw new Exception(string.Format("Your subscription do not support calls from {0} to {1}. ", serviceCall.FromCountry, serviceCall.ToCountry));
+                throw new Exception(string.Format("Your subscription do not support calls from {0} to {1}. ", call.FromCountry, call.ToCountry));
             }
+        }
+
+        private bool CountryIsSupported(string countryIsoCode, string phoneNumber)
+        {
+            return _serviceChargeRepository.GetServiceChargesByCountryAndPhoneNumber(countryIsoCode, phoneNumber).Any();
         }
 
         public IEnumerable<IServiceCall> GetCallsMadeFromPhoneNumber(string phoneNumber)

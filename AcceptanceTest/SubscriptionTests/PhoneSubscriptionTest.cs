@@ -58,7 +58,7 @@ namespace AcceptanceTest.SubscriptionTests
         public void WhenIAddANewVoiceCallServiceToTheSubcription()
         {
             _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Then(@"the Voice Call service must be added to the list of services")]
@@ -90,7 +90,7 @@ namespace AcceptanceTest.SubscriptionTests
         public void GivenTheSubscriptionIncludesAVoiceCallService()
         {
             _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [When(@"I make a Voice Call with the phone ""51948896""")]

@@ -26,7 +26,7 @@ namespace AcceptanceTest.SMSServiceTests
             _subscriptionRepository.SaveSubscription(_subscription);
 
             _serviceRepository.SaveService(new SMSService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the customer creates an SMS")]
@@ -117,13 +117,13 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"the subscription includes support for texting from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingFromCountryDE(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
 
         [Given(@"the subscription includes support for texting to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingToCountryDK(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
     }
 }

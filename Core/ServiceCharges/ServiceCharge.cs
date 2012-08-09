@@ -5,8 +5,9 @@ namespace Core.ServiceCharges
 {
     public interface IServiceCharge
     {
-        string Description { get;  }
         string PhoneNumber { get; }
+        string Country { get; }
+        string Description { get; }
         Type ServiceType { get; }
         decimal ChargePrUnit { get; }
 
@@ -18,10 +19,12 @@ namespace Core.ServiceCharges
         public string Description { get; private set; }
         public string PhoneNumber { get; private set; }
         public Type ServiceType { get; private set; }
+        public string Country { get; private set; }
         public decimal ChargePrUnit { get; private set; }
 
-        protected ServiceCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, string description)
+        protected ServiceCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, string description, string country)
         {
+            Country = country;
             Description = description;
             PhoneNumber = phoneNumber;
             ServiceType = typeOfService;

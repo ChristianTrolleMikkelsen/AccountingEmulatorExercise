@@ -1,12 +1,12 @@
 ﻿using System.Linq;
+using Core.Models;
+using Core.Repositories;
+using Core.ServiceCharges;
+using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
-using PhoneSubscriptionCalculator.Service_Charges;
-using PhoneSubscriptionCalculator.Services;
 using StructureMap;
+using TestHelpers;
 
 namespace IntegrationTest.Repositories
 {
@@ -14,17 +14,13 @@ namespace IntegrationTest.Repositories
     class ServiceChargeRepositoryTests : IntegrationTestBaseFixture
     {
         private ISubscription _subscription;
-        private IService _service;
 
         [SetUp]
         public void CreateSubscription()
         {
             var phoneNumber = "44556677";
 
-            _subscription = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>()
-                                .CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
-            _service = new VoiceCallService(_subscription.PhoneNumber);
-
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
         }
 
         [Test]
@@ -32,9 +28,9 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceChargeRepository>();
 
-            repo.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
+            repo.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService),1.1M, "Standard Call Fee", "DK"));
 
-            repo.GetServiceChargesForPhoneNumberAndService(_subscription.PhoneNumber, _service)
+            repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(1);
         }
 
@@ -43,12 +39,12 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceChargeRepository>();
 
-            repo.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
-            repo.SaveServiceCharge(new VoiceCallSecondCharge("11111111", 1.1M));
-            repo.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
-            repo.SaveServiceCharge(new VoiceCallSecondCharge("22222222", 1.1M));
+            repo.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 1.1M, "Standard Call Fee", "DK"));
+            repo.SaveServiceCharge(new FixedCharge("11111111", typeof(VoiceService), 1.1M, "Standard Call Fee", "DK"));
+            repo.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 1.1M, "Standard Call Fee", "DK"));
+            repo.SaveServiceCharge(new FixedCharge("22222222", typeof(VoiceService), 1.1M, "Standard Call Fee", "DK"));
 
-            repo.GetServiceChargesForPhoneNumberAndService(_subscription.PhoneNumber, _service)
+            repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(2);
         }
 
@@ -57,7 +53,7 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceChargeRepository>();
 
-            repo.GetServiceChargesForPhoneNumberAndService(_subscription.PhoneNumber, _service)
+            repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(0);
         }
 

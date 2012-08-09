@@ -67,16 +67,16 @@ namespace AcceptanceTest
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call Charge")]
+        [NUnit.Framework.DescriptionAttribute("Send Charge")]
         [NUnit.Framework.TestCaseAttribute("1.0", "0", "128", "1", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("2.0", "0", "256", "2", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "0", "512", "1", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("1.0", "4", "64", "4", "DE", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("2.0", "3", "32", "3", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1.0", "4", "64", "5", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("2.0", "3", "32", "5", "DK", "DE", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "2.3", "16", "2.3", "DE", "DE", new string[0])]
-        public virtual void CallCharge(string sendCharge, string foreignSendCharge, string sMSLenght, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
+        public virtual void SendCharge(string sendCharge, string foreignSendCharge, string sMSLenght, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call Charge", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send Charge", exampleTags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -108,8 +108,8 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestCaseAttribute("1.0", "16", "1.0", "512", "64", "4", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("2.0", "32", "2.0", "256", "128", "8", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "64", "3.0", "128", "256", "4", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("1.0", "128", "4.0", "64", "64", "4", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("2.0", "256", "5.0", "32", "256", "40", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1.0", "128", "4.0", "64", "64", "5", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("2.0", "256", "5.0", "32", "256", "42", "DE", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "512", "6.0", "16", "321", "126", "DE", "DE", new string[0])]
         public virtual void LenghtCharge(string lenghtCharge, string numberOfCharacters, string foreignLenghtCharge, string foreignNumberOfCharacters, string sMSLenght, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {

@@ -3,7 +3,6 @@ using System.Linq;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallCentral;
-using Core;
 using Core.Repositories;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
@@ -22,17 +21,17 @@ namespace AccountingMachine
         private readonly ICallCentral _callCentral;
         private readonly IServiceRepository _serviceRepository;
         private readonly IRecordRepository _recordRepository;
-        private readonly IServiceChargeSelector _serviceChargeSelector;
+        private readonly IServiceChargeRepository _serviceChargeRepository;
 
         public AccountingMachine(   ICallCentral callCentral,
                                     IServiceRepository serviceRepository, 
                                     IRecordRepository recordRepository,
-                                    IServiceChargeSelector serviceChargeSelector)
+                                    IServiceChargeRepository serviceChargeRepository)
         {
             _callCentral = callCentral;
             _serviceRepository = serviceRepository;
             _recordRepository = recordRepository;
-            _serviceChargeSelector = serviceChargeSelector;
+            _serviceChargeRepository = serviceChargeRepository;
         }
 
         public void GenerateBillForPhoneNumber(string phoneNumber)
@@ -59,9 +58,17 @@ namespace AccountingMachine
 
         private void CalculateServiceCharge(IServiceCall call)
         {
-            var charges = _serviceChargeSelector.GetServiceChargesForServiceBasedOnCallSourceAndDestination(call);
+            var charges = GetServiceChargesForCall(call);
 
             charges.ForEach(charge => GenerateRecord(charge, call));
+        }
+
+        private IEnumerable<IServiceCharge> GetServiceChargesForCall(IServiceCall call)
+        {
+            var fromCharges = _serviceChargeRepository.GetServiceChargesByCountryAndPhoneNumber(call.FromCountry, call.PhoneNumber);
+            var toCharges = _serviceChargeRepository.GetServiceChargesByCountryAndPhoneNumber(call.ToCountry, call.PhoneNumber);
+
+            return fromCharges.Union(toCharges).Distinct();
         }
 
         private void GenerateRecord(IServiceCharge charge, IServiceCall call)

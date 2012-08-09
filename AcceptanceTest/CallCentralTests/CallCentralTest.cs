@@ -20,7 +20,7 @@ namespace AcceptanceTest.CallCentralTests
             var subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
 
             _serviceRepository.SaveService(new VoiceService(phoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(phoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(phoneNumber));
 
             _subscriptionRepository.SaveSubscription(subscription);
         }

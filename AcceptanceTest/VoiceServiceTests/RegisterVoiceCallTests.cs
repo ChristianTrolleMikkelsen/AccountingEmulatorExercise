@@ -36,7 +36,7 @@ namespace AcceptanceTest.VoiceServiceTests
             var subscription = ScenarioContext.Current.Get<ISubscription>();
 
             _serviceRepository.SaveService(new VoiceService(subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(subscription.PhoneNumber));
         }
 
         [Given(@"the customer makes a Voice Call at ""(.*)""")]
@@ -125,13 +125,13 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"the subscription includes support for calling from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForCallingFromCountryDE(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_phoneNumber, country));
         }
 
         [Given(@"the subscription includes support for calling to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForCallingToCountryDK(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_phoneNumber, country));
         }
     }
 }

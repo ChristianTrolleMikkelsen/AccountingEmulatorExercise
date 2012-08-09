@@ -7,8 +7,8 @@ namespace Core.ServiceCharges
     {
         public decimal UnitSize { get; private set; }
 
-        public VariableCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, decimal unitSize, string description)
-            : base(phoneNumber, typeOfService, chargePrUnit, description)
+        public VariableCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, decimal unitSize, string description, string country)
+            : base(phoneNumber, typeOfService, chargePrUnit, description, country)
         {
             UnitSize = unitSize;
         }

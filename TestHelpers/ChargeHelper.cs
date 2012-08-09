@@ -7,10 +7,17 @@ namespace TestHelpers
     {
         public static readonly decimal SecondUnitSize = 1;
         public static readonly decimal MinuteUnitSize = 60;
+        public static readonly decimal OneKiloByteUnitSize = 1024M;
+        public static readonly decimal OneMegaByteUnitSize = 1024M * 1024M;
 
         public static FixedCharge CreateStandardFixedCharge(string phoneNumber)
         {
-            return new FixedCharge(phoneNumber, typeof(VoiceService), 1, "Standard Fixed Fee");
+            return new FixedCharge(phoneNumber, typeof(VoiceService), 1, "Standard Fixed Fee", "DK");
+        }
+
+        public static FixedCharge CreateStandardFixedCharge(string phoneNumber, string countryIsoCode)
+        {
+            return new FixedCharge(phoneNumber, typeof(VoiceService), 1, "Standard Fixed Fee", countryIsoCode);
         }
     }
 }

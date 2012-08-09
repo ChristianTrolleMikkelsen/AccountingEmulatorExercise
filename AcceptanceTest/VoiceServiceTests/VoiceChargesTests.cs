@@ -5,6 +5,7 @@ using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
+using MoreLinq;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -37,11 +38,12 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have specified a second charge of: ""(.*)"" for the Voice Call service")]
         public void GivenIHaveSpecifiedASecondChargeOf0_5ForTheVoiceCallService(string charge)
         {
-            _localServiceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                typeof (VoiceService),
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.SecondUnitSize,
-                                                                               "Standard Second Charge"));
+                                                                               "Standard Second Charge",
+                                                                               "DK"));
         }
 
         [Given(@"start a call from ""(.*)""")]
@@ -83,78 +85,84 @@ namespace AcceptanceTest.VoiceServiceTests
         public void ThenThePriceMustBe30(string price)
         {
             var records = _recordRepository.GetRecordsForPhoneNumber(_subscription.PhoneNumber);
-            records.Count().Should().Be(1);
-            records.First().Charge.Should().Be(Decimal.Parse(price));
+            records.Sum(record => record.Charge).Should().Be(Decimal.Parse(price));
         }
 
         [Given(@"I have specified a minute charge of: ""(.*)"" for every minute begun for the Voice Call service")]
         public void GivenIHaveSpecifiedAMinuteChargeOf1_0ForEveryMinuteBegunForTheVoiceCallService(string charge)
         {
-            _localServiceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                typeof(VoiceService),
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.MinuteUnitSize,
-                                                                               "Standard Minute Charge"));
+                                                                               "Standard Minute Charge",
+                                                                               "DK"));
         }
 
         [Given(@"I have specified a interval charge of: ""(.*)"" for every ""(.*)"" begun for the Voice Call service")]
         public void GivenIHaveSpecifiedAIntervalChargeOf1_0ForEvery000030BegunForTheVoiceCallService(string charge, string interval)
         {
             var intervalSize = Convert.ToDecimal(TimeSpan.Parse(interval).TotalSeconds);
-            _localServiceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                typeof(VoiceService),
                                                                                Decimal.Parse(charge),
                                                                                intervalSize,
-                                                                               "Standard Minute Charge"));
+                                                                               "Standard Minute Charge",
+                                                                               "DK"));
         }
 
         [Given(@"I have specified a call charge of ""(.*)""")]
         public void GivenIHaveSpecifiedACallChargeOf1(string charge)
         {
-            _localServiceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, 
+            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, 
                                                                             typeof(VoiceService),
                                                                             Decimal.Parse(charge),
-                                                                            "Standard Call Fee"));
+                                                                            "Standard Call Fee",
+                                                                               "DK"));
         }
 
         [Given(@"I have added call charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedCallChargeOf2_3ForCallingToOrFromCountryDE(string charge)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge("DE", new FixedCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,
                                                                             typeof(VoiceService),
                                                                             Decimal.Parse(charge),
-                                                                            "Standard Call Fee"));
+                                                                            "Standard Call Fee",
+                                                                               "DE"));
         }
 
         [Given(@"I have added second charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedSecondChargeOf3ForCallingToOrFromCountryDE(string charge)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge("DE", new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                typeof(VoiceService),
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.SecondUnitSize,
-                                                                               "Standard Second Charge"));
+                                                                               "Standard Second Charge",
+                                                                               "DE"));
         }
 
         [Given(@"I have added minute charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedMinuteChargeOf5ForCallingToOrFromCountryDE(string charge)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge("DE", new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                typeof(VoiceService),
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.MinuteUnitSize,
-                                                                               "Standard Minute Charge"));
+                                                                               "Standard Minute Charge",
+                                                                               "DE"));
         }
 
         [Given(@"I have added an interval charge of ""(.*)"" for every ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedAnIntervalChargeOf5ForEvery000030ForCallingToOrFromCountryDE(string charge, string interval)
         {
             var intervalSize = Convert.ToDecimal(TimeSpan.Parse(interval).TotalSeconds);
-            _foreignServiceChargeRepository.SaveServiceCharge("DE", new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                typeof(VoiceService),
                                                                                Decimal.Parse(charge),
                                                                                intervalSize,
-                                                                               "Standard Minute Charge"));
+                                                                               "Standard Minute Charge",
+                                                                               "DE"));
         }
     }
 }

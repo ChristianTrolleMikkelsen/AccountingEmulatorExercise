@@ -28,7 +28,7 @@ namespace AcceptanceTest.DataTransferTests
             _subscriptionRepository.SaveSubscription(_subscription);
 
             _serviceRepository.SaveService(new DataTransferService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the customer makes a data transfer at ""(.*)""")]
@@ -120,13 +120,13 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the subscription includes support for transfering data from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataFromCountryDK(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
 
         [Given(@"the subscription includes support for transfering data to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataToCountryDE(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
     }
 }

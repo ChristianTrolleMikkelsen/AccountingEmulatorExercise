@@ -12,10 +12,9 @@ namespace AcceptanceTest
         protected ISubscriptionRepository _subscriptionRepository;
         protected IServiceRepository _serviceRepository;
         protected ICallCentral _callCentral;
-        protected ILocalServiceChargeRepository _localServiceChargeRepository;
+        protected IServiceChargeRepository _serviceChargeRepository;
         protected IAccountingMachine _accountingMachine;
         protected IRecordRepository _recordRepository;
-        protected IForeignServiceChargeRepository _foreignServiceChargeRepository;
 
         [BeforeScenario]
         public void InitializeApplication()
@@ -31,10 +30,9 @@ namespace AcceptanceTest
             _subscriptionRepository = ObjectFactory.GetInstance<ISubscriptionRepository>();
             _serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
             _callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            _localServiceChargeRepository = ObjectFactory.GetInstance<ILocalServiceChargeRepository>();
+            _serviceChargeRepository = ObjectFactory.GetInstance<IServiceChargeRepository>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
             _recordRepository = ObjectFactory.GetInstance<IRecordRepository>();
-            _foreignServiceChargeRepository = ObjectFactory.GetInstance<IForeignServiceChargeRepository>();
         }
     }
 }

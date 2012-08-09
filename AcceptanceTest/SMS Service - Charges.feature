@@ -4,7 +4,7 @@
 	I must be able to register sms calls 
 	and I must be able to choose between different kinds of charges for sms calls
 
-Scenario Outline: Call Charge
+Scenario Outline: Send Charge
 	Given I have a subscription which has "DK" as local country
 	And I have added a SMS service to the subscription
 	And I have specified a SMS send charge of "<SendCharge>"
@@ -21,8 +21,8 @@ Scenario Outline: Call Charge
 	| 1.0        | 0                 | 128		 | 1    | DK            | DK                 |
 	| 2.0        | 0                 | 256       | 2    | DK            | DK                 |
 	| 1.0        | 0                 | 512       | 1    | DK            | DK                 | 
-	| 1.0        | 4                 | 64        | 4    | DE            | DK                 |
-	| 2.0        | 3                 | 32        | 3    | DK            | DE                 |
+	| 1.0        | 4                 | 64        | 5    | DE            | DK                 |
+	| 2.0        | 3                 | 32        | 5    | DK            | DE                 |
 	| 1.0        | 2.3               | 16        | 2.3  | DE            | DE                 | 
 
 Scenario Outline: Lenght Charge
@@ -42,8 +42,8 @@ Scenario Outline: Lenght Charge
 	| 1.0          | 16                 | 1.0                 | 512                       | 64        | 4    | DK            | DK                 |
 	| 2.0          | 32                 | 2.0                 | 256                       | 128       | 8    | DK            | DK                 |
 	| 1.0          | 64                 | 3.0                 | 128                       | 256       | 4    | DK            | DK                 |
-	| 1.0          | 128                | 4.0                 | 64                        | 64        | 4    | DK            | DE                 |
-	| 2.0          | 256                | 5.0                 | 32                        | 256       | 40   | DE            | DK                 |
+	| 1.0          | 128                | 4.0                 | 64                        | 64        | 5    | DK            | DE                 |
+	| 2.0          | 256                | 5.0                 | 32                        | 256       | 42   | DE            | DK                 |
 	| 1.0          | 512                | 6.0                 | 16                        | 321       | 126  | DE            | DE                 |
 
 

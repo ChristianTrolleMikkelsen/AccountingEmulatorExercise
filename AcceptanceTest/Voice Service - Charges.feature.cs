@@ -71,8 +71,8 @@ namespace AcceptanceTest
         [NUnit.Framework.TestCaseAttribute("1.0", "0", "00:00:29", "1", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("2.0", "0", "00:01:30", "2", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "0", "02:02:00", "1", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("1.0", "4", "00:00:29", "4", "DE", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("2.0", "3", "00:01:30", "3", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1.0", "4", "00:00:29", "5", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("2.0", "3", "00:01:30", "5", "DK", "DE", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "2.3", "02:02:00", "2.3", "DE", "DE", new string[0])]
         public virtual void CallCharge(string callCharge, string foreignCallCharge, string duration, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
@@ -108,8 +108,8 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestCaseAttribute("1.0", "0", "00:00:30", "30", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("2.0", "0", "00:00:30", "60", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("0.5", "0", "00:01:00", "30", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("1.0", "3", "00:00:30", "90", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("2.0", "4", "00:00:30", "120", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1.0", "3", "00:00:30", "120", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("2.0", "4", "00:00:30", "180", "DE", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("0.5", "5", "00:01:00", "300", "DE", "DE", new string[0])]
         public virtual void SecondCharge(string charge, string foreignCallCharge, string duration, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
@@ -145,8 +145,8 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestCaseAttribute("1.0", "10", "00:00:30", "1", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("2.0", "10", "00:00:30", "2", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "10", "00:01:01", "2", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("1.0", "3", "00:00:30", "3", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("2.0", "4", "00:00:30", "4", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1.0", "3", "00:00:30", "4", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("2.0", "4", "00:00:30", "6", "DE", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("0.5", "5", "00:01:01", "10", "DE", "DE", new string[0])]
         public virtual void MinuteCharge(string charge, string foreignCallCharge, string duration, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
@@ -183,8 +183,8 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestCaseAttribute("00:00:30", "1.0", "00:00:45", "10", "00:00:29", "1", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("00:00:30", "1.0", "00:00:45", "10", "00:00:31", "2", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("00:00:45", "0.9", "00:00:45", "10", "00:00:45", "0.9", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("00:00:30", "1.0", "00:00:30", "5", "00:00:29", "5", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("00:00:30", "1.0", "00:00:45", "10", "00:00:31", "10", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("00:00:30", "1.0", "00:00:30", "5", "00:00:29", "6", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("00:00:30", "1.0", "00:00:45", "10", "00:00:31", "12", "DE", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("00:00:45", "0.9", "00:00:55", "15", "00:01:55", "45", "DE", "DE", new string[0])]
         public virtual void IntervalCharge(string interval, string charge, string foreignInterval, string foreignCallCharge, string duration, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {

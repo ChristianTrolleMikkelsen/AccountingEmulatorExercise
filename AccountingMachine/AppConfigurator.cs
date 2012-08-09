@@ -18,8 +18,7 @@ namespace AccountingMachine
                                          {
                                              x.For<IServiceRepository>().Singleton();
                                              x.For<ISubscriptionRepository>().Singleton();
-                                             x.For<ILocalServiceChargeRepository>().Singleton();
-                                             x.For<IForeignServiceChargeRepository>().Singleton();
+                                             x.For<IServiceChargeRepository>().Singleton();
                                              x.For<IRecordRepository>().Singleton();
 
                                              x.Scan(scan =>

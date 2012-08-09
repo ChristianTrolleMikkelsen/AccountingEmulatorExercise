@@ -5,8 +5,8 @@ namespace Core.ServiceCharges
 {
     public class FixedCharge : ServiceCharge
     {
-        public FixedCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, string description)
-            : base(phoneNumber, typeOfService, chargePrUnit, description)
+        public FixedCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, string description, string country)
+            : base(phoneNumber, typeOfService, chargePrUnit, description, country)
         {
         }
 

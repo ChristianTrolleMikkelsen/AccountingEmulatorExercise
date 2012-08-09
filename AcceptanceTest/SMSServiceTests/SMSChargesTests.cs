@@ -30,19 +30,21 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"I have specified a SMS send charge of ""(.*)""")]
         public void GivenIHaveSpecifiedASMSSendChargeOf1_0(string charge)
         {
-            _localServiceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, 
+            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, 
                                                                             typeof(SMSService),
                                                                             Decimal.Parse(charge), 
-                                                                            "Standard SMS Send Charge"));
+                                                                            "Standard SMS Send Charge",
+                                                                            "DK"));
         }
 
         [Given(@"I have added SMS send charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedSMSSendChargeOf0ForCallingToOrFromCountryDE(string charge)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge("DE", new FixedCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,
                                                                             typeof(SMSService),
                                                                             Decimal.Parse(charge),
-                                                                            "Standard SMS Send Charge"));
+                                                                            "Standard SMS Send Charge",
+                                                                            "DE"));
         }
 
         [Given(@"I create a SMS of ""(.*)"" characters")]
@@ -84,28 +86,29 @@ namespace AcceptanceTest.SMSServiceTests
         public void ThenThePriceForSendingTheSmsMustBe1(string price)
         {
             var records = _recordRepository.GetRecordsForPhoneNumber(_subscription.PhoneNumber);
-            records.Count().Should().Be(1);
-            records.First().Charge.Should().Be(Decimal.Parse(price));
+            records.Sum(record => record.Charge).Should().Be(Decimal.Parse(price));
         }
 
         [Given(@"I have specified a lenght charge of: ""(.*)"" for every ""(.*)"" character for the SMS Call service")]
         public void GivenIHaveSpecifiedALenghtChargeOf1_0ForEvery128CharacterForTheSMSCallService(string charge, string chunkSize)
         {
-            _localServiceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                 typeof(SMSService),
                                                                                 Decimal.Parse(charge), 
                                                                                 int.Parse(chunkSize),
-                                                                                "Standard SMS Lenght Charge"));
+                                                                                "Standard SMS Lenght Charge",
+                                                                                "DK"));
         }
 
         [Given(@"I have added SMS lenght charge of ""(.*)""  for every ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedSMSLenghtChargeOf4_0ForEvery64ForCallingToOrFromCountryDE(string charge, string chunkSize)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge("DE", new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
                                                                                 typeof(SMSService),
                                                                                 Decimal.Parse(charge),
                                                                                 int.Parse(chunkSize),
-                                                                                "Standard SMS Lenght Charge"));
+                                                                                "Standard SMS Lenght Charge",
+                                                                                "DE"));
         }
     }
 }

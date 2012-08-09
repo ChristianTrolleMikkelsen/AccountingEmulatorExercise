@@ -41,6 +41,9 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MoreLinq, Version=1.0.11522.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.1.0\lib\net35\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -72,12 +75,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTestFixtureBase.cs" />
+    <Compile Include="Data Transfer Service - Charges.feature.cs">
+      <DependentUpon>Data Transfer Service - Charges.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataTransferTests\DataTransferChargesTests.cs" />
+    <Compile Include="Foreign Country Calls.feature.cs">
+      <DependentUpon>Foreign Country Calls.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Data Transfer Service - Register Call.feature.cs">
       <DependentUpon>Data Transfer Service - Register Call.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataTransferTests\RegisterDataTransferTests.cs" />
+    <Compile Include="ForeignCountryCallsTests\ForeignCountryServiceBehaviourTests.cs" />
     <Compile Include="SMS Service - Charges.feature.cs">
       <DependentUpon>SMS Service - Charges.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -130,6 +145,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data Transfer Service - Charges.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Data Transfer Service - Charges.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Foreign Country Calls.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Foreign Country Calls.feature.cs</LastGenOutput>
+    </None>
     <None Include="Data Transfer Service - Register Call.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Transfer Service - Register Call.feature.cs</LastGenOutput>
