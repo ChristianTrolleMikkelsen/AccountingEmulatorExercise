@@ -1,5 +1,5 @@
 ﻿using System;
-using PhoneSubscriptionCalculator.Models;
+using Core.Models;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTest.CustomerTests

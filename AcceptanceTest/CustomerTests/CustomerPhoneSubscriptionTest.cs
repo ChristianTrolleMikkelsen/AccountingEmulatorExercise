@@ -1,33 +1,39 @@
-﻿using System.Linq;
+﻿using Core.Models;
 using FluentAssertions;
-using PhoneSubscriptionCalculator.Models;
 using TechTalk.SpecFlow;
+using TestHelpers;
 
 namespace AcceptanceTest.CustomerTests
 {
     [Binding]
     class CustomerPhoneSubscriptionTest : AcceptanceTestFixtureBase
     {
-        private string phoneNumber = "99998888";
-        private Customer customer;
+        private string _phoneNumber = "99998888";
+        private Customer _customer;
+        private ISubscription _subscription;
 
         [Given(@"I have created a new customer")]
         public void GivenIHaveCreatedANewCustomer()
         {
-            customer = new Customer("John Doe");
+            _customer = new Customer("John Doe");
         }
 
         [When(@"I sell the customer a phone subscription")]
         public void WhenISellTheCustomerAPhoneSubscription()
         {
-            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
-            customer.AddPhoneSubscription(subscription);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_customer, _phoneNumber);
         }
 
-        [Then(@"the phone subscription is added to the customers inventory")]
-        public void ThenThePhoneSubscriptionIsAddedToTheCustomersInventory()
+        [Then(@"the phone subscription is assigned the customer")]
+        public void ThenThePhoneSubscriptionIsAssignedTheCustomer()
         {
-            customer.GetPhoneSubscriptions().Count(sub => sub.PhoneNumber == phoneNumber).Should().Be(1);
+            _subscription.Customer.Should().Be(_customer);
+        }
+
+        [Then(@"the customer has the initial customer status NORMAL")]
+        public void ThenTheCustomerHasTheInitialCustomerStatusNORMAL()
+        {
+            _subscription.Customer.Status.Should().Be(CustomerStatus.Normal);
         }
     }
 }

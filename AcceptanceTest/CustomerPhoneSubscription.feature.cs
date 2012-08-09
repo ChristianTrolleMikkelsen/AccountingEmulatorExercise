@@ -77,7 +77,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.When("I sell the customer a phone subscription");
 #line 9
- testRunner.Then("the phone subscription is added to the customers inventory");
+ testRunner.Then("the phone subscription is assigned the customer");
+#line 10
+ testRunner.And("the customer has the initial customer status NORMAL");
 #line hidden
             this.ScenarioCleanup();
         }

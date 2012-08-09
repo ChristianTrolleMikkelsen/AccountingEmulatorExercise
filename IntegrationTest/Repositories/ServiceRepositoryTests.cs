@@ -1,11 +1,11 @@
 ﻿using System.Linq;
+using Core.Models;
+using Core.Repositories;
+using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
-using PhoneSubscriptionCalculator.Services;
 using StructureMap;
+using TestHelpers;
 
 namespace IntegrationTest.Repositories
 {
@@ -19,8 +19,7 @@ namespace IntegrationTest.Repositories
         {
             var phoneNumber = "44556677";
 
-            subscription = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>()
-                                .CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
             
         }
 
@@ -29,7 +28,7 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceRepository>();
 
-            repo.SaveService(new VoiceCallService(subscription.PhoneNumber));
+            repo.SaveService(new VoiceService(subscription.PhoneNumber));
 
             repo.GetServicesForPhoneNumber(subscription.PhoneNumber).Count().Should().Be(1);
         }
@@ -39,10 +38,10 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceRepository>();
 
-            repo.SaveService(new VoiceCallService(subscription.PhoneNumber));
-            repo.SaveService(new VoiceCallService("99999999"));
-            repo.SaveService(new VoiceCallService("88888888"));
-            repo.SaveService(new VoiceCallService(subscription.PhoneNumber));
+            repo.SaveService(new VoiceService(subscription.PhoneNumber));
+            repo.SaveService(new VoiceService("99999999"));
+            repo.SaveService(new VoiceService("88888888"));
+            repo.SaveService(new VoiceService(subscription.PhoneNumber));
 
             repo.GetServicesForPhoneNumber(subscription.PhoneNumber).Count().Should().Be(2);
         }
@@ -52,8 +51,8 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceRepository>();
 
-            repo.SaveService(new VoiceCallService("99999999"));
-            repo.SaveService(new VoiceCallService("88888888"));
+            repo.SaveService(new VoiceService("99999999"));
+            repo.SaveService(new VoiceService("88888888"));
 
             repo.GetServicesForPhoneNumber(subscription.PhoneNumber).Count().Should().Be(0);
         }

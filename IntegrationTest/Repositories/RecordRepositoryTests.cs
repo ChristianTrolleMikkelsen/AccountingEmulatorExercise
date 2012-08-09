@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using AccountingMachine.Models;
+using AccountingMachine.Repositories;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
 using StructureMap;
 
 namespace IntegrationTest.Repositories

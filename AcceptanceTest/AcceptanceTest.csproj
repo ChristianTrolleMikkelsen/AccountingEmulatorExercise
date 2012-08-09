@@ -72,8 +72,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTestFixtureBase.cs" />
-    <Compile Include="Voice Call Service - Charges.feature.cs">
-      <DependentUpon>Voice Call Service - Charges.feature</DependentUpon>
+    <Compile Include="Data Transfer Service - Register Call.feature.cs">
+      <DependentUpon>Data Transfer Service - Register Call.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataTransferTests\RegisterDataTransferTests.cs" />
+    <Compile Include="SMS Service - Charges.feature.cs">
+      <DependentUpon>SMS Service - Charges.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SMS Service - Register Call.feature.cs">
+      <DependentUpon>SMS Service - Register Call.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SMSServiceTests\RegisterSMSSentTests.cs" />
+    <Compile Include="SMSServiceTests\SMSChargesTests.cs" />
+    <Compile Include="Voice Service - Charges.feature.cs">
+      <DependentUpon>Voice Service - Charges.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -102,19 +120,31 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubscriptionTests\PhoneSubscriptionTest.cs" />
     <Compile Include="CallCentralTests\CallCentralTest.cs" />
-    <Compile Include="Voice Call Service - Register Call.feature.cs">
+    <Compile Include="Voice Service - Register Call.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Voice Call Service - Register Call.feature</DependentUpon>
+      <DependentUpon>Voice Service - Register Call.feature</DependentUpon>
     </Compile>
-    <Compile Include="VoiceCallTests\RegisterVoiceCallTests.cs" />
-    <Compile Include="VoiceCallTests\VoiceCallChargesTests.cs" />
+    <Compile Include="VoiceServiceTests\RegisterVoiceCallTests.cs" />
+    <Compile Include="VoiceServiceTests\VoiceChargesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Voice Call Service - Charges.feature">
+    <None Include="Data Transfer Service - Register Call.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Voice Call Service - Charges.feature.cs</LastGenOutput>
+      <LastGenOutput>Data Transfer Service - Register Call.feature.cs</LastGenOutput>
+    </None>
+    <None Include="SMS Service - Charges.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SMS Service - Charges.feature.cs</LastGenOutput>
+    </None>
+    <None Include="SMS Service - Register Call.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SMS Service - Register Call.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Voice Service - Charges.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Voice Service - Charges.feature.cs</LastGenOutput>
     </None>
     <None Include="CallCental.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -133,15 +163,27 @@
       <LastGenOutput>PhoneSubscription.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="Voice Call Service - Register Call.feature">
+    <None Include="Voice Service - Register Call.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Voice Call Service - Register Call.feature.cs</LastGenOutput>
+      <LastGenOutput>Voice Service - Register Call.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator.csproj">
-      <Project>{7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9}</Project>
-      <Name>PhoneSubscriptionCalculator</Name>
+    <ProjectReference Include="..\AccountingMachine\AccountingMachine.csproj">
+      <Project>{47B77810-19BC-4795-A08C-F140538CD2C5}</Project>
+      <Name>AccountingMachine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CallCentral\CallCentral.csproj">
+      <Project>{9BE0B646-3373-4413-8FF9-F710B98F8E20}</Project>
+      <Name>CallCentral</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestHelpers\TestHelpers.csproj">
+      <Project>{37B87A0D-D03B-4B28-B5D1-518CC49F4208}</Project>
+      <Name>TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

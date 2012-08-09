@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using CallCentral.Repositories;
+
+using Core.ServiceCalls;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
-using PhoneSubscriptionCalculator.Service_Calls;
 using StructureMap;
 
 namespace IntegrationTest.Repositories

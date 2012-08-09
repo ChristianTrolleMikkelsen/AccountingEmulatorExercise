@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using Core.Models;
+
+using Core.ServiceCalls;
+using Core.ServiceCharges.Voice;
+using Core.Services;
 using FluentAssertions;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Service_Calls;
-using PhoneSubscriptionCalculator.Service_Charges;
-using PhoneSubscriptionCalculator.Services;
 using TechTalk.SpecFlow;
+using TestHelpers;
 
 namespace AcceptanceTest.SubscriptionTests
 {
@@ -25,7 +27,7 @@ namespace AcceptanceTest.SubscriptionTests
         [When(@"I have created the subscription")]
         public void WhenIHaveCreatedTheSubscription()
         {
-            _subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(_phoneNumber);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_phoneNumber);
         }
 
         [Then(@"the subscription is registered for phone ""51948896""")]
@@ -50,15 +52,15 @@ namespace AcceptanceTest.SubscriptionTests
         [Given(@"I have created a subscription for phone ""(.*)""")]
         public void GivenIHaveCreatedASubscriptionForPhone51948896(string phoneNumber)
         {
-            _subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
             _subscriptionRepository.SaveSubscription(_subscription);
         }
 
         [When(@"I add a new Voice Call service to the subcription")]
         public void WhenIAddANewVoiceCallServiceToTheSubcription()
         {
-            _serviceRepository.SaveService(new VoiceCallService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
+            _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new SecondCharge(_subscription.PhoneNumber, 1.1M));
         }
 
         [Then(@"the Voice Call service must be added to the list of services")]
@@ -77,7 +79,7 @@ namespace AcceptanceTest.SubscriptionTests
         [When(@"I have created the subscription with a not default country")]
         public void WhenIHaveCreatedTheSubscriptionWithANotDefaultCountry()
         {
-            _subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(_phoneNumber,_countryIsoCode);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_phoneNumber, _countryIsoCode);
         }
 
         [Then(@"the subscription has local country ""USD""")]
@@ -89,8 +91,8 @@ namespace AcceptanceTest.SubscriptionTests
         [Given(@"the subscription includes a Voice Call service")]
         public void GivenTheSubscriptionIncludesAVoiceCallService()
         {
-            _serviceRepository.SaveService(new VoiceCallService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
+            _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new SecondCharge(_subscription.PhoneNumber, 1.1M));
         }
 
         [When(@"I make a Voice Call with the phone ""51948896""")]

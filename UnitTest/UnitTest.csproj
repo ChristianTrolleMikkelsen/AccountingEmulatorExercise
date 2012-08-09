@@ -51,9 +51,9 @@
     <Compile Include="VoiceCallServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PhoneSubscriptionCalculator\PhoneSubscriptionCalculator.csproj">
-      <Project>{7E7B0211-610A-4C0E-9FCC-DAAD2E614FE9}</Project>
-      <Name>PhoneSubscriptionCalculator</Name>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

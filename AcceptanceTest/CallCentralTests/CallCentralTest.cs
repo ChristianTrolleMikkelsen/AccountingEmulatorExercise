@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+
+using Core.ServiceCalls;
+using Core.ServiceCharges.Voice;
+using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Service_Calls;
-using PhoneSubscriptionCalculator.Service_Charges;
-using PhoneSubscriptionCalculator.Services;
 using TechTalk.SpecFlow;
+using TestHelpers;
 
 namespace AcceptanceTest.CallCentralTests
 {
@@ -17,10 +19,10 @@ namespace AcceptanceTest.CallCentralTests
         [Given(@"a customer has a phone subscription with the Voice Call Service")]
         public void GivenACustomerHasAPhoneSubscriptionWithTheVoiceCallService()
         {
-            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            var subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
 
-            _serviceRepository.SaveService(new VoiceCallService(phoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new VoiceCallSecondCharge(phoneNumber, 1.1M));
+            _serviceRepository.SaveService(new VoiceService(phoneNumber));
+            _localServiceChargeRepository.SaveServiceCharge(new SecondCharge(phoneNumber, 1.1M));
 
             _subscriptionRepository.SaveSubscription(subscription);
         }
@@ -41,7 +43,7 @@ namespace AcceptanceTest.CallCentralTests
         [Given(@"a customer has a phone subscriptions without any services")]
         public void GivenACustomerHasAPhoneSubscriptionsWithoutAnyServices()
         {
-            var subscription = _subscriptionFactory.CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            var subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
 
             _subscriptionRepository.SaveSubscription(subscription);
         }

@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using PhoneSubscriptionCalculator;
-using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Repositories;
+﻿using AccountingMachine;
+using AccountingMachine.Repositories;
+using CallCentral;
+using Core.Repositories;
 using StructureMap;
 using TechTalk.SpecFlow;
 
@@ -9,7 +9,6 @@ namespace AcceptanceTest
 {
     internal abstract class AcceptanceTestFixtureBase
     {
-        protected IPhoneSubscriptionFactory _subscriptionFactory;
         protected ISubscriptionRepository _subscriptionRepository;
         protected IServiceRepository _serviceRepository;
         protected ICallCentral _callCentral;
@@ -21,13 +20,14 @@ namespace AcceptanceTest
         [BeforeScenario]
         public void InitializeApplication()
         {
-            new AppConfigurator().Initialize();
+            new AccountingMachine.AppConfigurator().Initialize();
+
+            new CallCentral.AppConfigurator().Initialize();
         }
 
         [BeforeScenario]
         public void CreateHelpers()
         {
-            _subscriptionFactory = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>();
             _subscriptionRepository = ObjectFactory.GetInstance<ISubscriptionRepository>();
             _serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
             _callCentral = ObjectFactory.GetInstance<ICallCentral>();

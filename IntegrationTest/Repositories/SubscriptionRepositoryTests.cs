@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+﻿using Core.Models;
+using Core.Repositories;
+using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
 using StructureMap;
+using TestHelpers;
 
 namespace IntegrationTest.Repositories
 {
@@ -17,9 +17,7 @@ namespace IntegrationTest.Repositories
         {
             var phoneNumber = "44556677";
 
-            subscription = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>()
-                                .CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
-
+            subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
         }
 
         [Test]

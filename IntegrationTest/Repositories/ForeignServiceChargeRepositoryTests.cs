@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using Core.Models;
+using Core.Repositories;
+
+using Core.ServiceCharges.Voice;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Factories;
-using PhoneSubscriptionCalculator.Models;
-using PhoneSubscriptionCalculator.Repositories;
-using PhoneSubscriptionCalculator.Service_Charges;
 using StructureMap;
+using TestHelpers;
 
 namespace IntegrationTest.Repositories
 {
@@ -19,8 +20,7 @@ namespace IntegrationTest.Repositories
         {
             var phoneNumber = "44556677";
 
-            _subscription = ObjectFactory.GetInstance<IPhoneSubscriptionFactory>()
-                                .CreateBlankSubscriptionWithPhoneNumberAndLocalCountry(phoneNumber);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IForeignServiceChargeRepository>();
 
-            repo.SaveServiceCharge("DK", new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
+            repo.SaveServiceCharge("DK", new SecondCharge(_subscription.PhoneNumber, 1.1M));
 
             repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(1);
@@ -39,10 +39,10 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IForeignServiceChargeRepository>();
 
-            repo.SaveServiceCharge("DK", new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
-            repo.SaveServiceCharge("DE", new VoiceCallSecondCharge("11111111", 1.1M));
-            repo.SaveServiceCharge("DK", new VoiceCallSecondCharge(_subscription.PhoneNumber, 1.1M));
-            repo.SaveServiceCharge("UK", new VoiceCallSecondCharge("22222222", 1.1M));
+            repo.SaveServiceCharge("DK", new SecondCharge(_subscription.PhoneNumber, 1.1M));
+            repo.SaveServiceCharge("DE", new SecondCharge("11111111", 1.1M));
+            repo.SaveServiceCharge("DK", new SecondCharge(_subscription.PhoneNumber, 1.1M));
+            repo.SaveServiceCharge("UK", new SecondCharge("22222222", 1.1M));
 
             repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(2);

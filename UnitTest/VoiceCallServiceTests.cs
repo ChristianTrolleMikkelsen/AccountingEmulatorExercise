@@ -1,9 +1,11 @@
 ﻿using System;
+
+using Core.ServiceCalls;
+using Core.ServiceCharges;
+using Core.ServiceCharges.Voice;
+using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
-using PhoneSubscriptionCalculator.Service_Calls;
-using PhoneSubscriptionCalculator.Service_Charges;
-using PhoneSubscriptionCalculator.Services;
 
 namespace UnitTest
 {
@@ -13,7 +15,7 @@ namespace UnitTest
         [Test]
         public void Should_Support_VoiceCall_Calls()
         {
-            var service = new VoiceCallService("");
+            var service = new VoiceService("");
 
             service.HasSupportForCall(new VoiceServiceCall("", DateTime.Now, DateTime.Now.TimeOfDay, "", "", ""))
                 .Should().BeTrue();
@@ -22,7 +24,7 @@ namespace UnitTest
         [Test]
         public void Should_Not_Support_Other_Calls()
         {
-            var service = new VoiceCallService("");
+            var service = new VoiceService("");
 
             service.HasSupportForCall(new DummyServiceCall())
                 .Should().BeFalse();
@@ -49,16 +51,16 @@ namespace UnitTest
         [Test]
         public void Should_Support_VoiceCall_Charges()
         {
-            var service = new VoiceCallService("");
+            var service = new VoiceService("");
 
-            service.HasSupportForCharge(new VoiceCallSecondCharge("", 1.1M))
+            service.HasSupportForCharge(new SecondCharge("", 1.1M))
                 .Should().BeTrue();
         }
 
         [Test]
         public void Should_Not_Support_Other_Charges()
         {
-            var service = new VoiceCallService("");
+            var service = new VoiceService("");
 
             service.HasSupportForCharge(new DummyCharge())
                 .Should().BeFalse();
@@ -72,6 +74,11 @@ namespace UnitTest
             }
 
             public decimal CalculateCharge(IServiceCall call)
+            {
+                throw new NotImplementedException();
+            }
+
+            public decimal CalculateCharge<T>(IServiceCall call, T typeOfCall) where T : class
             {
                 throw new NotImplementedException();
             }

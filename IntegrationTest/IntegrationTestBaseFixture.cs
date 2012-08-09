@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using PhoneSubscriptionCalculator;
+﻿using NUnit.Framework;
 
 namespace IntegrationTest
 {
@@ -13,7 +8,9 @@ namespace IntegrationTest
         [SetUp]
         public void InitializeApplication()
         {
-            new AppConfigurator().Initialize();
+            new AccountingMachine.AppConfigurator().Initialize();
+
+            new CallCentral.AppConfigurator().Initialize();
         }
     }
 }
