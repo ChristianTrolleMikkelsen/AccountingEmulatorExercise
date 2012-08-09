@@ -2,10 +2,10 @@
 using System.Linq;
 using Core.Models;
 using Core.ServiceCalls;
-using Core.ServiceCharges.SMS;
 using Core.Services;
 using FluentAssertions;
 using TechTalk.SpecFlow;
+using TestHelpers;
 
 namespace AcceptanceTest.SMSServiceTests
 {
@@ -26,7 +26,7 @@ namespace AcceptanceTest.SMSServiceTests
             _subscriptionRepository.SaveSubscription(_subscription);
 
             _serviceRepository.SaveService(new SMSService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new LenghtCharge(_subscription.PhoneNumber, 1.1M, 128));
+            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the customer creates an SMS")]
@@ -83,14 +83,14 @@ namespace AcceptanceTest.SMSServiceTests
         public void ThenTheStartTimeOfTheSMSMustBeRegisteredAt090000(string expectedStart)
         {
             var sms = ScenarioContext.Current.Get<SMSServiceCall>();
-            sms.Start.Should().Be(DateTime.Parse(expectedStart));
+            sms.SendTime.Should().Be(DateTime.Parse(expectedStart));
         }
 
         [Then(@"the lenght of the SMS must be registered to be ""(.*)"" characters")]
         public void ThenTheLenghtOfTheSMSMustBeRegisteredToBe128Characters(string expectedLenght)
         {
             var sms = ScenarioContext.Current.Get<SMSServiceCall>();
-            sms.Lenght.Should().Be(int.Parse(expectedLenght));
+            sms.NoOfCharacters.Should().Be(int.Parse(expectedLenght));
         }
 
         [Then(@"the receiver of the SMS must be registered as ""(.*)""")]
@@ -117,13 +117,13 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"the subscription includes support for texting from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingFromCountryDE(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, new LenghtCharge(_subscription.PhoneNumber, 1.1M, 128));
+            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the subscription includes support for texting to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingToCountryDK(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, new LenghtCharge(_subscription.PhoneNumber, 1.1M, 128));
+            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
     }
 }

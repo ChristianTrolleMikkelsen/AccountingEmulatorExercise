@@ -5,5 +5,6 @@ namespace Core.ServiceCalls
         string PhoneNumber { get; }
         string FromCountry { get; }
         string ToCountry { get; }
+        decimal GetUnitSize();
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Core.Models;
 using Core.Repositories;
-
-using Core.ServiceCharges.Voice;
+using Core.ServiceCharges;
+using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;
@@ -28,7 +28,7 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IForeignServiceChargeRepository>();
 
-            repo.SaveServiceCharge("DK", new SecondCharge(_subscription.PhoneNumber, 1.1M));
+            repo.SaveServiceCharge("DK", new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 1.1M, "Standard Call Fee"));
 
             repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(1);
@@ -39,10 +39,10 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IForeignServiceChargeRepository>();
 
-            repo.SaveServiceCharge("DK", new SecondCharge(_subscription.PhoneNumber, 1.1M));
-            repo.SaveServiceCharge("DE", new SecondCharge("11111111", 1.1M));
-            repo.SaveServiceCharge("DK", new SecondCharge(_subscription.PhoneNumber, 1.1M));
-            repo.SaveServiceCharge("UK", new SecondCharge("22222222", 1.1M));
+            repo.SaveServiceCharge("DK", new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 1.1M, "Standard Call Fee"));
+            repo.SaveServiceCharge("DE", new FixedCharge("11111111", typeof(VoiceService), 1.1M, "Standard Call Fee"));
+            repo.SaveServiceCharge("DK", new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 1.1M, "Standard Call Fee"));
+            repo.SaveServiceCharge("UK", new FixedCharge("22222222", typeof(VoiceService), 1.1M, "Standard Call Fee"));
 
             repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
                     .Count().Should().Be(2);

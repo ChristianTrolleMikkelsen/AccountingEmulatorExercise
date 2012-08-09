@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-
 using Core.ServiceCalls;
-using Core.ServiceCharges.Voice;
 using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
@@ -22,7 +20,7 @@ namespace AcceptanceTest.CallCentralTests
             var subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
 
             _serviceRepository.SaveService(new VoiceService(phoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new SecondCharge(phoneNumber, 1.1M));
+            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(phoneNumber));
 
             _subscriptionRepository.SaveSubscription(subscription);
         }

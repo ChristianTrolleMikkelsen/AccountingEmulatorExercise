@@ -1,5 +1,4 @@
 using Core.ServiceCalls;
-using Core.ServiceCharges;
 
 namespace Core.Services
 {
@@ -7,6 +6,5 @@ namespace Core.Services
     {
         string PhoneNumber { get; }
         bool HasSupportForCall(IServiceCall serviceCall);
-        bool HasSupportForCharge(IServiceCharge charge);
     }
 }

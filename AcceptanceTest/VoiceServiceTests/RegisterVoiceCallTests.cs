@@ -2,7 +2,6 @@
 using System.Linq;
 using Core.Models;
 using Core.ServiceCalls;
-using Core.ServiceCharges.Voice;
 using Core.Services;
 using FluentAssertions;
 using TechTalk.SpecFlow;
@@ -37,7 +36,7 @@ namespace AcceptanceTest.VoiceServiceTests
             var subscription = ScenarioContext.Current.Get<ISubscription>();
 
             _serviceRepository.SaveService(new VoiceService(subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new SecondCharge(subscription.PhoneNumber, 1.1M));
+            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(subscription.PhoneNumber));
         }
 
         [Given(@"the customer makes a Voice Call at ""(.*)""")]
@@ -126,13 +125,13 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"the subscription includes support for calling from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForCallingFromCountryDE(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, new SecondCharge(_phoneNumber,1.1M));
+            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
         }
 
         [Given(@"the subscription includes support for calling to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForCallingToCountryDK(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, new SecondCharge(_phoneNumber, 1.1M));
+            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
         }
     }
 }

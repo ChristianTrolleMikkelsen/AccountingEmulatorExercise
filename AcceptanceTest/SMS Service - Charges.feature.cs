@@ -110,7 +110,7 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestCaseAttribute("1.0", "64", "3.0", "128", "256", "4", "DK", "DK", new string[0])]
         [NUnit.Framework.TestCaseAttribute("1.0", "128", "4.0", "64", "64", "4", "DK", "DE", new string[0])]
         [NUnit.Framework.TestCaseAttribute("2.0", "256", "5.0", "32", "256", "40", "DE", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("1.0", "512", "6.0", "16", "321", "120", "DE", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1.0", "512", "6.0", "16", "321", "126", "DE", "DE", new string[0])]
         public virtual void LenghtCharge(string lenghtCharge, string numberOfCharacters, string foreignLenghtCharge, string foreignNumberOfCharacters, string sMSLenght, string cost, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Lenght Charge", exampleTags);

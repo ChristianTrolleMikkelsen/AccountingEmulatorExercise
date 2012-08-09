@@ -40,7 +40,7 @@ namespace CallCentral
         {
             if (HasServicesWhichSupportsCall(serviceCall) == false)
             {
-                throw new Exception(string.Format("Your subscription do not support usage of {0}. ", (object) serviceCall.GetType().Name));
+                throw new Exception(string.Format("Your subscription do not support usage of {0}. ", serviceCall.GetType().Name));
             }
         }
 

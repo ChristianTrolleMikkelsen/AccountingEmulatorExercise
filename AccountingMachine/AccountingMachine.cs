@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallCentral;
@@ -6,6 +7,7 @@ using Core;
 using Core.Repositories;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
+using Core.Services;
 using MoreLinq;
 
 namespace AccountingMachine
@@ -44,11 +46,15 @@ namespace AccountingMachine
 
         private void GenerateRecordsForBill(IServiceCall call)
         {
-            var services = _serviceRepository.GetServicesForPhoneNumber(call.PhoneNumber);
-
-            var servicesWhichSupportTheCall = services.Where(service => service.HasSupportForCall(call)).ToList();
+            var servicesWhichSupportTheCall = FindServicesWhichSupportThisTypeOfCall(call);
 
             servicesWhichSupportTheCall.ForEach(service => CalculateServiceCharge(call));
+        }
+
+        private IEnumerable<IService> FindServicesWhichSupportThisTypeOfCall(IServiceCall call)
+        {
+            return _serviceRepository.GetServicesForPhoneNumber(call.PhoneNumber)
+                                                .Where(service => service.HasSupportForCall(call)).ToList();
         }
 
         private void CalculateServiceCharge(IServiceCall call)

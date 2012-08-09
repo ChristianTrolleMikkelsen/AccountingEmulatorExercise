@@ -1,6 +1,4 @@
 using Core.ServiceCalls;
-using Core.ServiceCharges;
-using Core.ServiceCharges.Voice;
 
 namespace Core.Services
 {
@@ -16,11 +14,6 @@ namespace Core.Services
         public bool HasSupportForCall(IServiceCall serviceCall)
         {
             return serviceCall.GetType() == typeof(VoiceServiceCall);
-        }
-
-        public bool HasSupportForCharge(IServiceCharge charge)
-        {
-            return charge is IVoiceServiceCharge;
         }
     }
 }

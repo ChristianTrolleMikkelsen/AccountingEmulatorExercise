@@ -20,5 +20,10 @@ namespace Core.ServiceCalls
             FromCountry = fromCountry;
             ToCountry = toCountry;
         }
+
+        public decimal GetUnitSize()
+        {
+            return Convert.ToDecimal(Duration.TotalSeconds);
+        }
     }
 }

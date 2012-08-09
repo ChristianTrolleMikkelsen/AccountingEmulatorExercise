@@ -2,10 +2,11 @@
 using System.Linq;
 using Core.Models;
 using Core.ServiceCalls;
-using Core.ServiceCharges.SMS;
+using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
 using TechTalk.SpecFlow;
+using TestHelpers;
 
 namespace AcceptanceTest.DataTransferTests
 {
@@ -27,7 +28,7 @@ namespace AcceptanceTest.DataTransferTests
             _subscriptionRepository.SaveSubscription(_subscription);
 
             _serviceRepository.SaveService(new DataTransferService(_subscription.PhoneNumber));
-            _localServiceChargeRepository.SaveServiceCharge(new KilobyteCharge(_subscription.PhoneNumber, 1.1M));
+            _localServiceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the customer makes a data transfer at ""(.*)""")]
@@ -85,7 +86,7 @@ namespace AcceptanceTest.DataTransferTests
         public void ThenTheStartTimeOfTheDataTransferMustBeRegisteredAt090000(string start)
         {
             var sms = ScenarioContext.Current.Get<DataTransferCall>();
-            sms.Start.Should().Be(DateTime.Parse(start));
+            sms.TransferStart.Should().Be(DateTime.Parse(start));
         }
 
         [Then(@"the size of the data transfer must be registered to be: ""(.*)"" kb")]
@@ -99,7 +100,7 @@ namespace AcceptanceTest.DataTransferTests
         public void ThenTheSourceOfTheDataTransferMustBeRegisteredAsWww_Google_Com(string url)
         {
             var sms = ScenarioContext.Current.Get<DataTransferCall>();
-            sms.Url.Should().Be(url);
+            sms.TransferUrl.Should().Be(url);
         }
 
         [Then(@"the country from which the data transfer was made must be registered as ""(.*)""")]
@@ -119,13 +120,13 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the subscription includes support for transfering data from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataFromCountryDK(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, new KilobyteCharge(_subscription.PhoneNumber, 1.1M));
+            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the subscription includes support for transfering data to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataToCountryDE(string country)
         {
-            _foreignServiceChargeRepository.SaveServiceCharge(country, new KilobyteCharge(_subscription.PhoneNumber, 1.1M));
+            _foreignServiceChargeRepository.SaveServiceCharge(country, ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
     }
 }
