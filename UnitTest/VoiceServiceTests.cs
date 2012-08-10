@@ -17,7 +17,7 @@ namespace UnitTest
             service.HasSupportForCall(new VoiceServiceCall("", DateTime.Now, DateTime.Now.TimeOfDay, "", "", ""))
                 .Should().BeTrue();
         }
-
+         
         [Test]
         public void Should_Not_Support_Other_Calls()
         {
