@@ -1,4 +1,5 @@
 ﻿using System;
+using Core;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
@@ -13,7 +14,7 @@ namespace UnitTest
         [Test]
         public void Must_Return_Calculated_Value_When_Standard_Data_Is_Supplied()
         {
-            var fixedCharge = new VariableCharge("99999999", typeof(VoiceService), 100, 10 , "Variable Charge Test", "DK");
+            var fixedCharge = new VariableCharge("99999999", ServiceType.Voice, 100, 10, "Variable Charge Test", "DK");
 
             fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
                                                              DateTime.Now,
@@ -27,7 +28,7 @@ namespace UnitTest
         [Test]
         public void Must_Return_Handle_Zero_Duration()
         {
-            var fixedCharge = new VariableCharge("99999999", typeof(VoiceService), 100, 10, "Variable Charge Test", "DK");
+            var fixedCharge = new VariableCharge("99999999", ServiceType.Voice, 100, 10, "Variable Charge Test", "DK");
 
             fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
                                                              DateTime.Now,
@@ -41,7 +42,7 @@ namespace UnitTest
         [Test]
         public void Must_Be_Handle_Handle_Charge_Pr_Unit()
         {
-            var fixedCharge = new VariableCharge("99999999", typeof(VoiceService), 0, 10, "Variable Charge Test", "DK");
+            var fixedCharge = new VariableCharge("99999999", ServiceType.Voice, 0, 10, "Variable Charge Test", "DK");
 
             fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
                                                              DateTime.Now,
@@ -54,7 +55,7 @@ namespace UnitTest
         [Test]
         public void Must_Throw_Exception_If_Duration_Is_Zero()
         {
-            Assert.Throws<Exception>(delegate { new VariableCharge("99999999", typeof (VoiceService), 100, 0, "Variable Charge Test", "DK"); });
+            Assert.Throws<Exception>(delegate { new VariableCharge("99999999", ServiceType.Voice, 100, 0, "Variable Charge Test", "DK"); });
         }
     }
 }

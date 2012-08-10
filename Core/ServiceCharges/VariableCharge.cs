@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.ServiceCalls;
+using Core.Services;
 
 namespace Core.ServiceCharges
 {
@@ -7,7 +8,7 @@ namespace Core.ServiceCharges
     {
         public decimal UnitSize { get; private set; }
 
-        public VariableCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, decimal unitSize, string description, string country)
+        public VariableCharge(string phoneNumber, ServiceType typeOfService, decimal chargePrUnit, decimal unitSize, string description, string country)
             : base(phoneNumber, typeOfService, chargePrUnit, description, country)
         {
             UnitSize = unitSize;

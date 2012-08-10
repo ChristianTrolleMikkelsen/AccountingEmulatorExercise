@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using Core.Models;
 using Core.ServiceCalls;
 using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -21,12 +23,10 @@ namespace AcceptanceTest.CallCentralTests
         [Given(@"a customer has a phone subscription with the Voice Call Service")]
         public void GivenACustomerHasAPhoneSubscriptionWithTheVoiceCallService()
         {
-            var subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_phoneNumber);
+           SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, "DK", CustomerStatus.Normal);
 
-            _serviceRepository.SaveService(new VoiceService(_phoneNumber));
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
-
-            _subscriptionRepository.SaveSubscription(subscription);
+            _subscriptionService.AddServiceToSubscription(new Service(_phoneNumber, ServiceType.Voice));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
         }
 
         [When(@"the customer makes a Voice Call with the phone")]
@@ -45,9 +45,7 @@ namespace AcceptanceTest.CallCentralTests
         [Given(@"a customer has a phone subscriptions without any services")]
         public void GivenACustomerHasAPhoneSubscriptionsWithoutAnyServices()
         {
-            var subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_phoneNumber);
-
-            _subscriptionRepository.SaveSubscription(subscription);
+           SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [When(@"the customer tries to make a Voice Call with the phone")]

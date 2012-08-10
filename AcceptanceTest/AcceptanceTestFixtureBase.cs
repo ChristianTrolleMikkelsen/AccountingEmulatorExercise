@@ -3,21 +3,20 @@ using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallCentral;
 using Core.Models;
-using Core.Repositories;
 using StructureMap;
+using SubscriptionService;
+using SubscriptionService.Models;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTest
 {
     internal abstract class AcceptanceTestFixtureBase
     {
-        protected ISubscriptionRepository _subscriptionRepository;
-        protected IServiceRepository _serviceRepository;
         protected ICallCentral _callCentral;
-        protected IServiceChargeRepository _serviceChargeRepository;
         protected IAccountingMachine _accountingMachine;
         protected IRecordRepository _recordRepository;
         protected IDiscountRepository _discountRepository;
+        protected ISubscriptionService _subscriptionService;
 
         [BeforeScenario]
         public void InitializeApplication()
@@ -25,18 +24,18 @@ namespace AcceptanceTest
             new AccountingMachine.AppConfigurator().Initialize();
 
             new CallCentral.AppConfigurator().Initialize();
+
+            new SubscriptionService.AppConfigurator().Initialize();
         }
 
         [BeforeScenario]
         public void CreateHelpers()
         {
-            _subscriptionRepository = ObjectFactory.GetInstance<ISubscriptionRepository>();
-            _serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
             _callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            _serviceChargeRepository = ObjectFactory.GetInstance<IServiceChargeRepository>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
             _recordRepository = ObjectFactory.GetInstance<IRecordRepository>();
             _discountRepository = ObjectFactory.GetInstance<IDiscountRepository>();
+            _subscriptionService = ObjectFactory.GetInstance<ISubscriptionService>();
         }
 
         [BeforeScenario]
@@ -46,5 +45,16 @@ namespace AcceptanceTest
             _discountRepository.SaveDiscount(new Discount(CustomerStatus.HighRoller, 0.1M));
             _discountRepository.SaveDiscount(new Discount(CustomerStatus.VIP, 0.2M));
         }
+
+       /* protected ISubscriptionSubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,string phoneNumber, string country, CustomerStatus status)
+        {
+            var customer = _subscriptionService.CreateCustomer("John Doe", status);
+            _subscriptionService.CreateSubscription(customer, phoneNumber, country);
+
+            var subscription = _subscriptionService.GetSubscription(phoneNumber);
+
+            ScenarioContext.Current.Set(_subscriptionService.GetSubscription(phoneNumber));
+            return subscription;
+        }*/
     }
 }

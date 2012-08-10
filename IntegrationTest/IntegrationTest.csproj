@@ -74,6 +74,10 @@
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SubscriptionService\SubscriptionService.csproj">
+      <Project>{291FB2B0-380F-4533-BB9B-118ABEE73675}</Project>
+      <Name>SubscriptionService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestHelpers\TestHelpers.csproj">
       <Project>{37B87A0D-D03B-4B28-B5D1-518CC49F4208}</Project>
       <Name>TestHelpers</Name>

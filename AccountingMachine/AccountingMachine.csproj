@@ -71,6 +71,10 @@
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SubscriptionService\SubscriptionService.csproj">
+      <Project>{291FB2B0-380F-4533-BB9B-118ABEE73675}</Project>
+      <Name>SubscriptionService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

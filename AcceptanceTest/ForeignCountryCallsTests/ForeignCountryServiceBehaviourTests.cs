@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -22,22 +24,20 @@ namespace AcceptanceTest.ForeignCountryCallsTests
         [Given(@"I have a subscription for phone ""23458126"" with local country ""DK""")]
         public void GivenIHaveASubscriptionForPhone23458126WithLocalCountryDK()
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer("23458126");
-
-            _subscriptionRepository.SaveSubscription(_subscription);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"23458126", "DK", CustomerStatus.Normal);
         }
 
         [Given(@"the subscription is allowed to perform Voice Calls to ""DE""")]
         public void GivenTheSubscriptionIsAllowedToPerformVoiceCallsToDE()
         {
-            _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                _dkCharge,
                                                                                "Standard Second Charge",
                                                                                "DK"));
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                _deCharge,
                                                                                "Standard Second Charge",
                                                                                "DE"));

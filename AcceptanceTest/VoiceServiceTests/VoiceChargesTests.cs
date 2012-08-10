@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
-using MoreLinq;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -23,23 +24,20 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have a subscription which has ""(.*)"" as local country")]
         public void GivenIHaveASubscriptionWhichHasDKAsLocalCountry(string country)
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber, country);
-            _subscriptionRepository.SaveSubscription(_subscription);
-
-            ScenarioContext.Current.Set(_subscription);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService, phoneNumber, country, CustomerStatus.Normal);
         }
 
         [Given(@"I have added a Voice Call service to the subscription")]
         public void GivenIHaveAddedAVoiceCallServiceToTheSubscription()
         {
-            _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
         }
 
         [Given(@"I have specified a second charge of: ""(.*)"" for the Voice Call service")]
         public void GivenIHaveSpecifiedASecondChargeOf0_5ForTheVoiceCallService(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                               typeof (VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.SecondUnitSize,
                                                                                "Standard Second Charge",
@@ -91,8 +89,8 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have specified a minute charge of: ""(.*)"" for every minute begun for the Voice Call service")]
         public void GivenIHaveSpecifiedAMinuteChargeOf1_0ForEveryMinuteBegunForTheVoiceCallService(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.MinuteUnitSize,
                                                                                "Standard Minute Charge",
@@ -103,8 +101,8 @@ namespace AcceptanceTest.VoiceServiceTests
         public void GivenIHaveSpecifiedAIntervalChargeOf1_0ForEvery000030BegunForTheVoiceCallService(string charge, string interval)
         {
             var intervalSize = Convert.ToDecimal(TimeSpan.Parse(interval).TotalSeconds);
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                Decimal.Parse(charge),
                                                                                intervalSize,
                                                                                "Standard Minute Charge",
@@ -114,8 +112,8 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have specified a call charge of ""(.*)""")]
         public void GivenIHaveSpecifiedACallChargeOf1(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, 
-                                                                            typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, 
+                                                                            ServiceType.Voice,
                                                                             Decimal.Parse(charge),
                                                                             "Standard Call Fee",
                                                                                "DK"));
@@ -124,8 +122,8 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have added call charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedCallChargeOf2_3ForCallingToOrFromCountryDE(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,
-                                                                            typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,
+                                                                            ServiceType.Voice,
                                                                             Decimal.Parse(charge),
                                                                             "Standard Call Fee",
                                                                                "DE"));
@@ -134,8 +132,8 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have added second charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedSecondChargeOf3ForCallingToOrFromCountryDE(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.SecondUnitSize,
                                                                                "Standard Second Charge",
@@ -145,8 +143,8 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have added minute charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedMinuteChargeOf5ForCallingToOrFromCountryDE(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                Decimal.Parse(charge),
                                                                                ChargeHelper.MinuteUnitSize,
                                                                                "Standard Minute Charge",
@@ -157,8 +155,8 @@ namespace AcceptanceTest.VoiceServiceTests
         public void GivenIHaveAddedAnIntervalChargeOf5ForEvery000030ForCallingToOrFromCountryDE(string charge, string interval)
         {
             var intervalSize = Convert.ToDecimal(TimeSpan.Parse(interval).TotalSeconds);
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                               typeof(VoiceService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                               ServiceType.Voice,
                                                                                Decimal.Parse(charge),
                                                                                intervalSize,
                                                                                "Standard Minute Charge",

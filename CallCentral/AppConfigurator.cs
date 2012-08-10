@@ -1,5 +1,6 @@
 ﻿using CallCentral.Repositories;
 using StructureMap;
+using SubscriptionService;
 
 namespace CallCentral
 {

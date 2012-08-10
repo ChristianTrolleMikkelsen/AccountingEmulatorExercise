@@ -9,25 +9,25 @@ namespace AcceptanceTest.CustomerTests
     class CustomerPhoneSubscriptionTest : AcceptanceTestFixtureBase
     {
         private string _phoneNumber = "99998888";
-        private Customer _customer;
+        private ICustomer _customer;
         private ISubscription _subscription;
 
         [Given(@"I have created a new customer")]
         public void GivenIHaveCreatedANewCustomer()
         {
-            _customer = new Customer("John Doe");
+            _customer = _subscriptionService.CreateCustomer("John Doe", CustomerStatus.Normal);
         }
 
         [When(@"I sell the customer a phone subscription")]
         public void WhenISellTheCustomerAPhoneSubscription()
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_customer, _phoneNumber);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, "DK", _customer.Status);
         }
 
         [Then(@"the phone subscription is assigned the customer")]
         public void ThenThePhoneSubscriptionIsAssignedTheCustomer()
         {
-            _subscription.Customer.Should().Be(_customer);
+            _subscription.Customer.Name.Should().Be(_customer.Name);
         }
 
         [Then(@"the customer has the initial customer status NORMAL")]

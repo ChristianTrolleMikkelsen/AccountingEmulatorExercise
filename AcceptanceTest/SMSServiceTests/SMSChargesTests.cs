@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Linq;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
+using TestHelpers;
 
 namespace AcceptanceTest.SMSServiceTests
 {
@@ -20,18 +23,16 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"I have added a SMS service to the subscription")]
         public void GivenIHaveAddedASMSServiceToTheSubscription()
         {
-            _subscription = ScenarioContext.Current.Get<ISubscription>();
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"66665555", "DK", CustomerStatus.Normal);
 
-            _subscriptionRepository.SaveSubscription(_subscription);
-
-            _serviceRepository.SaveService(new SMSService(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
         }
 
         [Given(@"I have specified a SMS send charge of ""(.*)""")]
         public void GivenIHaveSpecifiedASMSSendChargeOf1_0(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, 
-                                                                            typeof(SMSService),
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, 
+                                                                            ServiceType.SMS,
                                                                             Decimal.Parse(charge), 
                                                                             "Standard SMS Send Charge",
                                                                             "DK"));
@@ -40,8 +41,8 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"I have added SMS send charge of ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedSMSSendChargeOf0ForCallingToOrFromCountryDE(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,
-                                                                            typeof(SMSService),
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,
+                                                                            ServiceType.SMS,
                                                                             Decimal.Parse(charge),
                                                                             "Standard SMS Send Charge",
                                                                             "DE"));
@@ -92,8 +93,8 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"I have specified a lenght charge of: ""(.*)"" for every ""(.*)"" character for the SMS Call service")]
         public void GivenIHaveSpecifiedALenghtChargeOf1_0ForEvery128CharacterForTheSMSCallService(string charge, string chunkSize)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                                typeof(SMSService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                                ServiceType.SMS,
                                                                                 Decimal.Parse(charge), 
                                                                                 int.Parse(chunkSize),
                                                                                 "Standard SMS Lenght Charge",
@@ -103,8 +104,8 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"I have added SMS lenght charge of ""(.*)""  for every ""(.*)"" for calling to or from country: ""DE""")]
         public void GivenIHaveAddedSMSLenghtChargeOf4_0ForEvery64ForCallingToOrFromCountryDE(string charge, string chunkSize)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                                typeof(SMSService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                                ServiceType.SMS,
                                                                                 Decimal.Parse(charge),
                                                                                 int.Parse(chunkSize),
                                                                                 "Standard SMS Lenght Charge",

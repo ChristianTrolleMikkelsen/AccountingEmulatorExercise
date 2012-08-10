@@ -5,6 +5,7 @@ using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -23,12 +24,10 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the subscription includes the Data Transfer Service")]
         public void GivenTheSubscriptionIncludesTheDataTransferService()
         {
-            _subscription = ScenarioContext.Current.Get<ISubscription>();
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"11111111", "DK", CustomerStatus.Normal);
 
-            _subscriptionRepository.SaveSubscription(_subscription);
-
-            _serviceRepository.SaveService(new DataTransferService(_subscription.PhoneNumber));
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the customer makes a data transfer at ""(.*)""")]
@@ -120,13 +119,13 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the subscription includes support for transfering data from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataFromCountryDK(string country)
         {
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
 
         [Given(@"the subscription includes support for transfering data to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataToCountryDE(string country)
         {
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Core.ServiceCalls
         public string DestinationPhoneNumber { get; private set; }
 
         public VoiceServiceCall(string phoneNumber, DateTime start, TimeSpan duration, string destinationPhoneNumber, string fromCountry, string toCountry)
-            : base(phoneNumber, fromCountry, toCountry)
+            : base(phoneNumber, fromCountry, toCountry, ServiceCallType.Voice)
         {
             Start = start;
             Duration = duration;

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -22,17 +24,16 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have added a Data Transfer service to the subscription")]
         public void GivenIHaveAddedADataTransferServiceToTheSubscription()
         {
-            _subscription = ScenarioContext.Current.Get<ISubscription>();
-            _subscriptionRepository.SaveSubscription(_subscription);
+            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"66665555", "DK", CustomerStatus.Normal);
 
-            _serviceRepository.SaveService(new DataTransferService(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
         }
 
         [Given(@"I have specified a charge of: ""(.*)"" for every megabyte for the Data Transfer service")]
         public void GivenIHaveSpecifiedAChargeOf10_0ForEveryMegabyteForTheDataTransferService(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                          typeof (DataTransferService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                          ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneMegaByteUnitSize,
                                                                           "Standard Megabyte Charge",
@@ -42,8 +43,8 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have added Data Transfer charge of ""(.*)""  for every megabyte for calling to or from country: ""(.*)""")]
         public void GivenIHaveAddedDataTransferChargeOf40ForEveryMegabyteForCallingToOrFromCountryDE(string charge, string country)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                          typeof(DataTransferService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                          ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneMegaByteUnitSize,
                                                                           "Standard Megabyte Charge",
@@ -107,8 +108,8 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have specified a charge of: ""(.*)"" for every kilobyte for the Data Transfer service")]
         public void GivenIHaveSpecifiedAChargeOf10_0ForEveryKilobyteForTheDataTransferService(string charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                          typeof(DataTransferService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                          ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneKiloByteUnitSize,
                                                                           "Standard Kilobyte Charge",
@@ -118,8 +119,8 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have added Data Transfer charge of ""(.*)""  for every kilobyte for calling to or from country: ""(.*)""")]
         public void GivenIHaveAddedDataTransferChargeOf40ForEveryKilobyteForCallingToOrFromCountryDE(string charge, string country)
         {
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber,
-                                                                          typeof(DataTransferService),
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+                                                                          ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneKiloByteUnitSize,
                                                                           "Standard Kilobyte Charge",

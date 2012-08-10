@@ -128,13 +128,13 @@
     </Compile>
     <Compile Include="CustomerTests\CustomerPhoneSubscriptionTest.cs" />
     <Compile Include="CustomerTests\CustomerStatusTest.cs" />
-    <Compile Include="PhoneSubscription.feature.cs">
-      <DependentUpon>PhoneSubscription.feature</DependentUpon>
+    <Compile Include="Subscription.feature.cs">
+      <DependentUpon>Subscription.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubscriptionTests\PhoneSubscriptionTest.cs" />
+    <Compile Include="SubscriptionTests\SubscriptionTest.cs" />
     <Compile Include="CallCentralTests\CallCentralTest.cs" />
     <Compile Include="Voice Service - Register Call.feature.cs">
       <AutoGen>True</AutoGen>
@@ -182,9 +182,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CustomerStatus.feature.cs</LastGenOutput>
     </None>
-    <None Include="PhoneSubscription.feature">
+    <None Include="Subscription.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>PhoneSubscription.feature.cs</LastGenOutput>
+      <LastGenOutput>Subscription.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Voice Service - Register Call.feature">
@@ -204,6 +204,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SubscriptionService\SubscriptionService.csproj">
+      <Project>{291FB2B0-380F-4533-BB9B-118ABEE73675}</Project>
+      <Name>SubscriptionService</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestHelpers\TestHelpers.csproj">
       <Project>{37B87A0D-D03B-4B28-B5D1-518CC49F4208}</Project>

@@ -1,6 +1,4 @@
-﻿using AccountingMachine.Generators;
-using AccountingMachine.Repositories;
-using Core.Repositories;
+﻿using AccountingMachine.Repositories;
 using Core.ServiceCalls;
 using StructureMap;
 
@@ -17,9 +15,6 @@ namespace AccountingMachine
         {
             ObjectFactory.Initialize(x =>
                                          {
-                                             x.For<IServiceRepository>().Singleton();
-                                             x.For<ISubscriptionRepository>().Singleton();
-                                             x.For<IServiceChargeRepository>().Singleton();
                                              x.For<IRecordRepository>().Singleton();
                                              x.For<IDiscountRepository>().Singleton();
 

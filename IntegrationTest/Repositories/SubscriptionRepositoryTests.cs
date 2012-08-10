@@ -1,8 +1,9 @@
 ﻿using Core.Models;
-using Core.Repositories;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;
+using SubscriptionService;
+using SubscriptionService.Repositories;
 using TestHelpers;
 
 namespace IntegrationTest.Repositories
@@ -16,8 +17,9 @@ namespace IntegrationTest.Repositories
         public void CreateSubscription()
         {
             var phoneNumber = "44556677";
+            var service = ObjectFactory.GetInstance<ISubscriptionService>();
 
-            subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
+            subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(service, phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [Test]

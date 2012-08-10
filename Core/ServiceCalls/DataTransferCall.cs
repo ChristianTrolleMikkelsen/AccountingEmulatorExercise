@@ -9,7 +9,7 @@ namespace Core.ServiceCalls
         public string TransferUrl { get; private set; }
 
         public DataTransferCall(string phoneNumber, DateTime transferStart, int size, string transferUrl, string fromCountry, string toCountry)
-            : base(phoneNumber, fromCountry, toCountry)
+            : base(phoneNumber, fromCountry, toCountry, ServiceCallType.DataTransfer)
         {
             TransferStart = transferStart;
             Size = size;

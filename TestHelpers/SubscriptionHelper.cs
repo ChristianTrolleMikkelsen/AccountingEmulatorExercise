@@ -1,17 +1,15 @@
 ﻿using Core.Models;
+using SubscriptionService;
 
 namespace TestHelpers
 {
     public class SubscriptionHelper
     {
-        public static ISubscription CreateSubscriptionWithDefaultCustomer(string phoneNumber, string countryIsoCode = "DK")
+        public static ISubscription CreateSubscriptionWithDefaultCustomer(ISubscriptionService service, string phoneNumber, string countryIsoCode, CustomerStatus status)
         {
-            return new Subscription(new Customer("John Doe"),phoneNumber, countryIsoCode );
-        }
+            var customer = service.CreateCustomer("John Doe", status);
 
-        public static ISubscription CreateSubscriptionWithDefaultCustomer(ICustomer customer, string phoneNumber, string countryIsoCode = "DK")
-        {
-            return new Subscription(customer, phoneNumber, countryIsoCode);
+            return service.CreateSubscription(customer,phoneNumber, countryIsoCode);
         }
     }
 }

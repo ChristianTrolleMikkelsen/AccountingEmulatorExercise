@@ -11,6 +11,8 @@ namespace IntegrationTest
             new AccountingMachine.AppConfigurator().Initialize();
 
             new CallCentral.AppConfigurator().Initialize();
+
+            new SubscriptionService.AppConfigurator().Initialize();
         }
     }
 }

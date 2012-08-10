@@ -9,7 +9,7 @@ namespace Core.ServiceCalls
         public string DestinationPhoneNumber { get; private set; }
 
         public SMSServiceCall(string phoneNumber, DateTime sendTime, int lenght, string destinationPhoneNumber, string fromCountry, string toCountry)
-            : base(phoneNumber, fromCountry, toCountry)
+            : base(phoneNumber, fromCountry, toCountry, ServiceCallType.SMS)
         {
             SendTime = sendTime;
             NoOfCharacters = lenght;

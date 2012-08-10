@@ -1,11 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AccountingMachine.Models;
+﻿using AccountingMachine.Models;
 using AccountingMachine.Repositories;
-using Core.Models;
-using Core.Repositories;
-using MoreLinq;
+using SubscriptionService;
 
 namespace AccountingMachine.Generators
 {
@@ -16,20 +11,20 @@ namespace AccountingMachine.Generators
 
     public class BillGenerator : IBillGenerator
     {
-        private readonly ISubscriptionRepository _subscriptionRepository;
+        private readonly ISubscriptionService _subscriptionService;
         private readonly IRecordRepository _recordRepository;
         private readonly IDiscountRepository _discountRepository;
 
-        public BillGenerator(ISubscriptionRepository subscriptionRepository, IRecordRepository recordRepository, IDiscountRepository discountRepository)
+        public BillGenerator(ISubscriptionService subscriptionService, IRecordRepository recordRepository, IDiscountRepository discountRepository)
         {
-            _subscriptionRepository = subscriptionRepository;
+            _subscriptionService = subscriptionService;
             _recordRepository = recordRepository;
             _discountRepository = discountRepository;
         }
 
         public Bill GenerateBillForPhoneNumber(string phoneNumber)
         {
-            var subscription = _subscriptionRepository.GetSubscriptionForPhoneNumber(phoneNumber);
+            var subscription = _subscriptionService.GetSubscription(phoneNumber);
 
             var records = _recordRepository.GetRecordsForPhoneNumber(phoneNumber);
 

@@ -1,29 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AccountingMachine;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallCentral;
 using Core.Models;
-using Core.Repositories;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using StructureMap;
+using SubscriptionService;
+using SubscriptionService.Services;
 
 namespace ConsoleDemonstration
 {
     class Program
     {
-        private static ISubscriptionRepository _subscriptionRepository;
-        private static IServiceRepository _serviceRepository;
         private static ICallCentral _callCentral;
-        private static IServiceChargeRepository _serviceChargeRepository;
         private static IAccountingMachine _accountingMachine;
-        private static Subscription _subscription;
+        private static ISubscription _subscription;
         private static IDiscountRepository _discountRepository;
+        private static ISubscriptionService _subscriptionService;
 
         static void Main(string[] args)
         {
@@ -31,11 +27,9 @@ namespace ConsoleDemonstration
 
             SetupData();
 
-            var customer = new Customer("John CallALot");
-            customer.SetCustomerStatus(CustomerStatus.HighRoller);
-
-            _subscription = new Subscription(customer, "90909090", "DK");
-            _subscriptionRepository.SaveSubscription(_subscription);
+            var customer = _subscriptionService.CreateCustomer("John CallALot", CustomerStatus.HighRoller);
+            _subscriptionService.CreateSubscription(customer, "90909090", "DK");
+            _subscription = _subscriptionService.GetSubscription("90909090");
 
             CreateOneOfEachServiceWithOneOrMoreCharges();
 
@@ -50,13 +44,12 @@ namespace ConsoleDemonstration
         {
             new AccountingMachine.AppConfigurator().Initialize();
             new CallCentral.AppConfigurator().Initialize();
+            new SubscriptionService.AppConfigurator().Initialize();
 
-            _subscriptionRepository = ObjectFactory.GetInstance<ISubscriptionRepository>();
-            _serviceRepository = ObjectFactory.GetInstance<IServiceRepository>();
             _callCentral = ObjectFactory.GetInstance<ICallCentral>();
-            _serviceChargeRepository = ObjectFactory.GetInstance<IServiceChargeRepository>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
             _discountRepository = ObjectFactory.GetInstance<IDiscountRepository>();
+            _subscriptionService = ObjectFactory.GetInstance<ISubscriptionService>();
         }
 
         private static void SetupData()
@@ -68,27 +61,27 @@ namespace ConsoleDemonstration
 
         private static void CreateOneOfEachServiceWithOneOrMoreCharges()
         {
-            _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
-            _serviceRepository.SaveService(new SMSService(_subscription.PhoneNumber));
-            _serviceRepository.SaveService(new DataTransferService(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
 
             //Local
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 0.20M, "Standard Call Charge", "DK"));
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber, typeof(VoiceService), 0.50M, 60, "Standard Minute Charge", "DK"));
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 0.20M, "Standard Call Charge", "DK"));
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.Voice, 0.50M, 60, "Standard Minute Charge", "DK"));
 
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(SMSService), 0.10M, "Standard Send SMS Charge", "DK"));
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber, typeof(SMSService), 0.50M, 10, "Standard SMS Lenght Charge", "DK"));
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.SMS, 0.10M, "Standard Send SMS Charge", "DK"));
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.SMS, 0.50M, 10, "Standard SMS Lenght Charge", "DK"));
 
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber, typeof(DataTransferService), 0.50M, 1024*1024, "Standard Megabyte Charge", "DK"));
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.DataTransfer, 0.50M, 1024 * 1024, "Standard Megabyte Charge", "DK"));
 
             //Germany
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(VoiceService), 0.40M, "Standard Call Charge", "DE"));
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber, typeof(VoiceService), 1.50M, 60, "Standard Minute Charge", "DE"));
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 0.40M, "Standard Call Charge", "DE"));
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.Voice, 1.50M, 60, "Standard Minute Charge", "DE"));
 
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, typeof(SMSService), 0.20M, "Standard Send SMS Charge", "DE"));
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber, typeof(SMSService), 2.50M, 10, "Standard SMS Lenght Charge", "DE"));
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.SMS, 0.20M, "Standard Send SMS Charge", "DE"));
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.SMS, 2.50M, 10, "Standard SMS Lenght Charge", "DE"));
 
-            _serviceChargeRepository.SaveServiceCharge(new VariableCharge(_subscription.PhoneNumber, typeof(DataTransferService), 7.50M, 1024 * 1024, "Standard Megabyte Charge", "DE"));
+            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.DataTransfer, 7.50M, 1024 * 1024, "Standard Megabyte Charge", "DE"));
         }
 
         private static void PerformCalls()

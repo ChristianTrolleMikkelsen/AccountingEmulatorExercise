@@ -5,6 +5,7 @@ using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
 using FluentAssertions;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -19,19 +20,15 @@ namespace AcceptanceTest.CustomerTests
         [Given(@"I have given a customer the ""(.*)"" status")]
         public void GivenIHaveGivenACustomerTheStatusStatus(string status)
         {
-            var customer = new Customer("John Doe");
-            customer.SetCustomerStatus((CustomerStatus)Enum.Parse(typeof(CustomerStatus), status));
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"12345678", "DK", (CustomerStatus)Enum.Parse(typeof(CustomerStatus), status));
 
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(customer, "12345678");
-            _subscriptionRepository.SaveSubscription(_subscription);
-
-            _serviceRepository.SaveService(new VoiceService(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber,ServiceType.Voice));
         }
 
         [Given(@"I charge (\d+) pr Voice Call")]
         public void GivenICharge100PrVoiceCall(int charge)
         {
-            _serviceChargeRepository.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber,typeof(VoiceService), charge, "Standard Call Fee", "DK"));
+            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,ServiceType.Voice, charge, "Standard Call Fee", "DK"));
         }
 
         [Given(@"the customer has finished a call")]

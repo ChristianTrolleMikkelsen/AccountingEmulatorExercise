@@ -4,6 +4,7 @@ using Core.Models;
 using Core.ServiceCalls;
 using Core.Services;
 using FluentAssertions;
+using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -21,12 +22,11 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"the subscription includes the SMS Service")]
         public void GivenTheSubscriptionIncludesTheSMSService()
         {
-            _subscription = ScenarioContext.Current.Get<ISubscription>();
+            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"66665555", "DK", CustomerStatus.Normal);
 
-            _subscriptionRepository.SaveSubscription(_subscription);
+            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
 
-            _serviceRepository.SaveService(new SMSService(_subscription.PhoneNumber));
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Given(@"the customer creates an SMS")]
@@ -117,13 +117,13 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"the subscription includes support for texting from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingFromCountryDE(string country)
         {
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
 
         [Given(@"the subscription includes support for texting to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingToCountryDK(string country)
         {
-            _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
         }
     }
 }

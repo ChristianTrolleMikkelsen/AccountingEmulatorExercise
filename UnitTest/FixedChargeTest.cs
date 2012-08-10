@@ -1,4 +1,5 @@
 ﻿using System;
+using Core;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using Core.Services;
@@ -13,7 +14,7 @@ namespace UnitTest
         [Test]
         public void Must_Return_Raw_Chrage_Value()
         {
-            var fixedCharge = new FixedCharge("99999999", typeof (VoiceService), 123, "Fixed Charge Test", "DK");
+            var fixedCharge = new FixedCharge("99999999", ServiceType.Voice, 123, "Fixed Charge Test", "DK");
 
             fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
                                                              DateTime.Now,

@@ -1,5 +1,5 @@
-﻿using System;
-using Core.ServiceCalls;
+﻿using Core.ServiceCalls;
+using Core.Services;
 
 namespace Core.ServiceCharges
 {
@@ -8,7 +8,7 @@ namespace Core.ServiceCharges
         string PhoneNumber { get; }
         string Country { get; }
         string Description { get; }
-        Type ServiceType { get; }
+        ServiceType ServiceType { get; }
         decimal ChargePrUnit { get; }
 
         decimal CalculateCharge(IServiceCall call);
@@ -18,11 +18,11 @@ namespace Core.ServiceCharges
     {
         public string Description { get; private set; }
         public string PhoneNumber { get; private set; }
-        public Type ServiceType { get; private set; }
+        public ServiceType ServiceType { get; private set; }
         public string Country { get; private set; }
         public decimal ChargePrUnit { get; private set; }
 
-        protected BaseCharge(string phoneNumber, Type typeOfService, decimal chargePrUnit, string description, string country)
+        protected BaseCharge(string phoneNumber, ServiceType typeOfService, decimal chargePrUnit, string description, string country)
         {
             Country = country;
             Description = string.Format("({0}) {1}",country, description);

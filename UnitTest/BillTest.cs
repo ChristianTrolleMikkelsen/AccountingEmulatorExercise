@@ -4,6 +4,8 @@ using AccountingMachine.Models;
 using Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
+using StructureMap;
+using SubscriptionService;
 using TestHelpers;
 
 namespace UnitTest
@@ -14,7 +16,11 @@ namespace UnitTest
         [Test]
         public void Must_Be_Able_To_Print_Bill()
         {
-            var sub = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer("55555555");
+            new SubscriptionService.AppConfigurator().Initialize();
+
+            var service = ObjectFactory.GetInstance<ISubscriptionService>();
+
+            var sub = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(service,"55555555", "DK", CustomerStatus.Normal);
             var records = new List<Record>
                               {
                                   new Record("55555555", DateTime.Now, "Standard", "Call from 55555555 to 66666666", 12.5M)
