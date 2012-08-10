@@ -21,9 +21,9 @@ Scenario Outline: Register Local Voice Call
 
 	Examples: 
 	| StartTime | Duration | Receiver | SourceCountry | DestinationCountry |
-	| 09:00:00  | 00:01:37 | 27206617 | DK            | DK                 |
-	| 15:41:02  | 00:02:15 | 51948896 | DK            | DK                 |
-	| 18:29:56  | 00:28:09 | 27206617 | DK            | DK                 |
+	| 09:00:00  | 00:01:37 | 98561234 | DK            | DK                 |
+	| 15:41:02  | 00:02:15 | 23458126 | DK            | DK                 |
+	| 18:29:56  | 00:28:09 | 98561234 | DK            | DK                 |
 
 
 Scenario Outline: Register Foreign Voice Call
@@ -46,7 +46,7 @@ Scenario Outline: Register Foreign Voice Call
 
 	Examples: 
 	| StartTime | Duration | Receiver | SourceCountry | DestinationCountry |
-	| 09:00:00  | 00:01:37 | 27206617 | DE            | DK                 |
-	| 15:41:02  | 00:02:15 | 51948896 | DK            | DE                 |
-	| 18:29:56  | 00:28:09 | 27206617 | DE            | DE                 |
+	| 09:00:00  | 00:01:37 | 98561234 | DE            | DK                 |
+	| 15:41:02  | 00:02:15 | 23458126 | DK            | DE                 |
+	| 18:29:56  | 00:28:09 | 98561234 | DE            | DE                 |
 

@@ -21,9 +21,9 @@ Scenario Outline: Register Local SMS Call
 
 	Examples: 
 	| SentTime | Lenght | Receiver | SourceCountry | DestinationCountry |
-	| 09:00:00 | 128	| 27206617 | DK            | DK                 |
-	| 15:41:02 | 256    | 51948896 | DK            | DK                 |
-	| 18:29:56 | 512    | 27206617 | DK            | DK                 |
+	| 09:00:00 | 128	| 98561234 | DK            | DK                 |
+	| 15:41:02 | 256    | 23458126 | DK            | DK                 |
+	| 18:29:56 | 512    | 98561234 | DK            | DK                 |
 
 
 Scenario Outline: Register Foreign SMS Call
@@ -46,7 +46,7 @@ Scenario Outline: Register Foreign SMS Call
 
 	Examples: 
 	| SentTime | Lenght | Receiver | SourceCountry | DestinationCountry |
-	| 09:00:00 | 128	| 27206617 | DK            | DE                 |
-	| 15:41:02 | 256    | 51948896 | DE            | DK                 |
-	| 18:29:56 | 512    | 27206617 | DE            | DE                 |
+	| 09:00:00 | 128	| 98561234 | DK            | DE                 |
+	| 15:41:02 | 256    | 23458126 | DE            | DK                 |
+	| 18:29:56 | 512    | 98561234 | DE            | DE                 |
 

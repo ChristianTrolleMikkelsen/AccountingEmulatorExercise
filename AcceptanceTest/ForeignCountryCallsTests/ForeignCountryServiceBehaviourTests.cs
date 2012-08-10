@@ -19,10 +19,10 @@ namespace AcceptanceTest.ForeignCountryCallsTests
         private string _fromCountry;
         private string _toCountry;
 
-        [Given(@"I have a subscription for phone ""51948896"" with local country ""DK""")]
-        public void GivenIHaveASubscriptionForPhone51948896WithLocalCountryDK()
+        [Given(@"I have a subscription for phone ""23458126"" with local country ""DK""")]
+        public void GivenIHaveASubscriptionForPhone23458126WithLocalCountryDK()
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer("51948896");
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer("23458126");
 
             _subscriptionRepository.SaveSubscription(_subscription);
         }

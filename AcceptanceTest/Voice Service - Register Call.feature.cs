@@ -67,9 +67,9 @@ namespace AcceptanceTest
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Register Local Voice Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "27206617", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "51948896", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "27206617", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "98561234", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "23458126", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "98561234", "DK", "DK", new string[0])]
         public virtual void RegisterLocalVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Local Voice Call", exampleTags);
@@ -109,9 +109,9 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Register Foreign Voice Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "27206617", "DE", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "51948896", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "27206617", "DE", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "00:01:37", "98561234", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15:41:02", "00:02:15", "23458126", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "00:28:09", "98561234", "DE", "DE", new string[0])]
         public virtual void RegisterForeignVoiceCall(string startTime, string duration, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Foreign Voice Call", exampleTags);

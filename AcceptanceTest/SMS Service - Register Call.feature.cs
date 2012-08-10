@@ -67,9 +67,9 @@ namespace AcceptanceTest
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Register Local SMS Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "128", "27206617", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("15:41:02", "256", "51948896", "DK", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "512", "27206617", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "128", "98561234", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15:41:02", "256", "23458126", "DK", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "512", "98561234", "DK", "DK", new string[0])]
         public virtual void RegisterLocalSMSCall(string sentTime, string lenght, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Local SMS Call", exampleTags);
@@ -109,9 +109,9 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Register Foreign SMS Call")]
-        [NUnit.Framework.TestCaseAttribute("09:00:00", "128", "27206617", "DK", "DE", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("15:41:02", "256", "51948896", "DE", "DK", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("18:29:56", "512", "27206617", "DE", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09:00:00", "128", "98561234", "DK", "DE", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15:41:02", "256", "23458126", "DE", "DK", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("18:29:56", "512", "98561234", "DE", "DE", new string[0])]
         public virtual void RegisterForeignSMSCall(string sentTime, string lenght, string receiver, string sourceCountry, string destinationCountry, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Foreign SMS Call", exampleTags);

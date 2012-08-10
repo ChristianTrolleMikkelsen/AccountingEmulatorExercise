@@ -17,7 +17,7 @@ namespace AcceptanceTest.SubscriptionTests
         private ISubscription _subscription;
 
         [Given(@"I want to create a new subscription for phone ""(.*)""")]
-        public void GivenIWantToCreateANewSubscriptionForPhone51948896(string phoneNumber)
+        public void GivenIWantToCreateANewSubscriptionForPhone23458126(string phoneNumber)
         {
             _phoneNumber = phoneNumber;
         }
@@ -28,8 +28,8 @@ namespace AcceptanceTest.SubscriptionTests
             _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_phoneNumber);
         }
 
-        [Then(@"the subscription is registered for phone ""51948896""")]
-        public void ThenTheSubscriptionIsRegisteredForPhone51948896()
+        [Then(@"the subscription is registered for phone ""23458126""")]
+        public void ThenTheSubscriptionIsRegisteredForPhone23458126()
         {
             _subscription.PhoneNumber.Should().Be(_subscription.PhoneNumber);
         }
@@ -48,7 +48,7 @@ namespace AcceptanceTest.SubscriptionTests
         }
 
         [Given(@"I have created a subscription for phone ""(.*)""")]
-        public void GivenIHaveCreatedASubscriptionForPhone51948896(string phoneNumber)
+        public void GivenIHaveCreatedASubscriptionForPhone23458126(string phoneNumber)
         {
             _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(phoneNumber);
             _subscriptionRepository.SaveSubscription(_subscription);
@@ -93,8 +93,8 @@ namespace AcceptanceTest.SubscriptionTests
             _serviceChargeRepository.SaveServiceCharge(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
-        [When(@"I make a Voice Call with the phone ""51948896""")]
-        public void WhenIMakeAVoiceCallWithThePhone51948896()
+        [When(@"I make a Voice Call with the phone ""23458126""")]
+        public void WhenIMakeAVoiceCallWithThePhone23458126()
         {
             var voiceCall = new VoiceServiceCall(_subscription.PhoneNumber,
                                           new DateTime(2012, 1, 1),

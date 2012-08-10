@@ -52,7 +52,7 @@ namespace AcceptanceTest.VoiceServiceTests
         }
 
         [Given(@"the call is made to number: ""(.*)""")]
-        public void GivenTheCallIsMadeToNumber27206617(string receiver)
+        public void GivenTheCallIsMadeToNumber98561234(string receiver)
         {
             _receiver = receiver;
         }
@@ -102,7 +102,7 @@ namespace AcceptanceTest.VoiceServiceTests
         }
 
         [Then(@"the receiver of the call must be registered as ""(.*)""")]
-        public void ThenTheReceiverOfTheCallMustBeRegisteredAs27206617(string expectedPhoneNumber)
+        public void ThenTheReceiverOfTheCallMustBeRegisteredAs98561234(string expectedPhoneNumber)
         {
             var call = ScenarioContext.Current.Get<VoiceServiceCall>();
             call.DestinationPhoneNumber.Should().Be(expectedPhoneNumber);

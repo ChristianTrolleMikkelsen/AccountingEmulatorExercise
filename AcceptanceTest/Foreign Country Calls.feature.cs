@@ -74,7 +74,7 @@ namespace AcceptanceTest
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I have a subscription for phone \"51948896\" with local country \"DK\"");
+ testRunner.Given("I have a subscription for phone \"23458126\" with local country \"DK\"");
 #line 9
  testRunner.And("the subscription is allowed to perform Voice Calls to \"DE\"");
 #line 10
@@ -95,7 +95,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.Given("I have a subscription for phone \"51948896\" with local country \"DK\"");
+ testRunner.Given("I have a subscription for phone \"23458126\" with local country \"DK\"");
 #line 16
  testRunner.And("the subscription is allowed to perform Voice Calls to \"DE\"");
 #line 17
@@ -116,7 +116,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.Given("I have a subscription for phone \"51948896\" with local country \"DK\"");
+ testRunner.Given("I have a subscription for phone \"23458126\" with local country \"DK\"");
 #line 23
  testRunner.And("the subscription is allowed to perform Voice Calls to \"DE\"");
 #line 24

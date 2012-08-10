@@ -41,7 +41,7 @@ namespace AcceptanceTest.SMSServiceTests
         }
 
         [Given(@"the SMS is sent to number: ""(.*)""")]
-        public void GivenTheSMSIsSentToNumber27206617(string phoneNumber)
+        public void GivenTheSMSIsSentToNumber98561234(string phoneNumber)
         {
             _receiver = phoneNumber;
         }
@@ -94,7 +94,7 @@ namespace AcceptanceTest.SMSServiceTests
         }
 
         [Then(@"the receiver of the SMS must be registered as ""(.*)""")]
-        public void ThenTheReceiverOfTheSMSMustBeRegisteredAs27206617(string receiver)
+        public void ThenTheReceiverOfTheSMSMustBeRegisteredAs98561234(string receiver)
         {
             var sms = ScenarioContext.Current.Get<SMSServiceCall>();
             sms.DestinationPhoneNumber.Should().Be(receiver);

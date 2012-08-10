@@ -74,11 +74,11 @@ namespace AcceptanceTest
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 9
- testRunner.Given("I want to create a new subscription for phone \"51948896\"");
+ testRunner.Given("I want to create a new subscription for phone \"23458126\"");
 #line 10
  testRunner.When("I have created the subscription");
 #line 11
- testRunner.Then("the subscription is registered for phone \"51948896\"");
+ testRunner.Then("the subscription is registered for phone \"23458126\"");
 #line 12
  testRunner.And("the subscription has default local country \"DK\"");
 #line 13
@@ -95,7 +95,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Given("I have created a subscription for phone \"51948896\"");
+ testRunner.Given("I have created a subscription for phone \"23458126\"");
 #line 18
  testRunner.When("I add a new Voice Call service to the subcription");
 #line 19
@@ -112,13 +112,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 22
 this.ScenarioSetup(scenarioInfo);
 #line 23
- testRunner.Given("I want to create a new subscription for phone \"51948896\"");
+ testRunner.Given("I want to create a new subscription for phone \"23458126\"");
 #line 24
  testRunner.And("I want the local country of the subscription to be \"USD\"");
 #line 25
  testRunner.When("I have created the subscription with a not default country");
 #line 26
- testRunner.Then("the subscription is registered for phone \"51948896\"");
+ testRunner.Then("the subscription is registered for phone \"23458126\"");
 #line 27
  testRunner.And("the subscription has local country \"USD\"");
 #line 28
@@ -135,11 +135,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 31
 this.ScenarioSetup(scenarioInfo);
 #line 32
- testRunner.Given("I have created a subscription for phone \"51948896\"");
+ testRunner.Given("I have created a subscription for phone \"23458126\"");
 #line 33
  testRunner.And("the subscription includes a Voice Call service");
 #line 34
- testRunner.When("I make a Voice Call with the phone \"51948896\"");
+ testRunner.When("I make a Voice Call with the phone \"23458126\"");
 #line 35
  testRunner.Then("I can find the call using the subscription phone number");
 #line hidden
