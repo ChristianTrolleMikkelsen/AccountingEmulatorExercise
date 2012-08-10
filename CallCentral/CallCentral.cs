@@ -28,11 +28,21 @@ namespace CallCentral
 
         public void RegisterACall(IServiceCall serviceCall)
         {
+            CheckIfCallHasRequiredInformation(serviceCall);
+
             CheckIfCallIsAllowToUseTheSerivceAsDefinedByTheSubscription(serviceCall);
 
             CheckIfCallIsWithinTheCountryRangeDefinedByTheSubscription(serviceCall);
 
             _callRepository.RegisterACallForPhone(serviceCall);
+        }
+
+        private void CheckIfCallHasRequiredInformation(IServiceCall call)
+        {
+            if(call.IsValid() == false)
+            {
+                throw new Exception(string.Format("Your call was dimissed as it contained invalid information: {0},", call.ToString()));
+            }
         }
 
         private void CheckIfCallIsAllowToUseTheSerivceAsDefinedByTheSubscription(IServiceCall call)

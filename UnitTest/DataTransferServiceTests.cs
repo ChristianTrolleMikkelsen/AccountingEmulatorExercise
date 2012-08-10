@@ -53,6 +53,11 @@ namespace UnitTest
             {
                 throw new NotImplementedException();
             }
+
+            public bool IsValid()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

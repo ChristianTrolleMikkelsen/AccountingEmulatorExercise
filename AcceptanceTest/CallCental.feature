@@ -17,3 +17,27 @@ Scenario: Deny usage of services if the call is outside the allow country range
 	Given a customer has a phone subscription with the Voice Call Service
 	When the customer tries to make a Voice Call with the phone to "DE" from "DK"
 	Then the service is denied when contacting the Call Central
+
+Scenario: Deny usage of services if invalid source phonenumber was supplied
+	Given a customer has a phone subscriptions without any services
+	When the customer tries to make a Voice Call with the phone
+	And for some reason the call is missing a source phonenumber
+	Then the service is denied when contacting the Call Central
+
+Scenario: Deny usage of services if invalid destination phonenumber was supplied
+	Given a customer has a phone subscriptions without any services
+	When the customer tries to make a Voice Call with the phone
+	And for some reason the call is missing a destination phonenumber
+	Then the service is denied when contacting the Call Central
+
+Scenario: Deny usage of services if invalid source country was supplied
+	Given a customer has a phone subscriptions without any services
+	When the customer tries to make a Voice Call with the phone
+	And for some reason the call is missing a source country
+	Then the service is denied when contacting the Call Central
+
+Scenario: Deny usage of services if invalid destination country was supplied
+	Given a customer has a phone subscriptions without any services
+	When the customer tries to make a Voice Call with the phone
+	And for some reason the call is missing a destination country
+	Then the service is denied when contacting the Call Central

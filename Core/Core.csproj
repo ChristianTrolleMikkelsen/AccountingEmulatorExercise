@@ -48,11 +48,11 @@
     <Compile Include="Repositories\ServiceRepository.cs" />
     <Compile Include="Repositories\SubscriptionRepository.cs" />
     <Compile Include="ServiceCalls\DataTransferCall.cs" />
-    <Compile Include="ServiceCalls\IServiceCall.cs" />
+    <Compile Include="ServiceCalls\BaseCall.cs" />
     <Compile Include="ServiceCalls\SMSServiceCall.cs" />
     <Compile Include="ServiceCalls\VoiceServiceCall.cs" />
     <Compile Include="ServiceCharges\FixedCharge.cs" />
-    <Compile Include="ServiceCharges\ServiceCharge.cs" />
+    <Compile Include="ServiceCharges\BaseCharge.cs" />
     <Compile Include="ServiceCharges\VariableCharge.cs" />
     <Compile Include="Services\DataTransferService.cs" />
     <Compile Include="Services\SMSService.cs" />

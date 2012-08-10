@@ -3,7 +3,7 @@ using Core.ServiceCalls;
 
 namespace Core.ServiceCharges
 {
-    public class VariableCharge : ServiceCharge
+    public class VariableCharge : BaseCharge
     {
         public decimal UnitSize { get; private set; }
 
@@ -11,6 +11,15 @@ namespace Core.ServiceCharges
             : base(phoneNumber, typeOfService, chargePrUnit, description, country)
         {
             UnitSize = unitSize;
+            EvaluateUnitSize();
+        }
+
+        private void EvaluateUnitSize()
+        {
+            if(UnitSize == 0M)
+            {
+                throw new Exception(string.Format("UnitSize may not be Zero for charge. PhoneNumber: {0} Service: {1} Country: {2} Description: {3}", PhoneNumber, ServiceType, Country,Description));
+            }
         }
 
         public override decimal CalculateCharge(IServiceCall serviceCall)

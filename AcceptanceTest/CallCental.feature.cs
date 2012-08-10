@@ -116,6 +116,82 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Deny usage of services if invalid source phonenumber was supplied")]
+        public virtual void DenyUsageOfServicesIfInvalidSourcePhonenumberWasSupplied()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid source phonenumber was supplied", ((string[])(null)));
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+ testRunner.Given("a customer has a phone subscriptions without any services");
+#line 23
+ testRunner.When("the customer tries to make a Voice Call with the phone");
+#line 24
+ testRunner.And("for some reason the call is missing a source phonenumber");
+#line 25
+ testRunner.Then("the service is denied when contacting the Call Central");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Deny usage of services if invalid destination phonenumber was supplied")]
+        public virtual void DenyUsageOfServicesIfInvalidDestinationPhonenumberWasSupplied()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid destination phonenumber was supplied", ((string[])(null)));
+#line 27
+this.ScenarioSetup(scenarioInfo);
+#line 28
+ testRunner.Given("a customer has a phone subscriptions without any services");
+#line 29
+ testRunner.When("the customer tries to make a Voice Call with the phone");
+#line 30
+ testRunner.And("for some reason the call is missing a destination phonenumber");
+#line 31
+ testRunner.Then("the service is denied when contacting the Call Central");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Deny usage of services if invalid source country was supplied")]
+        public virtual void DenyUsageOfServicesIfInvalidSourceCountryWasSupplied()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid source country was supplied", ((string[])(null)));
+#line 33
+this.ScenarioSetup(scenarioInfo);
+#line 34
+ testRunner.Given("a customer has a phone subscriptions without any services");
+#line 35
+ testRunner.When("the customer tries to make a Voice Call with the phone");
+#line 36
+ testRunner.And("for some reason the call is missing a source country");
+#line 37
+ testRunner.Then("the service is denied when contacting the Call Central");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Deny usage of services if invalid destination country was supplied")]
+        public virtual void DenyUsageOfServicesIfInvalidDestinationCountryWasSupplied()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid destination country was supplied", ((string[])(null)));
+#line 39
+this.ScenarioSetup(scenarioInfo);
+#line 40
+ testRunner.Given("a customer has a phone subscriptions without any services");
+#line 41
+ testRunner.When("the customer tries to make a Voice Call with the phone");
+#line 42
+ testRunner.And("for some reason the call is missing a destination country");
+#line 43
+ testRunner.Then("the service is denied when contacting the Call Central");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
