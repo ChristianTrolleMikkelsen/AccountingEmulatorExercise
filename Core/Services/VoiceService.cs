@@ -14,6 +14,6 @@ namespace Core.Services
         public bool HasSupportForCall(IServiceCall serviceCall)
         {
             return serviceCall.GetType() == typeof(VoiceServiceCall);
-        }
+        } 
     }
 }
