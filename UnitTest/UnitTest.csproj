@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillTest.cs" />
     <Compile Include="DataTransferServiceTests.cs" />
     <Compile Include="FixedChargeTest.cs" />
     <Compile Include="ServiceCallTests.cs" />
@@ -56,9 +57,17 @@
     <Compile Include="VoiceServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccountingMachine\AccountingMachine.csproj">
+      <Project>{47B77810-19BC-4795-A08C-F140538CD2C5}</Project>
+      <Name>AccountingMachine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestHelpers\TestHelpers.csproj">
+      <Project>{37B87A0D-D03B-4B28-B5D1-518CC49F4208}</Project>
+      <Name>TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

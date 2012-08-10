@@ -127,9 +127,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 22
  testRunner.Given("a customer has a phone subscriptions without any services");
 #line 23
- testRunner.When("the customer tries to make a Voice Call with the phone");
+ testRunner.When("for some reason the call is missing a source phonenumber");
 #line 24
- testRunner.And("for some reason the call is missing a source phonenumber");
+ testRunner.And("the customer tries to make a Voice Call with the phone");
 #line 25
  testRunner.Then("the service is denied when contacting the Call Central");
 #line hidden
@@ -146,9 +146,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 28
  testRunner.Given("a customer has a phone subscriptions without any services");
 #line 29
- testRunner.When("the customer tries to make a Voice Call with the phone");
+ testRunner.When("for some reason the call is missing a destination phonenumber");
 #line 30
- testRunner.And("for some reason the call is missing a destination phonenumber");
+ testRunner.And("the customer tries to make a Voice Call with the phone");
 #line 31
  testRunner.Then("the service is denied when contacting the Call Central");
 #line hidden
@@ -165,9 +165,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 34
  testRunner.Given("a customer has a phone subscriptions without any services");
 #line 35
- testRunner.When("the customer tries to make a Voice Call with the phone");
+ testRunner.When("for some reason the call is missing a source country");
 #line 36
- testRunner.And("for some reason the call is missing a source country");
+ testRunner.And("the customer tries to make a Voice Call with the phone");
 #line 37
  testRunner.Then("the service is denied when contacting the Call Central");
 #line hidden
@@ -184,9 +184,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 40
  testRunner.Given("a customer has a phone subscriptions without any services");
 #line 41
- testRunner.When("the customer tries to make a Voice Call with the phone");
+ testRunner.When("for some reason the call is missing a destination country");
 #line 42
- testRunner.And("for some reason the call is missing a destination country");
+ testRunner.And("the customer tries to make a Voice Call with the phone");
 #line 43
  testRunner.Then("the service is denied when contacting the Call Central");
 #line hidden
