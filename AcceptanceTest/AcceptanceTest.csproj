@@ -116,8 +116,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="CustomerPhoneSubscription.feature.cs">
-      <DependentUpon>CustomerPhoneSubscription.feature</DependentUpon>
+    <Compile Include="CustomerSubscription.feature.cs">
+      <DependentUpon>CustomerSubscription.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -126,7 +126,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="CustomerTests\CustomerPhoneSubscriptionTest.cs" />
+    <Compile Include="CustomerTests\CustomerSubscriptionTest.cs" />
     <Compile Include="CustomerTests\CustomerStatusTest.cs" />
     <Compile Include="Subscription.feature.cs">
       <DependentUpon>Subscription.feature</DependentUpon>
@@ -174,9 +174,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CallCental.feature.cs</LastGenOutput>
     </None>
-    <None Include="CustomerPhoneSubscription.feature">
+    <None Include="CustomerSubscription.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CustomerPhoneSubscription.feature.cs</LastGenOutput>
+      <LastGenOutput>CustomerSubscription.feature.cs</LastGenOutput>
     </None>
     <None Include="CustomerStatus.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
