@@ -1,5 +1,6 @@
 *.suo
 *.user
+*.ncrunchsolution
 _ReSharper.*
 bin
 obj
