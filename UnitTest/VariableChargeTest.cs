@@ -1,10 +1,11 @@
 ﻿using System;
+using CallCentral.Calls;
 using Core;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
-using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
+using SubscriptionService.ServiceCharges;
 
 namespace UnitTest
 {
@@ -16,7 +17,7 @@ namespace UnitTest
         {
             var fixedCharge = new VariableCharge("99999999", ServiceType.Voice, 100, 10, "Variable Charge Test", "DK");
 
-            fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
+            fixedCharge.CalculateCharge(new VoiceCall("99999999",
                                                              DateTime.Now,
                                                              new TimeSpan(0, 0, 4, 0),
                                                              "00000000",
@@ -30,7 +31,7 @@ namespace UnitTest
         {
             var fixedCharge = new VariableCharge("99999999", ServiceType.Voice, 100, 10, "Variable Charge Test", "DK");
 
-            fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
+            fixedCharge.CalculateCharge(new VoiceCall("99999999",
                                                              DateTime.Now,
                                                              new TimeSpan(0, 0, 0, 0),
                                                              "00000000",
@@ -44,7 +45,7 @@ namespace UnitTest
         {
             var fixedCharge = new VariableCharge("99999999", ServiceType.Voice, 0, 10, "Variable Charge Test", "DK");
 
-            fixedCharge.CalculateCharge(new VoiceServiceCall("99999999",
+            fixedCharge.CalculateCharge(new VoiceCall("99999999",
                                                              DateTime.Now,
                                                              new TimeSpan(0, 0, 4, 0),
                                                              "00000000",

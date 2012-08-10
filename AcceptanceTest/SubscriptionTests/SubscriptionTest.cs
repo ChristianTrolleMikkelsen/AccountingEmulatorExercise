@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using CallCentral.Calls;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
-using Core.Services;
 using FluentAssertions;
 using SubscriptionService.Services;
 using TechTalk.SpecFlow;
@@ -94,7 +95,7 @@ namespace AcceptanceTest.SubscriptionTests
         [When(@"I make a Voice Call with the phone ""23458126""")]
         public void WhenIMakeAVoiceCallWithThePhone23458126()
         {
-            var voiceCall = new VoiceServiceCall(_subscription.PhoneNumber,
+            var voiceCall = new VoiceCall(_subscription.PhoneNumber,
                                           new DateTime(2012, 1, 1),
                                           new TimeSpan(0, 3, 45),
                                           "33334444",
@@ -109,9 +110,9 @@ namespace AcceptanceTest.SubscriptionTests
         public void ThenICanFindTheCallUsingTheSubscriptionPhoneNumber()
         {
             var calls = _callCentral.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber)
-                                        .ToList().ConvertAll(call => call as VoiceServiceCall);
+                                        .ToList().ConvertAll(call => call as VoiceCall);
 
-            var voiceCall = ScenarioContext.Current.Get<VoiceServiceCall>();
+            var voiceCall = ScenarioContext.Current.Get<VoiceCall>();
 
             calls.Count().Should().Be(1);
             calls.First()

@@ -1,6 +1,6 @@
 ﻿using System;
+using Core;
 using Core.ServiceCalls;
-using Core.Services;
 
 namespace SubscriptionService.Services
 {

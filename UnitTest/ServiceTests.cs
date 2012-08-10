@@ -1,7 +1,6 @@
 ﻿using System;
 using Core;
 using Core.ServiceCalls;
-using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
 using SubscriptionService.Services;

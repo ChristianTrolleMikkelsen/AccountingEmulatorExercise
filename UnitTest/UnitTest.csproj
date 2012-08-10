@@ -61,6 +61,10 @@
       <Project>{47B77810-19BC-4795-A08C-F140538CD2C5}</Project>
       <Name>AccountingMachine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CallCentral\CallCentral.csproj">
+      <Project>{9BE0B646-3373-4413-8FF9-F710B98F8E20}</Project>
+      <Name>CallCentral</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>

@@ -1,7 +1,8 @@
 ﻿using System;
+using Core;
 using Core.ServiceCalls;
 
-namespace Core.ServiceCharges
+namespace SubscriptionService.ServiceCharges
 {
     public class VariableCharge : BaseCharge
     {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using CallCentral.Calls;
 using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
-using Core.Services;
 using FluentAssertions;
+using SubscriptionService.ServiceCharges;
 using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
@@ -69,7 +70,7 @@ namespace AcceptanceTest.SMSServiceTests
         [When(@"the SMS has been sent")]
         public void WhenTheSMSHasBeenSent()
         {
-            _callCentral.RegisterACall(new SMSServiceCall(  _subscription.PhoneNumber,
+            _callCentral.RegisterACall(new SMSCall(  _subscription.PhoneNumber,
                                                             DateTime.Now,
                                                             _smsLenght,
                                                             "99999999",

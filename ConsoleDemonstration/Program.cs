@@ -3,12 +3,14 @@ using AccountingMachine;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallCentral;
+using CallCentral.Calls;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
-using Core.Services;
 using StructureMap;
 using SubscriptionService;
+using SubscriptionService.ServiceCharges;
 using SubscriptionService.Services;
 
 namespace ConsoleDemonstration
@@ -86,16 +88,16 @@ namespace ConsoleDemonstration
 
         private static void PerformCalls()
         {
-            _callCentral.RegisterACall(new VoiceServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-1), new TimeSpan(0, 0, 3, 35), "11111111", "DK", "DK"));
-            _callCentral.RegisterACall(new VoiceServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-2), new TimeSpan(0, 0, 0, 21), "22222222", "DK", "DK"));
-            _callCentral.RegisterACall(new VoiceServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-4), new TimeSpan(0, 0, 5, 45), "33333333", "DK", "DE"));
-            _callCentral.RegisterACall(new VoiceServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-3), new TimeSpan(0, 0, 9, 17), "44444444", "DE", "DK"));
-            _callCentral.RegisterACall(new VoiceServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-6), new TimeSpan(0, 0, 2, 01), "55555555", "DE", "DE"));
+            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-1), new TimeSpan(0, 0, 3, 35), "11111111", "DK", "DK"));
+            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-2), new TimeSpan(0, 0, 0, 21), "22222222", "DK", "DK"));
+            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-4), new TimeSpan(0, 0, 5, 45), "33333333", "DK", "DE"));
+            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-3), new TimeSpan(0, 0, 9, 17), "44444444", "DE", "DK"));
+            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-6), new TimeSpan(0, 0, 2, 01), "55555555", "DE", "DE"));
 
-            _callCentral.RegisterACall(new SMSServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-2), 100, "66666666", "DK", "DK"));
-            _callCentral.RegisterACall(new SMSServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-2), 150, "77777777", "DE", "DK"));
-            _callCentral.RegisterACall(new SMSServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-4), 100, "88888888", "DK", "DE"));
-            _callCentral.RegisterACall(new SMSServiceCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-5), 100, "99999999", "DE", "DE"));
+            _callCentral.RegisterACall(new SMSCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-2), 100, "66666666", "DK", "DK"));
+            _callCentral.RegisterACall(new SMSCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-2), 150, "77777777", "DE", "DK"));
+            _callCentral.RegisterACall(new SMSCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-4), 100, "88888888", "DK", "DE"));
+            _callCentral.RegisterACall(new SMSCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-5), 100, "99999999", "DE", "DE"));
 
             _callCentral.RegisterACall(new DataTransferCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-5), 12 * 1024 * 1024, "www.google.com", "DK", "DK"));
             _callCentral.RegisterACall(new DataTransferCall(_subscription.PhoneNumber, DateTime.Now.AddDays(-6), 3 * 1024 * 1024, "www.google.com", "DK", "DE"));

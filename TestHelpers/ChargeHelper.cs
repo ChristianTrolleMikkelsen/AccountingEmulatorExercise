@@ -1,6 +1,6 @@
 ﻿using Core;
 using Core.ServiceCharges;
-using Core.Services;
+using SubscriptionService.ServiceCharges;
 
 namespace TestHelpers
 {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using CallCentral.Calls;
 using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
-using Core.Services;
 using FluentAssertions;
+using SubscriptionService.ServiceCharges;
 using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;

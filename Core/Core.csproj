@@ -46,14 +46,9 @@
     <Compile Include="Models\CustomerStatus.cs" />
     <Compile Include="Models\ISubscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceCalls\DataTransferCall.cs" />
-    <Compile Include="ServiceCalls\BaseCall.cs" />
-    <Compile Include="ServiceCalls\SMSServiceCall.cs" />
-    <Compile Include="ServiceCalls\VoiceServiceCall.cs" />
+    <Compile Include="ServiceCalls\IServiceCall.cs" />
     <Compile Include="ServiceCalls\ServiceCallTypes.cs" />
-    <Compile Include="ServiceCharges\FixedCharge.cs" />
-    <Compile Include="ServiceCharges\BaseCharge.cs" />
-    <Compile Include="ServiceCharges\VariableCharge.cs" />
+    <Compile Include="ServiceCharges\IServiceCharge.cs" />
     <Compile Include="ServiceTypes.cs" />
   </ItemGroup>
   <ItemGroup />

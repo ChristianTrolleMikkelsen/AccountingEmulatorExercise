@@ -1,4 +1,5 @@
 ﻿using System;
+using CallCentral.Calls;
 using Core.ServiceCalls;
 using FluentAssertions;
 using NUnit.Framework;
@@ -27,7 +28,7 @@ namespace UnitTest
         [Test]
         public void SMSCalls_Must_Use_Length_As_UnitSize()
         {
-            var call = new SMSServiceCall("", new DateTime(2012, 1, 1), 123, "", "", "");
+            var call = new SMSCall("", new DateTime(2012, 1, 1), 123, "", "", "");
 
             call.GetUnitSize().Should().Be(123);
         }
@@ -35,7 +36,7 @@ namespace UnitTest
         [Test]
         public void SMSCalls_Must_Use_SendTime_As_StartTime()
         {
-            var call = new SMSServiceCall("", new DateTime(2012, 1, 1), 123, "", "", "");
+            var call = new SMSCall("", new DateTime(2012, 1, 1), 123, "", "", "");
 
             call.GetStartTime().Should().Be(new DateTime(2012, 1, 1));
         }
@@ -43,7 +44,7 @@ namespace UnitTest
         [Test]
         public void VoiceCalls_Must_Use_Duration_In_Seconds_As_UnitSize()
         {
-            var call = new VoiceServiceCall("", new DateTime(2012, 1, 1), new TimeSpan(0,0,1,2), "", "", "");
+            var call = new VoiceCall("", new DateTime(2012, 1, 1), new TimeSpan(0,0,1,2), "", "", "");
 
             call.GetUnitSize().Should().Be(62);
         }
@@ -51,7 +52,7 @@ namespace UnitTest
         [Test]
         public void VoiceCalls_Must_Use_Start_As_StartTime()
         {
-            var call = new VoiceServiceCall("", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "", "", "");
+            var call = new VoiceCall("", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "", "", "");
 
             call.GetStartTime().Should().Be(new DateTime(2012, 1, 1));
         }
@@ -59,35 +60,35 @@ namespace UnitTest
         [Test]
         public void Call_Must_Be_Invalid_If_There_Is_No_PhoneNumber()
         {
-            var call = new VoiceServiceCall("", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "DEST", "DK", "DK");
+            var call = new VoiceCall("", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "DEST", "DK", "DK");
             call.IsValid().Should().BeFalse();
         }
 
         [Test]
         public void Call_Must_Be_Invalid_If_There_Is_No_From_Country()
         {
-            var call = new VoiceServiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "DEST", "", "DK");
+            var call = new VoiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "DEST", "", "DK");
             call.IsValid().Should().BeFalse();
         }
 
         [Test]
         public void Call_Must_Be_Invalid_If_There_Is_No_To_Country()
         {
-            var call = new VoiceServiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "DEST", "DK", "");
+            var call = new VoiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "DEST", "DK", "");
             call.IsValid().Should().BeFalse();
         }
 
         [Test]
         public void Call_Must_Be_Invalid_If_There_Is_No_Destination()
         {
-            var call = new VoiceServiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "", "DK", "DK");
+            var call = new VoiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 1, 2), "", "DK", "DK");
             call.IsValid().Should().BeFalse();
         }
 
         [Test]
         public void Call_Must_Be_Invalid_If_There_Is_No_UnitSize()
         {
-            var call = new VoiceServiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 0, 0), "DEST", "DK", "DK");
+            var call = new VoiceCall("99999999", new DateTime(2012, 1, 1), new TimeSpan(0, 0, 0, 0), "DEST", "DK", "DK");
             call.IsValid().Should().BeFalse();
         }
     }

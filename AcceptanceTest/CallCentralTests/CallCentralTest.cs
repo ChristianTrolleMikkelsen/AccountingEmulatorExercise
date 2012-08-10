@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using CallCentral.Calls;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
-using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
 using SubscriptionService.Services;
@@ -32,7 +33,7 @@ namespace AcceptanceTest.CallCentralTests
         [When(@"the customer makes a Voice Call with the phone")]
         public void WhenTheCustomerMakesAVoiceCallWithThePhone()
         {
-            _callCentral.RegisterACall(new VoiceServiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry));
+            _callCentral.RegisterACall(new VoiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry));
         }
 
 
@@ -51,14 +52,14 @@ namespace AcceptanceTest.CallCentralTests
         [When(@"the customer tries to make a Voice Call with the phone")]
         public void WhenTheCustomerTriesToMakeAVoiceCallWithThePhone()
         {
-            var call = new VoiceServiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry);
+            var call = new VoiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry);
             ScenarioContext.Current.Set(call);
         }
 
         [Then(@"the service is denied when contacting the Call Central")]
         public void ThenTheServiceIsDeniedWhenContactingTheCallCentral()
         {
-            var call = ScenarioContext.Current.Get<VoiceServiceCall>();
+            var call = ScenarioContext.Current.Get<VoiceCall>();
 
             Assert.Throws<Exception>(delegate { _callCentral.RegisterACall(call); });
         }
@@ -67,7 +68,7 @@ namespace AcceptanceTest.CallCentralTests
         public void WhenTheCustomerTriesToMakeAVoiceCallWithThePhoneToDEFromDK()
         {
             _toCountry = "DE";
-            var call = new VoiceServiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry);
+            var call = new VoiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry);
             ScenarioContext.Current.Set(call);
         }
 

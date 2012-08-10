@@ -50,6 +50,10 @@
     <Compile Include="CallValidater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CallRepository.cs" />
+    <Compile Include="Calls\BaseCall.cs" />
+    <Compile Include="Calls\DataTransferCall.cs" />
+    <Compile Include="Calls\SMSCall.cs" />
+    <Compile Include="Calls\VoiceCall.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

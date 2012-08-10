@@ -1,12 +1,13 @@
 ﻿using System.Linq;
+using Core;
 using Core.Models;
 using Core.ServiceCharges;
-using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;
 using SubscriptionService;
 using SubscriptionService.Repositories;
+using SubscriptionService.ServiceCharges;
 using TestHelpers;
 
 namespace IntegrationTest.Repositories

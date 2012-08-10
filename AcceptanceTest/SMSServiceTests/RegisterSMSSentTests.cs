@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using CallCentral.Calls;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
-using Core.Services;
 using FluentAssertions;
 using SubscriptionService.Services;
 using TechTalk.SpecFlow;
@@ -61,7 +62,7 @@ namespace AcceptanceTest.SMSServiceTests
         [When(@"the SMS is sent at ""(.*)""")]
         public void WhenTheSMSIsSentAt090000(string startTime)
         {
-            _callCentral.RegisterACall(new SMSServiceCall(  _subscription.PhoneNumber,
+            _callCentral.RegisterACall(new SMSCall(  _subscription.PhoneNumber,
                                                             DateTime.Parse(startTime),
                                                             _smsLenght,
                                                             _receiver,
@@ -76,41 +77,41 @@ namespace AcceptanceTest.SMSServiceTests
 
             calls.Count().Should().Be(1);
 
-            ScenarioContext.Current.Set(calls.First() as SMSServiceCall); 
+            ScenarioContext.Current.Set(calls.First() as SMSCall); 
         }
 
         [Then(@"the start time of the SMS must be registered at ""(.*)""")]
         public void ThenTheStartTimeOfTheSMSMustBeRegisteredAt090000(string expectedStart)
         {
-            var sms = ScenarioContext.Current.Get<SMSServiceCall>();
+            var sms = ScenarioContext.Current.Get<SMSCall>();
             sms.SendTime.Should().Be(DateTime.Parse(expectedStart));
         }
 
         [Then(@"the lenght of the SMS must be registered to be ""(.*)"" characters")]
         public void ThenTheLenghtOfTheSMSMustBeRegisteredToBe128Characters(string expectedLenght)
         {
-            var sms = ScenarioContext.Current.Get<SMSServiceCall>();
+            var sms = ScenarioContext.Current.Get<SMSCall>();
             sms.NoOfCharacters.Should().Be(int.Parse(expectedLenght));
         }
 
         [Then(@"the receiver of the SMS must be registered as ""(.*)""")]
         public void ThenTheReceiverOfTheSMSMustBeRegisteredAs98561234(string receiver)
         {
-            var sms = ScenarioContext.Current.Get<SMSServiceCall>();
+            var sms = ScenarioContext.Current.Get<SMSCall>();
             sms.DestinationPhoneNumber.Should().Be(receiver);
         }
 
         [Then(@"the country from which the SMS was sent from must be registered as ""(.*)""")]
         public void ThenTheCountryFromWhichTheSMSWasSentFromMustBeRegisteredAsDK(string country)
         {
-            var sms = ScenarioContext.Current.Get<SMSServiceCall>();
+            var sms = ScenarioContext.Current.Get<SMSCall>();
             sms.FromCountry.Should().Be(country);
         }
 
         [Then(@"the country for which the SMS was sent to must be registered as ""(.*)""")]
         public void ThenTheCountryForWhichTheSMSWasSentToMustBeRegisteredAsDE(string country)
         {
-            var sms = ScenarioContext.Current.Get<SMSServiceCall>();
+            var sms = ScenarioContext.Current.Get<SMSCall>();
             sms.ToCountry.Should().Be(country);
         }
 

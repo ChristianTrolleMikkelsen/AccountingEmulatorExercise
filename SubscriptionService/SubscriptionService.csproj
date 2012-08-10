@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigurator.cs" />
+    <Compile Include="ServiceCharges\BaseCharge.cs" />
+    <Compile Include="ServiceCharges\FixedCharge.cs" />
+    <Compile Include="ServiceCharges\VariableCharge.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="SubscriptionService.cs" />
     <Compile Include="Models\Customer.cs" />

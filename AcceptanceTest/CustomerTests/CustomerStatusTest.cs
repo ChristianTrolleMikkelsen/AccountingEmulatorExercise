@@ -1,10 +1,12 @@
 ﻿using System;
 using AccountingMachine.Models;
+using CallCentral.Calls;
+using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
-using Core.Services;
 using FluentAssertions;
+using SubscriptionService.ServiceCharges;
 using SubscriptionService.Services;
 using TechTalk.SpecFlow;
 using TestHelpers;
@@ -34,7 +36,7 @@ namespace AcceptanceTest.CustomerTests
         [Given(@"the customer has finished a call")]
         public void GivenTheCustomerHasFinishedACall()
         {
-            _callCentral.RegisterACall(new VoiceServiceCall(_subscription.PhoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK"));
+            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK"));
         }
 
         [When(@"I calculate the cost of the customers bill to (\d+)")]
