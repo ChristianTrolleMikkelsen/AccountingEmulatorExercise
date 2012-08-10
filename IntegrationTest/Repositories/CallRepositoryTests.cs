@@ -2,7 +2,6 @@
 using System.Linq;
 using CallCentral.Calls;
 using CallCentral.Repositories;
-using Core.ServiceCalls;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;

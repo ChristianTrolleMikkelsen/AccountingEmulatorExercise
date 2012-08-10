@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using AccountingMachine.Models;
+﻿using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using Core.Models;
 using FluentAssertions;

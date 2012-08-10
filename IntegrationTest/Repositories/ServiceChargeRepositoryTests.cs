@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Core;
 using Core.Models;
-using Core.ServiceCharges;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;

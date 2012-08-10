@@ -16,7 +16,7 @@ namespace UnitTest
         [Test]
         public void Must_Be_Able_To_Print_Bill()
         {
-            new SubscriptionService.AppConfigurator().Initialize();
+            new AppConfigurator().Initialize();
 
             var service = ObjectFactory.GetInstance<ISubscriptionService>();
 

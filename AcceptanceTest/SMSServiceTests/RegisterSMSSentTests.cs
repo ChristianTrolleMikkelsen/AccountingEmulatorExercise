@@ -3,7 +3,6 @@ using System.Linq;
 using CallCentral.Calls;
 using Core;
 using Core.Models;
-using Core.ServiceCalls;
 using FluentAssertions;
 using SubscriptionService.Services;
 using TechTalk.SpecFlow;

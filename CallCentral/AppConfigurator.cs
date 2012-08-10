@@ -1,6 +1,6 @@
 ﻿using CallCentral.Repositories;
+using CallCentral.Validator.Rules;
 using StructureMap;
-using SubscriptionService;
 
 namespace CallCentral
 {
@@ -21,6 +21,7 @@ namespace CallCentral
                                                         {
                                                             scan.AssemblyContainingType<ICallCentral>();
                                                             scan.WithDefaultConventions();
+                                                            scan.AddAllTypesOf<IRule>();
                                                         });
                                          });
         }

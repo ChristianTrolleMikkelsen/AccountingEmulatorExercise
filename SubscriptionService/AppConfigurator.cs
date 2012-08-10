@@ -1,5 +1,4 @@
 ﻿using StructureMap;
-using StructureMap.Pipeline;
 using SubscriptionService.Repositories;
 
 namespace SubscriptionService

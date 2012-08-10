@@ -1,8 +1,6 @@
 ﻿using System;
 using CallCentral.Calls;
 using Core;
-using Core.ServiceCalls;
-using Core.ServiceCharges;
 using FluentAssertions;
 using NUnit.Framework;
 using SubscriptionService.ServiceCharges;

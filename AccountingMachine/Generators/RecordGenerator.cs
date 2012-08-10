@@ -38,12 +38,12 @@ namespace AccountingMachine.Generators
 
         private void GenerateRecords(IServiceCall call)
         {
-            var charges = GetChargesValidForCountriesInCall(call);
+            var charges = GetChargesValidForCountriesInTheCall(call);
 
             charges.ForEach(charge => GenerateRecord(charge, call));
         }
 
-        private IEnumerable<IServiceCharge> GetChargesValidForCountriesInCall(IServiceCall call)
+        private IEnumerable<IServiceCharge> GetChargesValidForCountriesInTheCall(IServiceCall call)
         {
             return _subscriptionService.GetServiceChargesSupportedBy(call.PhoneNumber, call.Type)
                                             .Where(charge => charge.Country == call.FromCountry || charge.Country == call.ToCountry);

@@ -1,6 +1,5 @@
 ﻿using System;
 using CallCentral.Calls;
-using Core.ServiceCalls;
 using FluentAssertions;
 using NUnit.Framework;
 

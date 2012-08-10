@@ -3,8 +3,6 @@ using System.Linq;
 using CallCentral.Calls;
 using Core;
 using Core.Models;
-using Core.ServiceCalls;
-using Core.ServiceCharges;
 using FluentAssertions;
 using SubscriptionService.ServiceCharges;
 using SubscriptionService.Services;

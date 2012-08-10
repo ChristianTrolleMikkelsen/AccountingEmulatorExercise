@@ -5,7 +5,7 @@ using Core.ServiceCalls;
 using Core.ServiceCharges;
 using SubscriptionService.Models;
 using SubscriptionService.Repositories;
-using IService = SubscriptionService.Services.IService;
+using SubscriptionService.Services;
 
 namespace SubscriptionService
 {

@@ -5,7 +5,6 @@ using CallCentral;
 using Core.Models;
 using StructureMap;
 using SubscriptionService;
-using SubscriptionService.Models;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTest
@@ -45,16 +44,5 @@ namespace AcceptanceTest
             _discountRepository.SaveDiscount(new Discount(CustomerStatus.HighRoller, 0.1M));
             _discountRepository.SaveDiscount(new Discount(CustomerStatus.VIP, 0.2M));
         }
-
-       /* protected ISubscriptionSubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,string phoneNumber, string country, CustomerStatus status)
-        {
-            var customer = _subscriptionService.CreateCustomer("John Doe", status);
-            _subscriptionService.CreateSubscription(customer, phoneNumber, country);
-
-            var subscription = _subscriptionService.GetSubscription(phoneNumber);
-
-            ScenarioContext.Current.Set(_subscriptionService.GetSubscription(phoneNumber));
-            return subscription;
-        }*/
     }
 }
