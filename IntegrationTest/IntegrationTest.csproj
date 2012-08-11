@@ -54,7 +54,6 @@
     <Compile Include="Repositories\DiscountRepositoryTests.cs" />
     <Compile Include="Repositories\ServiceChargeRepositoryTests.cs" />
     <Compile Include="Repositories\RecordRepositoryTests.cs" />
-    <Compile Include="Repositories\ServiceRepositoryTests.cs" />
     <Compile Include="Repositories\SubscriptionRepositoryTests.cs" />
     <Compile Include="StructureMapTests.cs" />
   </ItemGroup>

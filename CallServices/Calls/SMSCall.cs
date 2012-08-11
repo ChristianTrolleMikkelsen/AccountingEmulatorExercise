@@ -1,5 +1,5 @@
 using System;
-using Core.ServiceCalls;
+using Core;
 
 namespace CallServices.Calls
 {
@@ -10,7 +10,7 @@ namespace CallServices.Calls
         public string DestinationPhoneNumber { get; private set; }
 
         public SMSCall(string phoneNumber, DateTime sendTime, int lenght, string destinationPhoneNumber, string fromCountry, string toCountry)
-            : base(phoneNumber, fromCountry, toCountry, ServiceCallType.SMS)
+            : base(phoneNumber, fromCountry, toCountry, ServiceType.SMS)
         {
             SendTime = sendTime;
             NoOfCharacters = lenght;

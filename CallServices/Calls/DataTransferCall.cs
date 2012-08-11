@@ -1,5 +1,5 @@
 using System;
-using Core.ServiceCalls;
+using Core;
 
 namespace CallServices.Calls
 {
@@ -10,7 +10,7 @@ namespace CallServices.Calls
         public string TransferUrl { get; private set; }
 
         public DataTransferCall(string phoneNumber, DateTime transferStart, int size, string transferUrl, string fromCountry, string toCountry)
-            : base(phoneNumber, fromCountry, toCountry, ServiceCallType.DataTransfer)
+            : base(phoneNumber, fromCountry, toCountry, ServiceType.DataTransfer)
         {
             TransferStart = transferStart;
             Size = size;

@@ -29,7 +29,6 @@ namespace AcceptanceTest.ForeignCountryCallsTests
         [Given(@"the subscription is allowed to perform Voice Calls to ""DE""")]
         public void GivenTheSubscriptionIsAllowedToPerformVoiceCallsToDE()
         {
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,
                                                                                ServiceType.Voice,
                                                                                _dkCharge,

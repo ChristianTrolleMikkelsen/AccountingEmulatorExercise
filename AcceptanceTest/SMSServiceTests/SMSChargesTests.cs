@@ -23,8 +23,6 @@ namespace AcceptanceTest.SMSServiceTests
         public void GivenIHaveAddedASMSServiceToTheSubscription()
         {
             _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"66665555", "DK", CustomerStatus.Normal);
-
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
         }
 
         [Given(@"I have specified a SMS send charge of ""(.*)""")]

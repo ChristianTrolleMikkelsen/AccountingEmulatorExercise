@@ -21,8 +21,6 @@ namespace AcceptanceTest.CustomerTests
         public void GivenIHaveGivenACustomerTheStatusStatus(string status)
         {
             _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"12345678", "DK", (CustomerStatus)Enum.Parse(typeof(CustomerStatus), status));
-
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber,ServiceType.Voice));
         }
 
         [Given(@"I charge (\d+) pr Voice Call")]

@@ -25,8 +25,6 @@ namespace AcceptanceTest.SMSServiceTests
         {
             _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"66665555", "DK", CustomerStatus.Normal);
 
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
-
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.SMS, 1, "Standard Fixed Fee", "DK"));
         }
 

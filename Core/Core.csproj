@@ -42,7 +42,6 @@
     <Compile Include="Models\ISubscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCalls\IServiceCall.cs" />
-    <Compile Include="ServiceCalls\ServiceCallTypes.cs" />
     <Compile Include="ServiceCharges\IServiceCharge.cs" />
     <Compile Include="ServiceTypes.cs" />
   </ItemGroup>

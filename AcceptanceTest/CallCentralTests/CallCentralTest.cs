@@ -26,7 +26,6 @@ namespace AcceptanceTest.CallCentralTests
         {
            SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,_phoneNumber, "DK", CustomerStatus.Normal);
 
-            _serviceRegistration.AddServiceToSubscription(new Service(_phoneNumber, ServiceType.Voice));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_phoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 

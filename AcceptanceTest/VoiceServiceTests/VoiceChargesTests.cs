@@ -29,7 +29,6 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"I have added a Voice Call service to the subscription")]
         public void GivenIHaveAddedAVoiceCallServiceToTheSubscription()
         {
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
         }
 
         [Given(@"I have specified a second charge of: ""(.*)"" for the Voice Call service")]

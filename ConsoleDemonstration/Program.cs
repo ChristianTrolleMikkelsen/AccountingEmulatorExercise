@@ -21,7 +21,6 @@ namespace ConsoleDemonstration
         private static ICustomerRegistration _customerRegistration;
         private static ISubscriptionRegistration _subscriptionRegistration;
         private static ISubscriptionSearch _subscriptionSearch;
-        private static IServiceRegistration _serviceRegistration;
         private static IServiceChargeRegistration _serviceChargeRegistration;
 
         static void Main(string[] args)
@@ -55,7 +54,6 @@ namespace ConsoleDemonstration
             _customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();
             _subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
             _subscriptionSearch = ObjectFactory.GetInstance<ISubscriptionSearch>();
-            _serviceRegistration = ObjectFactory.GetInstance<IServiceRegistration>();
             _serviceChargeRegistration = ObjectFactory.GetInstance<IServiceChargeRegistration>();
         }
 
@@ -68,9 +66,9 @@ namespace ConsoleDemonstration
 
         private static void CreateOneOfEachServiceWithOneOrMoreCharges()
         {
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
+            /*_serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
             _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));*/
 
             //Local
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 0.20M, "Standard Call Charge", "DK"));

@@ -1,16 +1,17 @@
 using System;
+using Core;
 using Core.ServiceCalls;
 
 namespace CallServices.Calls
 {
     public abstract class BaseCall : IServiceCall
     {
-        public ServiceCallType Type { get; private set; }
+        public ServiceType Type { get; private set; }
         public string PhoneNumber { get; private set; }
         public string FromCountry { get; private set; }
         public string ToCountry { get; private set; }
 
-        protected BaseCall(string phoneNumber, string fromCountry, string toCountry, ServiceCallType callType)
+        protected BaseCall(string phoneNumber, string fromCountry, string toCountry, ServiceType callType)
         {
             Type = callType;
             PhoneNumber = phoneNumber;

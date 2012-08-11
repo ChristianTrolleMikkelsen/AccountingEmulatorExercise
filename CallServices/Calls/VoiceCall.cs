@@ -1,5 +1,5 @@
 using System;
-using Core.ServiceCalls;
+using Core;
 
 namespace CallServices.Calls
 {
@@ -10,7 +10,7 @@ namespace CallServices.Calls
         public string DestinationPhoneNumber { get; private set; }
 
         public VoiceCall(string phoneNumber, DateTime start, TimeSpan duration, string destinationPhoneNumber, string fromCountry, string toCountry)
-            : base(phoneNumber, fromCountry, toCountry, ServiceCallType.Voice)
+            : base(phoneNumber, fromCountry, toCountry, ServiceType.Voice)
         {
             Start = start;
             Duration = duration;

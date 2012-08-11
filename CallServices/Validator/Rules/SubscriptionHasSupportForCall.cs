@@ -7,25 +7,25 @@ namespace CallServices.Validator.Rules
 {
     public class SubscriptionHasSupportForCall : IRule
     {
-        private readonly IServiceSearch _serviceSearch;
+        private readonly IServiceChargeSearch _serviceChargeSearch;
 
-        public SubscriptionHasSupportForCall(IServiceSearch serviceSearch)
+        public SubscriptionHasSupportForCall(IServiceChargeSearch serviceChargeSearch)
         {
-            _serviceSearch = serviceSearch;
+            _serviceChargeSearch = serviceChargeSearch;
         }
 
         public void Validate(IServiceCall call)
         {
-            if (ServiceCallSupportedBySubscription(call.PhoneNumber, call.Type) == false)
+            if (ServiceCallSupportedBySubscription(call) == false)
             {
                 throw new Exception(string.Format("Your subscription do not support usage of {0}. ", (object) call.GetType().Name));
             }
         }
 
-        private bool ServiceCallSupportedBySubscription(string phoneNumber, ServiceCallType callType)
+        private bool ServiceCallSupportedBySubscription(IServiceCall call)
         {
-            return _serviceSearch.GetServicesBySubscription(phoneNumber)
-                                        .Any(service => service.HasSupportForCallType(callType));
+            return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber)
+                                            .Any(charge => charge.ServiceType == call.Type);
         }
     }
 }

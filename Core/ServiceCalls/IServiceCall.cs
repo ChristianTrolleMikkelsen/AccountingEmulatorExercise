@@ -7,7 +7,7 @@ namespace Core.ServiceCalls
         string PhoneNumber { get; }
         string FromCountry { get; }
         string ToCountry { get; }
-        ServiceCallType Type { get; }
+        ServiceType Type { get; }
         DateTime GetStartTime();
         decimal GetUnitSize();
         bool IsValid();

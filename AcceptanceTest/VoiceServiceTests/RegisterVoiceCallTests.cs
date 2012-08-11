@@ -32,7 +32,6 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"the subscription includes the Voice Call Service")]
         public void GivenTheSubscriptionIncludesTheVoiceCallService()
         {
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fixed Fee", "DK"));
         }
 

@@ -46,7 +46,7 @@ namespace AcceptanceTest.SubscriptionTests
         [Then(@"the subscription contains an empty list of services")]
         public void ThenTheSubscriptionContainsAnEmptyListOfServices()
         {
-            _serviceSearch.GetServicesBySubscription(_subscription.PhoneNumber).Count().Should().Be(0);
+            _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(_subscription.PhoneNumber).Count().Should().Be(0);
         }
 
         [Given(@"I have created a subscription for phone ""(.*)""")]
@@ -58,14 +58,13 @@ namespace AcceptanceTest.SubscriptionTests
         [When(@"I add a new Voice Call service to the subcription")]
         public void WhenIAddANewVoiceCallServiceToTheSubcription()
         {
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 
         [Then(@"the Voice Call service must be added to the list of services")]
         public void ThenTheVoiceCallServiceMustBeAddedToTheListOfServices()
         {
-            _serviceSearch.GetServicesBySubscription(_subscription.PhoneNumber).Count().Should().Be(1);
+            _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(_subscription.PhoneNumber).Count().Should().Be(1);
         }
 
         [Given(@"I want the local country of the subscription to be ""USD""")]
@@ -89,7 +88,6 @@ namespace AcceptanceTest.SubscriptionTests
         [Given(@"the subscription includes a Voice Call service")]
         public void GivenTheSubscriptionIncludesAVoiceCallService()
         {
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 

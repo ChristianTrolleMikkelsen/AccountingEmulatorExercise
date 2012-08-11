@@ -18,9 +18,8 @@ namespace AcceptanceTest
         protected IDiscountRepository _discountRepository;
         protected ICustomerRegistration _customerRegistration;
         protected ISubscriptionRegistration _subscriptionRegistration;
-        protected IServiceRegistration _serviceRegistration;
         protected IServiceChargeRegistration _serviceChargeRegistration;
-        protected IServiceSearch _serviceSearch;
+        protected IServiceChargeSearch _serviceChargeSearch;
 
         protected static readonly decimal SecondUnitSize = 1;
         protected static readonly decimal MinuteUnitSize = 60;
@@ -47,9 +46,8 @@ namespace AcceptanceTest
             _discountRepository = ObjectFactory.GetInstance<IDiscountRepository>();
             _customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();
             _subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
-            _serviceRegistration = ObjectFactory.GetInstance<IServiceRegistration>();
             _serviceChargeRegistration = ObjectFactory.GetInstance<IServiceChargeRegistration>();
-            _serviceSearch = ObjectFactory.GetInstance<IServiceSearch>();
+            _serviceChargeSearch = ObjectFactory.GetInstance<IServiceChargeSearch>();
         }
 
         [BeforeScenario]

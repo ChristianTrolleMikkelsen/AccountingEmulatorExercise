@@ -26,7 +26,6 @@ namespace AcceptanceTest.DataTransferTests
         {
             _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"11111111", "DK", CustomerStatus.Normal);
 
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.DataTransfer, 1, "Standard Fixed Fee", "DK"));
         }
 

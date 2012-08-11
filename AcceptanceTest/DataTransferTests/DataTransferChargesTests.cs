@@ -24,8 +24,6 @@ namespace AcceptanceTest.DataTransferTests
         public void GivenIHaveAddedADataTransferServiceToTheSubscription()
         {
             _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"66665555", "DK", CustomerStatus.Normal);
-
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
         }
 
         [Given(@"I have specified a charge of: ""(.*)"" for every megabyte for the Data Transfer service")]
