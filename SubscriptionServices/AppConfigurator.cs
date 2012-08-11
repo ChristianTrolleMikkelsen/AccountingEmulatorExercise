@@ -7,11 +7,6 @@ namespace SubscriptionServices
     {
         public void Initialize()
         {
-            SetUpStructureMap();
-        }
-
-        private void SetUpStructureMap()
-        {
             ObjectFactory.Configure(x =>
                                         {
                                              x.For<ISubscriptionRepository>().Singleton();

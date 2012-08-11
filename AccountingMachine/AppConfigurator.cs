@@ -8,11 +8,6 @@ namespace AccountingMachine
     {
         public void Initialize()
         {
-            SetUpStructureMap();
-        }
-
-        private void SetUpStructureMap()
-        {
             ObjectFactory.Initialize(x =>
                                          {
                                              x.For<IRecordRepository>().Singleton();

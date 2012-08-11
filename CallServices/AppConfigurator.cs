@@ -8,11 +8,6 @@ namespace CallServices
     {
         public void Initialize()
         {
-            SetUpStructureMap();
-        }
-
-        private void SetUpStructureMap()
-        {
             ObjectFactory.Configure(x =>
                                          {
                                              x.For<ICallRepository>().Singleton();

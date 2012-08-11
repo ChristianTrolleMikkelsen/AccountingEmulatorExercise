@@ -32,12 +32,12 @@ namespace CallServices.Validator.Rules
                    && HasChargeWithSameCountry(chargesWhichSupportTheCallType, call.ToCountry);
         }
 
-        private bool HasChargeWithSameCountry(IEnumerable<IServiceCharge> charges, string country)
+        private static bool HasChargeWithSameCountry(IEnumerable<IServiceCharge> charges, string country)
         {
             return charges.Any(charge => HasSameCountry(charge, country));
         }
 
-        private bool HasSameCountry(IServiceCharge charge, string country)
+        private static bool HasSameCountry(IServiceCharge charge, string country)
         {
             return charge.Country == country;
         }
