@@ -6,6 +6,7 @@ using Core.Models;
 using Core.ServiceCalls;
 using FluentAssertions;
 using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -58,7 +59,7 @@ namespace AcceptanceTest.SubscriptionTests
         public void WhenIAddANewVoiceCallServiceToTheSubcription()
         {
             _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
-            _serviceChargeRegistration.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 
         [Then(@"the Voice Call service must be added to the list of services")]
@@ -89,7 +90,7 @@ namespace AcceptanceTest.SubscriptionTests
         public void GivenTheSubscriptionIncludesAVoiceCallService()
         {
             _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
-            _serviceChargeRegistration.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 
         [When(@"I make a Voice Call with the phone ""23458126""")]

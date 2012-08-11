@@ -38,7 +38,7 @@ namespace AcceptanceTest.VoiceServiceTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                                ServiceType.Voice,
                                                                                Decimal.Parse(charge),
-                                                                               ChargeHelper.SecondUnitSize,
+                                                                               SecondUnitSize,
                                                                                "Standard Second Charge",
                                                                                "DK"));
         }
@@ -91,7 +91,7 @@ namespace AcceptanceTest.VoiceServiceTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                                ServiceType.Voice,
                                                                                Decimal.Parse(charge),
-                                                                               ChargeHelper.MinuteUnitSize,
+                                                                               MinuteUnitSize,
                                                                                "Standard Minute Charge",
                                                                                "DK"));
         }
@@ -134,7 +134,7 @@ namespace AcceptanceTest.VoiceServiceTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                                ServiceType.Voice,
                                                                                Decimal.Parse(charge),
-                                                                               ChargeHelper.SecondUnitSize,
+                                                                               SecondUnitSize,
                                                                                "Standard Second Charge",
                                                                                "DE"));
         }
@@ -145,7 +145,7 @@ namespace AcceptanceTest.VoiceServiceTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                                ServiceType.Voice,
                                                                                Decimal.Parse(charge),
-                                                                               ChargeHelper.MinuteUnitSize,
+                                                                               MinuteUnitSize,
                                                                                "Standard Minute Charge",
                                                                                "DE"));
         }

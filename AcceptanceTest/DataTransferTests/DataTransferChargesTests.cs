@@ -34,7 +34,7 @@ namespace AcceptanceTest.DataTransferTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
-                                                                          ChargeHelper.OneMegaByteUnitSize,
+                                                                          OneMegaByteUnitSize,
                                                                           "Standard Megabyte Charge",
                                                                           "DK"));
         }
@@ -45,7 +45,7 @@ namespace AcceptanceTest.DataTransferTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
-                                                                          ChargeHelper.OneMegaByteUnitSize,
+                                                                          OneMegaByteUnitSize,
                                                                           "Standard Megabyte Charge",
                                                                           country));
         }
@@ -71,7 +71,7 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the Data Transfer sizes up to: ""(.*)"" megabytes")]
         public void GivenTheDataTransferSizesUpTo10Megabytes(string size)
         {
-            _size = int.Parse(size) * Convert.ToInt32(ChargeHelper.OneMegaByteUnitSize);
+            _size = int.Parse(size) * Convert.ToInt32(OneMegaByteUnitSize);
         }
 
         [When(@"the Data Transfer has been completed")]
@@ -101,7 +101,7 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the Data Transfer sizes up to: ""(.*)"" kilobytes")]
         public void GivenTheDataTransferSizesUpTo10Kilobytes(string size)
         {
-            _size = int.Parse(size) * Convert.ToInt32(ChargeHelper.OneKiloByteUnitSize);
+            _size = int.Parse(size) * Convert.ToInt32(OneKiloByteUnitSize);
         }
 
         [Given(@"I have specified a charge of: ""(.*)"" for every kilobyte for the Data Transfer service")]
@@ -110,7 +110,7 @@ namespace AcceptanceTest.DataTransferTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
-                                                                          ChargeHelper.OneKiloByteUnitSize,
+                                                                          OneKiloByteUnitSize,
                                                                           "Standard Kilobyte Charge",
                                                                           "DK"));
         }
@@ -121,7 +121,7 @@ namespace AcceptanceTest.DataTransferTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
-                                                                          ChargeHelper.OneKiloByteUnitSize,
+                                                                          OneKiloByteUnitSize,
                                                                           "Standard Kilobyte Charge",
                                                                           country));
         }

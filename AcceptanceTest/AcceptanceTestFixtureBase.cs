@@ -22,6 +22,11 @@ namespace AcceptanceTest
         protected IServiceChargeRegistration _serviceChargeRegistration;
         protected IServiceSearch _serviceSearch;
 
+        protected static readonly decimal SecondUnitSize = 1;
+        protected static readonly decimal MinuteUnitSize = 60;
+        protected static readonly decimal OneKiloByteUnitSize = 1024M;
+        protected static readonly decimal OneMegaByteUnitSize = 1024M * 1024M;
+
         [BeforeScenario]
         public void InitializeApplication()
         {

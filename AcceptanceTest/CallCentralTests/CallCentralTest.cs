@@ -6,6 +6,7 @@ using Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
 using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -26,7 +27,7 @@ namespace AcceptanceTest.CallCentralTests
            SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,_phoneNumber, "DK", CustomerStatus.Normal);
 
             _serviceRegistration.AddServiceToSubscription(new Service(_phoneNumber, ServiceType.Voice));
-            _serviceChargeRegistration.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_phoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 
         [When(@"the customer makes a Voice Call with the phone")]
