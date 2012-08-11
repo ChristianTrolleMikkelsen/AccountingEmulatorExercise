@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using ChargeServices;
 using Core.ServiceCalls;
-using SubscriptionServices;
 
 namespace CallServices.Validator.Rules
 {

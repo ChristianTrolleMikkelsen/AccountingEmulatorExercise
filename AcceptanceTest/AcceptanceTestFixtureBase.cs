@@ -2,6 +2,7 @@
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallServices;
+using ChargeServices;
 using Core.Models;
 using StructureMap;
 using SubscriptionServices;
@@ -34,6 +35,8 @@ namespace AcceptanceTest
             new CallServices.AppConfigurator().Initialize();
 
             new SubscriptionServices.AppConfigurator().Initialize();
+
+            new ChargeServices.AppConfigurator().Initialize();
         }
 
         [BeforeScenario]

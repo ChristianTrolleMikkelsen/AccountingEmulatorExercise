@@ -2,7 +2,7 @@ using Core;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 
-namespace SubscriptionServices.ServiceCharges
+namespace ChargeServices.ServiceCharges
 {
     public abstract class BaseCharge : IServiceCharge
     {

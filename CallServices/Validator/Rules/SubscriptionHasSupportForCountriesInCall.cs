@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ChargeServices;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
-using SubscriptionServices;
 
 namespace CallServices.Validator.Rules
 {
@@ -28,14 +28,24 @@ namespace CallServices.Validator.Rules
         {
             var chargesWhichSupportTheCallType = GetServiceChargesWhichSupportTheCall(call);
 
-            return chargesWhichSupportTheCallType.Any(charge => charge.Country == call.FromCountry)
-                   && chargesWhichSupportTheCallType.Any(charge => charge.Country == call.ToCountry);
+            return    HasChargeWithSameCountry(chargesWhichSupportTheCallType, call.FromCountry)
+                   && HasChargeWithSameCountry(chargesWhichSupportTheCallType, call.ToCountry);
+        }
+
+        private bool HasChargeWithSameCountry(IEnumerable<IServiceCharge> charges, string country)
+        {
+            return charges.Any(charge => HasSameCountry(charge, country));
+        }
+
+        private bool HasSameCountry(IServiceCharge charge, string country)
+        {
+            return charge.Country == country;
         }
 
         private IEnumerable<IServiceCharge> GetServiceChargesWhichSupportTheCall(IServiceCall call)
         {
             return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber)
-                                          .Where(charge => charge.ServiceType == call.Type);
+                                          .Where(charge => charge.ServiceType == call.Type).ToList();
         }
     }
 }

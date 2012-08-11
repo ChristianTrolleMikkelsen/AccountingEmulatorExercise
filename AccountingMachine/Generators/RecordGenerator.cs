@@ -3,10 +3,10 @@ using System.Linq;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallServices;
+using ChargeServices;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using MoreLinq;
-using SubscriptionServices;
 
 namespace AccountingMachine.Generators
 {
@@ -37,16 +37,26 @@ namespace AccountingMachine.Generators
 
         private void GenerateRecords(IServiceCall call)
         {
-            var charges = GetChargesValidForCountriesInTheCall(call);
+            var charges = GetChargesValidForCountriesInCall(call);
 
             charges.ForEach(charge => GenerateRecord(charge, call));
         }
 
-        private IEnumerable<IServiceCharge> GetChargesValidForCountriesInTheCall(IServiceCall call)
+        private IEnumerable<IServiceCharge> GetChargesValidForCountriesInCall(IServiceCall call)
         {
             return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber)
-                                        .Where(charge => charge.ServiceType == call.Type)
-                                            .Where(charge => charge.Country == call.FromCountry || charge.Country == call.ToCountry);
+                                        .Where(charge => HasSameServiceTypeAsCall(charge, call))
+                                            .Where(charge => HasSameCountry(charge, call.FromCountry) || HasSameCountry(charge, call.ToCountry));
+        }
+
+        private bool HasSameServiceTypeAsCall(IServiceCharge charge, IServiceCall call)
+        {
+            return charge.ServiceType == call.Type;
+        }
+
+        private bool HasSameCountry(IServiceCharge charge, string country)
+        {
+            return charge.Country == country;
         }
 
         private void GenerateRecord(IServiceCharge charge, IServiceCall call)

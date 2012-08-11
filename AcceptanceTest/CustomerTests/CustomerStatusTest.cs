@@ -1,11 +1,11 @@
 ﻿using System;
 using AccountingMachine.Models;
 using CallServices.Calls;
+using ChargeServices.ServiceCharges;
 using Core;
 using Core.Models;
 using FluentAssertions;
 using SubscriptionServices;
-using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 

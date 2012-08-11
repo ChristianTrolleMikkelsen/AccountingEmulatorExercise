@@ -13,6 +13,8 @@ namespace IntegrationTest
             new CallServices.AppConfigurator().Initialize();
 
             new SubscriptionServices.AppConfigurator().Initialize();
+
+            new ChargeServices.AppConfigurator().Initialize();
         }
     }
 }

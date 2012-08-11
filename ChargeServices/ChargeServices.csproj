@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7028D94B-3212-487C-B2C1-9F8787340E94}</ProjectGuid>
+    <ProjectGuid>{1A9ED46F-A0D3-4AB8-9FCB-EB3ADB49AC9A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IntegrationTest</RootNamespace>
-    <AssemblyName>IntegrationTest</AssemblyName>
+    <RootNamespace>ChargeServices</RootNamespace>
+    <AssemblyName>ChargeServices</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,57 +29,36 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.1.7.1.1\Lib\net40\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTestBaseFixture.cs" />
+    <Compile Include="AppConfigurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CallRepositoryTests.cs" />
-    <Compile Include="Repositories\DiscountRepositoryTests.cs" />
-    <Compile Include="Repositories\ServiceChargeRepositoryTests.cs" />
-    <Compile Include="Repositories\RecordRepositoryTests.cs" />
-    <Compile Include="Repositories\SubscriptionRepositoryTests.cs" />
-    <Compile Include="StructureMapTests.cs" />
+    <Compile Include="Repositories\ServiceChargeRepository.cs" />
+    <Compile Include="ServiceChargeRegistration.cs" />
+    <Compile Include="ServiceChargeSearch.cs" />
+    <Compile Include="ServiceCharges\BaseCharge.cs" />
+    <Compile Include="ServiceCharges\FixedCharge.cs" />
+    <Compile Include="ServiceCharges\VariableCharge.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccountingMachine\AccountingMachine.csproj">
-      <Project>{47B77810-19BC-4795-A08C-F140538CD2C5}</Project>
-      <Name>AccountingMachine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CallServices\CallServices.csproj">
-      <Project>{997F0E05-4360-4DA1-934A-04376AC0324E}</Project>
-      <Name>CallServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ChargeServices\ChargeServices.csproj">
-      <Project>{1A9ED46F-A0D3-4AB8-9FCB-EB3ADB49AC9A}</Project>
-      <Name>ChargeServices</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SubscriptionServices\SubscriptionServices.csproj">
-      <Project>{C5FAA489-1655-4DC4-9F94-BB4F03983CA3}</Project>
-      <Name>SubscriptionServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestHelpers\TestHelpers.csproj">
-      <Project>{37B87A0D-D03B-4B28-B5D1-518CC49F4208}</Project>
-      <Name>TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

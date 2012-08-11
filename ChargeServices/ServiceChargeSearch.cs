@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using Core;
+using ChargeServices.Repositories;
 using Core.ServiceCharges;
-using SubscriptionServices.Repositories;
 
-namespace SubscriptionServices
+namespace ChargeServices
 {
     public interface IServiceChargeSearch
     {

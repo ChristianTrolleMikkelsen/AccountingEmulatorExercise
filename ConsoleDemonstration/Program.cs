@@ -4,11 +4,12 @@ using AccountingMachine.Models;
 using AccountingMachine.Repositories;
 using CallServices;
 using CallServices.Calls;
+using ChargeServices;
+using ChargeServices.ServiceCharges;
 using Core;
 using Core.Models;
 using StructureMap;
 using SubscriptionServices;
-using SubscriptionServices.ServiceCharges;
 
 namespace ConsoleDemonstration
 {
@@ -33,7 +34,7 @@ namespace ConsoleDemonstration
             _subscriptionRegistration.CreateSubscription(customer, "90909090", "DK");
             _subscription = _subscriptionSearch.GetSubscription("90909090");
 
-            CreateOneOfEachServiceWithOneOrMoreCharges();
+            SetupCharges();
 
             PerformCalls();
 
@@ -47,6 +48,7 @@ namespace ConsoleDemonstration
             new AccountingMachine.AppConfigurator().Initialize();
             new CallServices.AppConfigurator().Initialize();
             new SubscriptionServices.AppConfigurator().Initialize();
+            new ChargeServices.AppConfigurator().Initialize();
 
             _callRegistration = ObjectFactory.GetInstance<ICallRegistration>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
@@ -64,12 +66,8 @@ namespace ConsoleDemonstration
             _discountRepository.SaveDiscount(new Discount(CustomerStatus.VIP, 0.2M));
         }
 
-        private static void CreateOneOfEachServiceWithOneOrMoreCharges()
+        private static void SetupCharges()
         {
-            /*_serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
-            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));*/
-
             //Local
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 0.20M, "Standard Call Charge", "DK"));
             _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber, ServiceType.Voice, 0.50M, 60, "Standard Minute Charge", "DK"));

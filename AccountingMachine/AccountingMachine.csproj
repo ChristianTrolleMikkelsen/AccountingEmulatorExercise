@@ -62,6 +62,10 @@
       <Project>{997F0E05-4360-4DA1-934A-04376AC0324E}</Project>
       <Name>CallServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ChargeServices\ChargeServices.csproj">
+      <Project>{1A9ED46F-A0D3-4AB8-9FCB-EB3ADB49AC9A}</Project>
+      <Name>ChargeServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>

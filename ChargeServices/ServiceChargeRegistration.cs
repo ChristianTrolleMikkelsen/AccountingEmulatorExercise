@@ -1,7 +1,7 @@
-﻿using Core.ServiceCharges;
-using SubscriptionServices.Repositories;
+using ChargeServices.Repositories;
+using Core.ServiceCharges;
 
-namespace SubscriptionServices
+namespace ChargeServices
 {
     public interface IServiceChargeRegistration
     {

@@ -1,7 +1,7 @@
+using ChargeServices.Repositories;
 using StructureMap;
-using SubscriptionServices.Repositories;
 
-namespace SubscriptionServices
+namespace ChargeServices
 {
     public class AppConfigurator
     {
@@ -14,11 +14,11 @@ namespace SubscriptionServices
         {
             ObjectFactory.Configure(x =>
                                         {
-                                             x.For<ISubscriptionRepository>().Singleton();
+                                             x.For<IServiceChargeRepository>().Singleton();
  
                                              x.Scan(scan =>
                                                         {
-                                                            scan.AssemblyContainingType<ISubscriptionSearch>();
+                                                            scan.AssemblyContainingType<IServiceChargeSearch>();
                                                             scan.WithDefaultConventions();
                                                         });
                                          });

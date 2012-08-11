@@ -1,10 +1,9 @@
 ﻿using System;
 using CallServices.Calls;
+using ChargeServices.ServiceCharges;
 using Core;
 using FluentAssertions;
 using NUnit.Framework;
-
-using SubscriptionServices.ServiceCharges;
 
 namespace UnitTest
 {
