@@ -44,7 +44,7 @@ namespace AccountingMachine.Generators
 
         private IEnumerable<IServiceCharge> GetChargesValidForCountriesInCall(IServiceCall call)
         {
-            return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber)
+            return _serviceChargeSearch.GetServiceChargesBySubscripton(call.PhoneNumber)
                                         .Where(charge => HasSameServiceTypeAsCall(charge, call))
                                             .Where(charge => HasSameCountry(charge, call.FromCountry) || HasSameCountry(charge, call.ToCountry));
         }

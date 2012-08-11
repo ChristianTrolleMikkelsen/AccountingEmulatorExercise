@@ -24,7 +24,7 @@ namespace CallServices.Validator.Rules
 
         private bool ServiceCallSupportedBySubscription(IServiceCall call)
         {
-            return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber)
+            return _serviceChargeSearch.GetServiceChargesBySubscripton(call.PhoneNumber)
                                             .Any(charge => charge.ServiceType == call.Type);
         }
     }

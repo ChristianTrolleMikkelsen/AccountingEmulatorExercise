@@ -46,7 +46,7 @@ namespace AcceptanceTest.SubscriptionTests
         [Then(@"the subscription contains an empty list of services")]
         public void ThenTheSubscriptionContainsAnEmptyListOfServices()
         {
-            _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(_subscription.PhoneNumber).Count().Should().Be(0);
+            _serviceChargeSearch.GetServiceChargesBySubscripton(_subscription.PhoneNumber).Count().Should().Be(0);
         }
 
         [Given(@"I have created a subscription for phone ""(.*)""")]
@@ -64,7 +64,7 @@ namespace AcceptanceTest.SubscriptionTests
         [Then(@"the Voice Call service must be added to the list of services")]
         public void ThenTheVoiceCallServiceMustBeAddedToTheListOfServices()
         {
-            _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(_subscription.PhoneNumber).Count().Should().Be(1);
+            _serviceChargeSearch.GetServiceChargesBySubscripton(_subscription.PhoneNumber).Count().Should().Be(1);
         }
 
         [Given(@"I want the local country of the subscription to be ""USD""")]

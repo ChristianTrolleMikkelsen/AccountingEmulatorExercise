@@ -7,7 +7,7 @@ namespace ChargeServices
 {
     public interface IServiceChargeSearch
     {
-        IEnumerable<IServiceCharge> GetServiceChargesBySubscriptonAndCallType(string phoneNumber);
+        IEnumerable<IServiceCharge> GetServiceChargesBySubscripton(string phoneNumber);
     }
 
     public class ServiceChargeSearch : IServiceChargeSearch
@@ -19,7 +19,7 @@ namespace ChargeServices
             _serviceChargeRepository = serviceChargeRepository;
         }
 
-        public IEnumerable<IServiceCharge> GetServiceChargesBySubscriptonAndCallType(string phoneNumber)
+        public IEnumerable<IServiceCharge> GetServiceChargesBySubscripton(string phoneNumber)
         {
             return _serviceChargeRepository.GetServiceChargesByPhoneNumber(phoneNumber).ToList();
         }

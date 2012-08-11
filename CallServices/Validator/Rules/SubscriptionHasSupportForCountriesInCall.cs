@@ -44,7 +44,7 @@ namespace CallServices.Validator.Rules
 
         private IEnumerable<IServiceCharge> GetServiceChargesWhichSupportTheCall(IServiceCall call)
         {
-            return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber)
+            return _serviceChargeSearch.GetServiceChargesBySubscripton(call.PhoneNumber)
                                           .Where(charge => charge.ServiceType == call.Type).ToList();
         }
     }
