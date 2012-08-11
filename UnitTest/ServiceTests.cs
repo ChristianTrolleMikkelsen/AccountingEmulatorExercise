@@ -2,7 +2,7 @@
 using Core.ServiceCalls;
 using FluentAssertions;
 using NUnit.Framework;
-using SubscriptionService.Services;
+using SubscriptionServices;
 
 namespace UnitTest
 {

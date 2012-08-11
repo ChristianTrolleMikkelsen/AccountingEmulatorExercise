@@ -4,9 +4,9 @@ using Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;
-using SubscriptionService;
-using SubscriptionService.Repositories;
-using SubscriptionService.ServiceCharges;
+using SubscriptionServices;
+using SubscriptionServices.Repositories;
+using SubscriptionServices.ServiceCharges;
 using TestHelpers;
 
 namespace IntegrationTest.Repositories
@@ -21,9 +21,10 @@ namespace IntegrationTest.Repositories
         {
             var phoneNumber = "44556677";
 
-            var service = ObjectFactory.GetInstance<ISubscriptionService>();
+            var subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
+            var customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();
 
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(service, phoneNumber, "DK", CustomerStatus.Normal);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(subscriptionRegistration, customerRegistration, phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [Test]
@@ -33,7 +34,7 @@ namespace IntegrationTest.Repositories
 
             repo.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice,1.1M, "Standard Call Fee", "DK"));
 
-            repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
+            repo.GetServiceChargesByPhoneNumber( _subscription.PhoneNumber)
                     .Count().Should().Be(1);
         }
 
@@ -47,7 +48,7 @@ namespace IntegrationTest.Repositories
             repo.SaveServiceCharge(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1.1M, "Standard Call Fee", "DK"));
             repo.SaveServiceCharge(new FixedCharge("22222222", ServiceType.Voice, 1.1M, "Standard Call Fee", "DK"));
 
-            repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
+            repo.GetServiceChargesByPhoneNumber(_subscription.PhoneNumber)
                     .Count().Should().Be(2);
         }
 
@@ -56,7 +57,7 @@ namespace IntegrationTest.Repositories
         {
             var repo = ObjectFactory.GetInstance<IServiceChargeRepository>();
 
-            repo.GetServiceChargesByCountryAndPhoneNumber("DK", _subscription.PhoneNumber)
+            repo.GetServiceChargesByPhoneNumber(_subscription.PhoneNumber)
                     .Count().Should().Be(0);
         }
 

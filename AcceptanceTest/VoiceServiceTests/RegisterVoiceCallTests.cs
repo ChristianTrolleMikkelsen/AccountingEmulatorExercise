@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using FluentAssertions;
-using SubscriptionService.Services;
+using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -25,14 +26,14 @@ namespace AcceptanceTest.VoiceServiceTests
         public void GivenASubscriptionWithPhoneNumber77889955Exists(string phoneNumber)
         {
             _phoneNumber = phoneNumber;
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,phoneNumber, "DK", CustomerStatus.Normal);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [Given(@"the subscription includes the Voice Call Service")]
         public void GivenTheSubscriptionIncludesTheVoiceCallService()
         {
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fixed Fee", "DK"));
         }
 
         [Given(@"the customer makes a Voice Call at ""(.*)""")]
@@ -68,13 +69,13 @@ namespace AcceptanceTest.VoiceServiceTests
         [When(@"the call ends")]
         public void WhenTheCallEnds()
         {
-            _callCentral.RegisterACall(new VoiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
+            _callRegistration.RegisterACall(new VoiceCall(_phoneNumber, _startTime, _duration, _receiver, _sourceCountry, _destinationCountry));
         }
 
         [Then(@"I must be able to find the call using the subscription")]
         public void ThenIMustBeAbleToFindTheCallUsingTheSubscription()
         {
-            var calls = _callCentral.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber);
+            var calls = _callSearch.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber);
 
             calls.Count().Should().Be(1);
 
@@ -119,13 +120,13 @@ namespace AcceptanceTest.VoiceServiceTests
         [Given(@"the subscription includes support for calling from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForCallingFromCountryDE(string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_phoneNumber, country));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fixed Fee", country));
         }
 
         [Given(@"the subscription includes support for calling to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForCallingToCountryDK(string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_phoneNumber, country));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.Voice, 1, "Standard Fixed Fee", country));
         }
     }
 }

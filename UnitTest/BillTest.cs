@@ -5,7 +5,7 @@ using Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;
-using SubscriptionService;
+using SubscriptionServices;
 using TestHelpers;
 
 namespace UnitTest
@@ -18,9 +18,10 @@ namespace UnitTest
         {
             new AppConfigurator().Initialize();
 
-            var service = ObjectFactory.GetInstance<ISubscriptionService>();
+            var subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
+            var customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();
 
-            var sub = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(service,"55555555", "DK", CustomerStatus.Normal);
+            var sub = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(subscriptionRegistration, customerRegistration, "55555555", "DK", CustomerStatus.Normal);
             var records = new List<Record>
                               {
                                   new Record("55555555", DateTime.Now, "Standard", "Call from 55555555 to 66666666", 12.5M)

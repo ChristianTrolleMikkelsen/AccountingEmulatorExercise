@@ -1,11 +1,11 @@
 ﻿using System;
 using AccountingMachine.Models;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using FluentAssertions;
-using SubscriptionService.ServiceCharges;
-using SubscriptionService.Services;
+using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -20,21 +20,21 @@ namespace AcceptanceTest.CustomerTests
         [Given(@"I have given a customer the ""(.*)"" status")]
         public void GivenIHaveGivenACustomerTheStatusStatus(string status)
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"12345678", "DK", (CustomerStatus)Enum.Parse(typeof(CustomerStatus), status));
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"12345678", "DK", (CustomerStatus)Enum.Parse(typeof(CustomerStatus), status));
 
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber,ServiceType.Voice));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber,ServiceType.Voice));
         }
 
         [Given(@"I charge (\d+) pr Voice Call")]
         public void GivenICharge100PrVoiceCall(int charge)
         {
-            _subscriptionService.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,ServiceType.Voice, charge, "Standard Call Fee", "DK"));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber,ServiceType.Voice, charge, "Standard Call Fee", "DK"));
         }
 
         [Given(@"the customer has finished a call")]
         public void GivenTheCustomerHasFinishedACall()
         {
-            _callCentral.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK"));
+            _callRegistration.RegisterACall(new VoiceCall(_subscription.PhoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, "99999999", "DK", "DK"));
         }
 
         [When(@"I calculate the cost of the customers bill to (\d+)")]

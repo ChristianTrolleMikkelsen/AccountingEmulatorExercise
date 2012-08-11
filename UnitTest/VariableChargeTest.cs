@@ -1,9 +1,9 @@
 ﻿using System;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using FluentAssertions;
 using NUnit.Framework;
-using SubscriptionService.ServiceCharges;
+using SubscriptionServices.ServiceCharges;
 
 namespace UnitTest
 {

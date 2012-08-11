@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using FluentAssertions;
-using SubscriptionService.Services;
+using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -23,10 +24,10 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the subscription includes the Data Transfer Service")]
         public void GivenTheSubscriptionIncludesTheDataTransferService()
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"11111111", "DK", CustomerStatus.Normal);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"11111111", "DK", CustomerStatus.Normal);
 
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.DataTransfer, 1, "Standard Fixed Fee", "DK"));
         }
 
         [Given(@"the customer makes a data transfer at ""(.*)""")]
@@ -62,7 +63,7 @@ namespace AcceptanceTest.DataTransferTests
         [When(@"the data transfer ends")]
         public void WhenTheDataTransferEnds()
         {
-            _callCentral.RegisterACall(new DataTransferCall(_subscription.PhoneNumber,
+            _callRegistration.RegisterACall(new DataTransferCall(_subscription.PhoneNumber,
                                                             _start,
                                                             _size,
                                                             _url,
@@ -73,7 +74,7 @@ namespace AcceptanceTest.DataTransferTests
         [Then(@"I must be able to find the data transfer using the subscription")]
         public void ThenIMustBeAbleToFindTheDataTransferUsingTheSubscription()
         {
-            var calls = _callCentral.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber);
+            var calls = _callSearch.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber);
 
             calls.Count().Should().Be(1);
 
@@ -118,13 +119,13 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"the subscription includes support for transfering data from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataFromCountryDK(string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.DataTransfer, 1, "Standard Fixed Fee", country));
         }
 
         [Given(@"the subscription includes support for transfering data to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTransferingDataToCountryDE(string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.DataTransfer, 1, "Standard Fixed Fee", country));
         }
     }
 }

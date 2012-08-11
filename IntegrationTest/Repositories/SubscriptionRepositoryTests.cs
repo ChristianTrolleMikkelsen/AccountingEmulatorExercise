@@ -2,8 +2,8 @@
 using FluentAssertions;
 using NUnit.Framework;
 using StructureMap;
-using SubscriptionService;
-using SubscriptionService.Repositories;
+using SubscriptionServices;
+using SubscriptionServices.Repositories;
 using TestHelpers;
 
 namespace IntegrationTest.Repositories
@@ -17,9 +17,10 @@ namespace IntegrationTest.Repositories
         public void CreateSubscription()
         {
             var phoneNumber = "44556677";
-            var service = ObjectFactory.GetInstance<ISubscriptionService>();
+            var subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
+            var customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();
 
-            subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(service, phoneNumber, "DK", CustomerStatus.Normal);
+            subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(subscriptionRegistration,customerRegistration, phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [Test]

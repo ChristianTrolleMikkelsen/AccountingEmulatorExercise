@@ -2,11 +2,11 @@
 using System.Linq;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
-using CallCentral;
+using CallServices;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
 using MoreLinq;
-using SubscriptionService;
+using SubscriptionServices;
 
 namespace AccountingMachine.Generators
 {
@@ -17,21 +17,20 @@ namespace AccountingMachine.Generators
 
     public class RecordGenerator : IRecordGenerator
     {
-        private readonly ICallCentral _callCentral;
+        private readonly ICallSearch _callSearch;
+        private readonly IServiceChargeSearch _serviceChargeSearch;
         private readonly IRecordRepository _recordRepository;
-        private readonly ISubscriptionService _subscriptionService;
 
-        public RecordGenerator(ICallCentral callCentral, ISubscriptionService subscriptionService, IRecordRepository recordRepository)
+        public RecordGenerator(ICallSearch callSearch, IServiceChargeSearch serviceChargeSearch, IRecordRepository recordRepository)
         {
-            _callCentral = callCentral;
+            _callSearch = callSearch;
+            _serviceChargeSearch = serviceChargeSearch;
             _recordRepository = recordRepository;
-            _subscriptionService = subscriptionService;
         }
-
 
         public void GenerateAccountingRecordsForPhoneNumber(string phoneNumber)
         {
-            var calls = _callCentral.GetCallsMadeFromPhoneNumber(phoneNumber);
+            var calls = _callSearch.GetCallsMadeFromPhoneNumber(phoneNumber);
 
             calls.ForEach(GenerateRecords);
         }
@@ -45,7 +44,7 @@ namespace AccountingMachine.Generators
 
         private IEnumerable<IServiceCharge> GetChargesValidForCountriesInTheCall(IServiceCall call)
         {
-            return _subscriptionService.GetServiceChargesSupportedBy(call.PhoneNumber, call.Type)
+            return _serviceChargeSearch.GetServiceChargesBySubscriptonAndCallType(call.PhoneNumber, call.Type)
                                             .Where(charge => charge.Country == call.FromCountry || charge.Country == call.ToCountry);
         }
 

@@ -1,40 +1,50 @@
 ﻿using AccountingMachine;
 using AccountingMachine.Models;
 using AccountingMachine.Repositories;
-using CallCentral;
+using CallServices;
 using Core.Models;
 using StructureMap;
-using SubscriptionService;
+using SubscriptionServices;
 using TechTalk.SpecFlow;
 
 namespace AcceptanceTest
 {
     internal abstract class AcceptanceTestFixtureBase
     {
-        protected ICallCentral _callCentral;
+        protected ICallRegistration _callRegistration;
+        protected ICallSearch _callSearch;
         protected IAccountingMachine _accountingMachine;
         protected IRecordRepository _recordRepository;
         protected IDiscountRepository _discountRepository;
-        protected ISubscriptionService _subscriptionService;
+        protected ICustomerRegistration _customerRegistration;
+        protected ISubscriptionRegistration _subscriptionRegistration;
+        protected IServiceRegistration _serviceRegistration;
+        protected IServiceChargeRegistration _serviceChargeRegistration;
+        protected IServiceSearch _serviceSearch;
 
         [BeforeScenario]
         public void InitializeApplication()
         {
             new AccountingMachine.AppConfigurator().Initialize();
 
-            new CallCentral.AppConfigurator().Initialize();
+            new CallServices.AppConfigurator().Initialize();
 
-            new SubscriptionService.AppConfigurator().Initialize();
+            new SubscriptionServices.AppConfigurator().Initialize();
         }
 
         [BeforeScenario]
         public void CreateHelpers()
         {
-            _callCentral = ObjectFactory.GetInstance<ICallCentral>();
+            _callRegistration = ObjectFactory.GetInstance<ICallRegistration>();
+            _callSearch = ObjectFactory.GetInstance<ICallSearch>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
             _recordRepository = ObjectFactory.GetInstance<IRecordRepository>();
             _discountRepository = ObjectFactory.GetInstance<IDiscountRepository>();
-            _subscriptionService = ObjectFactory.GetInstance<ISubscriptionService>();
+            _customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();
+            _subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
+            _serviceRegistration = ObjectFactory.GetInstance<IServiceRegistration>();
+            _serviceChargeRegistration = ObjectFactory.GetInstance<IServiceChargeRegistration>();
+            _serviceSearch = ObjectFactory.GetInstance<IServiceSearch>();
         }
 
         [BeforeScenario]

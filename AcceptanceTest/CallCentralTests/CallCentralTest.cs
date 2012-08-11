@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
-using SubscriptionService.Services;
+using SubscriptionServices;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -23,29 +23,29 @@ namespace AcceptanceTest.CallCentralTests
         [Given(@"a customer has a phone subscription with the Voice Call Service")]
         public void GivenACustomerHasAPhoneSubscriptionWithTheVoiceCallService()
         {
-           SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, "DK", CustomerStatus.Normal);
+           SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,_phoneNumber, "DK", CustomerStatus.Normal);
 
-            _subscriptionService.AddServiceToSubscription(new Service(_phoneNumber, ServiceType.Voice));
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
+            _serviceRegistration.AddServiceToSubscription(new Service(_phoneNumber, ServiceType.Voice));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_phoneNumber));
         }
 
         [When(@"the customer makes a Voice Call with the phone")]
         public void WhenTheCustomerMakesAVoiceCallWithThePhone()
         {
-            _callCentral.RegisterACall(new VoiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry));
+            _callRegistration.RegisterACall(new VoiceCall(_phoneNumber, DateTime.Now, DateTime.Now.TimeOfDay, _destinationNumber, _fromCountry, _toCountry));
         }
 
 
         [Then(@"the call has been registred at the Call Central")]
         public void ThenTheCallHasBeenRegistredAtTheCallCentral()
         {
-            _callCentral.GetCallsMadeFromPhoneNumber(_phoneNumber).Count().Should().Be(1);
+            _callSearch.GetCallsMadeFromPhoneNumber(_phoneNumber).Count().Should().Be(1);
         }
 
         [Given(@"a customer has a phone subscriptions without any services")]
         public void GivenACustomerHasAPhoneSubscriptionsWithoutAnyServices()
         {
-           SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, "DK", CustomerStatus.Normal);
+           SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,_phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [When(@"the customer tries to make a Voice Call with the phone")]
@@ -60,7 +60,7 @@ namespace AcceptanceTest.CallCentralTests
         {
             var call = ScenarioContext.Current.Get<VoiceCall>();
 
-            Assert.Throws<Exception>(delegate { _callCentral.RegisterACall(call); });
+            Assert.Throws<Exception>(delegate { _callRegistration.RegisterACall(call); });
         }
 
         [When(@"the customer tries to make a Voice Call with the phone to ""DE"" from ""DK""")]

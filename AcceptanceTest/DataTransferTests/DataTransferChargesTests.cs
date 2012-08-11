@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using FluentAssertions;
-using SubscriptionService.ServiceCharges;
-using SubscriptionService.Services;
+using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -23,15 +23,15 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have added a Data Transfer service to the subscription")]
         public void GivenIHaveAddedADataTransferServiceToTheSubscription()
         {
-            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"66665555", "DK", CustomerStatus.Normal);
+            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"66665555", "DK", CustomerStatus.Normal);
 
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.DataTransfer));
         }
 
         [Given(@"I have specified a charge of: ""(.*)"" for every megabyte for the Data Transfer service")]
         public void GivenIHaveSpecifiedAChargeOf10_0ForEveryMegabyteForTheDataTransferService(string charge)
         {
-            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneMegaByteUnitSize,
@@ -42,7 +42,7 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have added Data Transfer charge of ""(.*)""  for every megabyte for calling to or from country: ""(.*)""")]
         public void GivenIHaveAddedDataTransferChargeOf40ForEveryMegabyteForCallingToOrFromCountryDE(string charge, string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneMegaByteUnitSize,
@@ -77,7 +77,7 @@ namespace AcceptanceTest.DataTransferTests
         [When(@"the Data Transfer has been completed")]
         public void WhenTheDataTransferHasBeenCompleted()
         {
-            _callCentral.RegisterACall(new DataTransferCall(_subscription.PhoneNumber,
+            _callRegistration.RegisterACall(new DataTransferCall(_subscription.PhoneNumber,
                                                             DateTime.Now,
                                                             _size,
                                                             _url,
@@ -107,7 +107,7 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have specified a charge of: ""(.*)"" for every kilobyte for the Data Transfer service")]
         public void GivenIHaveSpecifiedAChargeOf10_0ForEveryKilobyteForTheDataTransferService(string charge)
         {
-            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneKiloByteUnitSize,
@@ -118,7 +118,7 @@ namespace AcceptanceTest.DataTransferTests
         [Given(@"I have added Data Transfer charge of ""(.*)""  for every kilobyte for calling to or from country: ""(.*)""")]
         public void GivenIHaveAddedDataTransferChargeOf40ForEveryKilobyteForCallingToOrFromCountryDE(string charge, string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new VariableCharge(_subscription.PhoneNumber,
                                                                           ServiceType.DataTransfer,
                                                                           Convert.ToDecimal(charge),
                                                                           ChargeHelper.OneKiloByteUnitSize,

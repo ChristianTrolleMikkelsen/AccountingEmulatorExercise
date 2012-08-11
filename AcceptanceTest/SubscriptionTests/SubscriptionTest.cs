@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using Core.ServiceCalls;
 using FluentAssertions;
-using SubscriptionService.Services;
+using SubscriptionServices;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -27,7 +27,7 @@ namespace AcceptanceTest.SubscriptionTests
         [When(@"I have created the subscription")]
         public void WhenIHaveCreatedTheSubscription()
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService, _phoneNumber, "DK", CustomerStatus.Normal);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration, _phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [Then(@"the subscription is registered for phone ""23458126""")]
@@ -45,26 +45,26 @@ namespace AcceptanceTest.SubscriptionTests
         [Then(@"the subscription contains an empty list of services")]
         public void ThenTheSubscriptionContainsAnEmptyListOfServices()
         {
-            _subscriptionService.IsServiceCallSupportedBySubscription(_subscription.PhoneNumber, ServiceCallType.Voice).Should().BeFalse();
+            _serviceSearch.GetServicesBySubscription(_subscription.PhoneNumber).Count().Should().Be(0);
         }
 
         [Given(@"I have created a subscription for phone ""(.*)""")]
         public void GivenIHaveCreatedASubscriptionForPhone23458126(string phoneNumber)
         {
-            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,phoneNumber, "DK", CustomerStatus.Normal);
+            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,phoneNumber, "DK", CustomerStatus.Normal);
         }
 
         [When(@"I add a new Voice Call service to the subcription")]
         public void WhenIAddANewVoiceCallServiceToTheSubcription()
         {
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [Then(@"the Voice Call service must be added to the list of services")]
         public void ThenTheVoiceCallServiceMustBeAddedToTheListOfServices()
         {
-            _subscriptionService.IsServiceCallSupportedBySubscription(_subscription.PhoneNumber, ServiceCallType.Voice).Should().BeTrue();
+            _serviceSearch.GetServicesBySubscription(_subscription.PhoneNumber).Count().Should().Be(1);
         }
 
         [Given(@"I want the local country of the subscription to be ""USD""")]
@@ -76,7 +76,7 @@ namespace AcceptanceTest.SubscriptionTests
         [When(@"I have created the subscription with a not default country")]
         public void WhenIHaveCreatedTheSubscriptionWithANotDefaultCountry()
         {
-            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, _countryIsoCode, CustomerStatus.Normal);
+            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,_phoneNumber, _countryIsoCode, CustomerStatus.Normal);
         }
 
         [Then(@"the subscription has local country ""USD""")]
@@ -88,8 +88,8 @@ namespace AcceptanceTest.SubscriptionTests
         [Given(@"the subscription includes a Voice Call service")]
         public void GivenTheSubscriptionIncludesAVoiceCallService()
         {
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.Voice));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
         }
 
         [When(@"I make a Voice Call with the phone ""23458126""")]
@@ -103,13 +103,13 @@ namespace AcceptanceTest.SubscriptionTests
                                           _subscription.LocalCountry);
             ScenarioContext.Current.Set(voiceCall);
 
-            _callCentral.RegisterACall(voiceCall);
+            _callRegistration.RegisterACall(voiceCall);
         }
 
         [Then(@"I can find the call using the subscription phone number")]
         public void ThenICanFindTheCallUsingTheSubscriptionPhoneNumber()
         {
-            var calls = _callCentral.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber)
+            var calls = _callSearch.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber)
                                         .ToList().ConvertAll(call => call as VoiceCall);
 
             var voiceCall = ScenarioContext.Current.Get<VoiceCall>();

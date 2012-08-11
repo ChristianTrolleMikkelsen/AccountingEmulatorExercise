@@ -15,13 +15,13 @@ namespace AcceptanceTest.CustomerTests
         [Given(@"I have created a new customer")]
         public void GivenIHaveCreatedANewCustomer()
         {
-            _customer = _subscriptionService.CreateCustomer("John Doe", CustomerStatus.Normal);
+            _customer = _customerRegistration.CreateCustomer("John Doe", CustomerStatus.Normal);
         }
 
         [When(@"I sell the customer a phone subscription")]
         public void WhenISellTheCustomerAPhoneSubscription()
         {
-            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,_phoneNumber, "DK", _customer.Status);
+            _subscription = SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration, _phoneNumber, "DK", _customer.Status);
         }
 
         [Then(@"the phone subscription is assigned the customer")]

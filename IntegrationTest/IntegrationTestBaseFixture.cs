@@ -10,9 +10,9 @@ namespace IntegrationTest
         {
             new AccountingMachine.AppConfigurator().Initialize();
 
-            new CallCentral.AppConfigurator().Initialize();
+            new CallServices.AppConfigurator().Initialize();
 
-            new SubscriptionService.AppConfigurator().Initialize();
+            new SubscriptionServices.AppConfigurator().Initialize();
         }
     }
 }

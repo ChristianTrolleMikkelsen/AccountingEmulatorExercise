@@ -39,7 +39,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,17 +60,17 @@
       <Project>{47B77810-19BC-4795-A08C-F140538CD2C5}</Project>
       <Name>AccountingMachine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CallCentral\CallCentral.csproj">
-      <Project>{9BE0B646-3373-4413-8FF9-F710B98F8E20}</Project>
-      <Name>CallCentral</Name>
+    <ProjectReference Include="..\CallServices\CallServices.csproj">
+      <Project>{997F0E05-4360-4DA1-934A-04376AC0324E}</Project>
+      <Name>CallServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{556B75A8-3086-4FFE-88B6-6E70B988DE68}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SubscriptionService\SubscriptionService.csproj">
-      <Project>{291FB2B0-380F-4533-BB9B-118ABEE73675}</Project>
-      <Name>SubscriptionService</Name>
+    <ProjectReference Include="..\SubscriptionServices\SubscriptionServices.csproj">
+      <Project>{C5FAA489-1655-4DC4-9F94-BB4F03983CA3}</Project>
+      <Name>SubscriptionServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestHelpers\TestHelpers.csproj">
       <Project>{37B87A0D-D03B-4B28-B5D1-518CC49F4208}</Project>

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CallCentral.Calls;
+using CallServices.Calls;
 using Core;
 using Core.Models;
 using FluentAssertions;
-using SubscriptionService.Services;
+using SubscriptionServices;
+using SubscriptionServices.ServiceCharges;
 using TechTalk.SpecFlow;
 using TestHelpers;
 
@@ -22,11 +23,11 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"the subscription includes the SMS Service")]
         public void GivenTheSubscriptionIncludesTheSMSService()
         {
-            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionService,"66665555", "DK", CustomerStatus.Normal);
+            _subscription =SubscriptionHelper.CreateSubscriptionWithDefaultCustomer(_subscriptionRegistration, _customerRegistration,"66665555", "DK", CustomerStatus.Normal);
 
-            _subscriptionService.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
+            _serviceRegistration.AddServiceToSubscription(new Service(_subscription.PhoneNumber, ServiceType.SMS));
 
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.SMS, 1, "Standard Fixed Fee", "DK"));
         }
 
         [Given(@"the customer creates an SMS")]
@@ -61,7 +62,7 @@ namespace AcceptanceTest.SMSServiceTests
         [When(@"the SMS is sent at ""(.*)""")]
         public void WhenTheSMSIsSentAt090000(string startTime)
         {
-            _callCentral.RegisterACall(new SMSCall(  _subscription.PhoneNumber,
+            _callRegistration.RegisterACall(new SMSCall(  _subscription.PhoneNumber,
                                                             DateTime.Parse(startTime),
                                                             _smsLenght,
                                                             _receiver,
@@ -72,7 +73,7 @@ namespace AcceptanceTest.SMSServiceTests
         [Then(@"I must be able to find the SMS using the subscription")]
         public void ThenIMustBeAbleToFindTheSMSUsingTheSubscription()
         {
-            var calls = _callCentral.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber);
+            var calls = _callSearch.GetCallsMadeFromPhoneNumber(_subscription.PhoneNumber);
 
             calls.Count().Should().Be(1);
 
@@ -117,13 +118,13 @@ namespace AcceptanceTest.SMSServiceTests
         [Given(@"the subscription includes support for texting from country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingFromCountryDE(string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.SMS, 1, "Standard Fixed Fee", country));
         }
 
         [Given(@"the subscription includes support for texting to country: ""(.*)""")]
         public void GivenTheSubscriptionIncludesSupportForTextingToCountryDK(string country)
         {
-            _subscriptionService.AddServiceChargeToSubscription(ChargeHelper.CreateStandardFixedCharge(_subscription.PhoneNumber, country));
+            _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_subscription.PhoneNumber, ServiceType.SMS, 1, "Standard Fixed Fee", country));
         }
     }
 }
