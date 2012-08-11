@@ -49,12 +49,12 @@ namespace AccountingMachine.Generators
                                             .Where(charge => HasSameCountry(charge, call));
         }
 
-        private bool HasSameServiceTypeAsCall(IServiceCharge charge, IServiceCall call)
+        private static bool HasSameServiceTypeAsCall(IServiceCharge charge, IServiceCall call)
         {
             return charge.ServiceType == call.Type;
         }
 
-        private bool HasSameCountry(IServiceCharge charge, IServiceCall call)
+        private static bool HasSameCountry(IServiceCharge charge, IServiceCall call)
         {
             return charge.Country == call.FromCountry || charge.Country == call.ToCountry;
         }
