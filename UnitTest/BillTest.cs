@@ -16,7 +16,11 @@ namespace UnitTest
         [Test]
         public void Must_Be_Able_To_Print_Bill()
         {
-            new AppConfigurator().Initialize();
+            ObjectFactory.Initialize(x => x.Scan(scanner =>
+            {
+                scanner.AssembliesFromApplicationBaseDirectory();
+                scanner.LookForRegistries();
+            }));
 
             var subscriptionRegistration = ObjectFactory.GetInstance<ISubscriptionRegistration>();
             var customerRegistration = ObjectFactory.GetInstance<ICustomerRegistration>();

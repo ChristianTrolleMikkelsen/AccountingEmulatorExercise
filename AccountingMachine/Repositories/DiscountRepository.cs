@@ -13,7 +13,7 @@ namespace AccountingMachine.Repositories
 
     public class DiscountRepository : IDiscountRepository
     {
-        private List<Discount> _discounts;
+        private readonly List<Discount> _discounts;
 
         public DiscountRepository()
         {

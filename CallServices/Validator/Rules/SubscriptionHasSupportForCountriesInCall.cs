@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CallServices.Exceptions;
 using ChargeServices;
 using Core.ServiceCalls;
 using Core.ServiceCharges;
@@ -20,7 +21,7 @@ namespace CallServices.Validator.Rules
         {
             if (ThereIsSupportForBothContriesInCall(call) == false)
             {
-                throw new Exception(string.Format("Your subscription do not support calls from {0} to {1}. ", call.FromCountry, call.ToCountry));
+                throw new CountriesNotSupportedBySubscriptionException(call);
             }
         }
 

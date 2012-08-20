@@ -55,6 +55,9 @@
     <Compile Include="Calls\DataTransferCall.cs" />
     <Compile Include="Calls\SMSCall.cs" />
     <Compile Include="Calls\VoiceCall.cs" />
+    <Compile Include="Exceptions\ServiceNotSupportedBySubscriptionException.cs" />
+    <Compile Include="Exceptions\CountriesNotSupportedBySubscriptionException.cs" />
+    <Compile Include="Exceptions\InvalidCallException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CallRepository.cs" />
     <Compile Include="Validator\CallValidater.cs" />

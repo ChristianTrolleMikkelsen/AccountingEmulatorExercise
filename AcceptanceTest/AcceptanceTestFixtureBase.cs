@@ -30,13 +30,11 @@ namespace AcceptanceTest
         [BeforeScenario]
         public void InitializeApplication()
         {
-            new AccountingMachine.AppConfigurator().Initialize();
-
-            new CallServices.AppConfigurator().Initialize();
-
-            new SubscriptionServices.AppConfigurator().Initialize();
-
-            new ChargeServices.AppConfigurator().Initialize();
+            ObjectFactory.Initialize(x => x.Scan(scanner =>
+            {
+                scanner.AssembliesFromApplicationBaseDirectory();
+                scanner.LookForRegistries();
+            }));
         }
 
         [BeforeScenario]

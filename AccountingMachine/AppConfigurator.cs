@@ -1,25 +1,22 @@
 ﻿using AccountingMachine.Repositories;
 using Core.ServiceCalls;
-using StructureMap;
+using StructureMap.Configuration.DSL;
 
 namespace AccountingMachine
 {
-    public class AppConfigurator
+    public class AppConfigurator : Registry
     {
-        public void Initialize()
+        public AppConfigurator()
         {
-            ObjectFactory.Initialize(x =>
-                                         {
-                                             x.For<IRecordRepository>().Singleton();
-                                             x.For<IDiscountRepository>().Singleton();
+            For<IRecordRepository>().Singleton();
+            For<IDiscountRepository>().Singleton();
 
-                                             x.Scan(scan =>
-                                                        {
-                                                            scan.AssemblyContainingType<IAccountingMachine>();
-                                                            scan.AssemblyContainingType<IServiceCall>();
-                                                            scan.WithDefaultConventions();
-                                                        });
-                                         });
+            Scan(scan =>
+                    {
+                        scan.AssemblyContainingType<IAccountingMachine>();
+                        scan.AssemblyContainingType<IServiceCall>();
+                        scan.WithDefaultConventions();
+                    });
         }
     }
 }

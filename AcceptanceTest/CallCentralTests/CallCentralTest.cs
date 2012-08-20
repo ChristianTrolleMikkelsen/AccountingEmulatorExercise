@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CallServices.Calls;
+using CallServices.Exceptions;
 using ChargeServices.ServiceCharges;
 using Core;
 using Core.Models;
@@ -29,6 +30,12 @@ namespace AcceptanceTest.CallCentralTests
             _serviceChargeRegistration.AddServiceChargeToSubscription(new FixedCharge(_phoneNumber, ServiceType.Voice, 1, "Standard Fee", "DK"));
         }
 
+        [Given(@"wants to make a call within the local country")]
+        public void GivenWantsToMakeACallWithinTheLocalCountry()
+        {
+            _fromCountry = _toCountry = "DK";
+        }
+
         [When(@"the customer makes a Voice Call with the phone")]
         public void WhenTheCustomerMakesAVoiceCallWithThePhone()
         {
@@ -55,12 +62,28 @@ namespace AcceptanceTest.CallCentralTests
             ScenarioContext.Current.Set(call);
         }
 
-        [Then(@"the service is denied when contacting the Call Central")]
-        public void ThenTheServiceIsDeniedWhenContactingTheCallCentral()
+        [Then(@"the service is denied with an InvalidCallException when contacting the Call Central")]
+        public void ThenTheServiceIsDeniedWithAnInvalidCallExceptionWhenContactingTheCallCentral()
         {
             var call = ScenarioContext.Current.Get<VoiceCall>();
 
-            Assert.Throws<Exception>(delegate { _callRegistration.RegisterACall(call); });
+            Assert.Throws<InvalidCallException>(delegate { _callRegistration.RegisterACall(call); });
+        }
+
+        [Then(@"the service is denied with a CountriesNotSupportBySubscriptionException when contacting the Call Central")]
+        public void ThenTheServiceIsDeniedWithACountriesNotSupportBySubscriptionExceptionWhenContactingTheCallCentral()
+        {
+            var call = ScenarioContext.Current.Get<VoiceCall>();
+
+            Assert.Throws<CountriesNotSupportedBySubscriptionException>(delegate { _callRegistration.RegisterACall(call); });
+        }
+
+        [Then(@"the service is denied with a ServiceNotSupportedBySubscriptionException when contacting the Call Central")]
+        public void ThenTheServiceIsDeniedWithAServiceNotSupportedBySubscriptionExceptionWhenContactingTheCallCentral()
+        {
+            var call = ScenarioContext.Current.Get<VoiceCall>();
+
+            Assert.Throws<ServiceNotSupportedBySubscriptionException>(delegate { _callRegistration.RegisterACall(call); });
         }
 
         [When(@"the customer tries to make a Voice Call with the phone to ""DE"" from ""DK""")]

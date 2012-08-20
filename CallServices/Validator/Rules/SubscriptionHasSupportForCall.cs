@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using CallServices.Exceptions;
 using ChargeServices;
 using Core.ServiceCalls;
 
@@ -18,7 +18,7 @@ namespace CallServices.Validator.Rules
         {
             if (ServiceCallSupportedBySubscription(call) == false)
             {
-                throw new Exception(string.Format("Your subscription do not support usage of {0}. ", (object) call.GetType().Name));
+                throw new ServiceNotSupportedBySubscriptionException(call);
             }
         }
 

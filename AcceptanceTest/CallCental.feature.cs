@@ -76,8 +76,10 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.Given("a customer has a phone subscription with the Voice Call Service");
 #line 8
- testRunner.When("the customer makes a Voice Call with the phone");
+ testRunner.And("wants to make a call within the local country");
 #line 9
+ testRunner.When("the customer makes a Voice Call with the phone");
+#line 10
  testRunner.Then("the call has been registred at the Call Central");
 #line hidden
             this.ScenarioCleanup();
@@ -88,14 +90,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DenyUsageOfServicesNotProvidedByTheSubscription()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services not provided by the subscription", ((string[])(null)));
-#line 11
-this.ScenarioSetup(scenarioInfo);
 #line 12
- testRunner.Given("a customer has a phone subscriptions without any services");
+this.ScenarioSetup(scenarioInfo);
 #line 13
- testRunner.When("the customer tries to make a Voice Call with the phone");
+ testRunner.Given("a customer has a phone subscriptions without any services");
 #line 14
- testRunner.Then("the service is denied when contacting the Call Central");
+ testRunner.When("the customer tries to make a Voice Call with the phone");
+#line 15
+ testRunner.Then("the service is denied with a ServiceNotSupportedBySubscriptionException when cont" +
+                    "acting the Call Central");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -105,14 +108,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DenyUsageOfServicesIfTheCallIsOutsideTheAllowCountryRange()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if the call is outside the allow country range", ((string[])(null)));
-#line 16
-this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Given("a customer has a phone subscription with the Voice Call Service");
+this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.When("the customer tries to make a Voice Call with the phone to \"DE\" from \"DK\"");
+ testRunner.Given("a customer has a phone subscription with the Voice Call Service");
 #line 19
- testRunner.Then("the service is denied when contacting the Call Central");
+ testRunner.When("the customer tries to make a Voice Call with the phone to \"DE\" from \"DK\"");
+#line 20
+ testRunner.Then("the service is denied with a CountriesNotSupportBySubscriptionException when cont" +
+                    "acting the Call Central");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -122,16 +126,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DenyUsageOfServicesIfInvalidSourcePhonenumberWasSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid source phonenumber was supplied", ((string[])(null)));
-#line 21
-this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.Given("a customer has a phone subscriptions without any services");
+this.ScenarioSetup(scenarioInfo);
 #line 23
- testRunner.When("for some reason the call is missing a source phonenumber");
+ testRunner.Given("a customer has a phone subscription with the Voice Call Service");
 #line 24
- testRunner.And("the customer tries to make a Voice Call with the phone");
+ testRunner.And("wants to make a call within the local country");
 #line 25
- testRunner.Then("the service is denied when contacting the Call Central");
+ testRunner.When("for some reason the call is missing a source phonenumber");
+#line 26
+ testRunner.And("the customer tries to make a Voice Call with the phone");
+#line 27
+ testRunner.Then("the service is denied with an InvalidCallException when contacting the Call Centr" +
+                    "al");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -141,16 +148,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DenyUsageOfServicesIfInvalidDestinationPhonenumberWasSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid destination phonenumber was supplied", ((string[])(null)));
-#line 27
-this.ScenarioSetup(scenarioInfo);
-#line 28
- testRunner.Given("a customer has a phone subscriptions without any services");
 #line 29
- testRunner.When("for some reason the call is missing a destination phonenumber");
+this.ScenarioSetup(scenarioInfo);
 #line 30
- testRunner.And("the customer tries to make a Voice Call with the phone");
+ testRunner.Given("a customer has a phone subscription with the Voice Call Service");
 #line 31
- testRunner.Then("the service is denied when contacting the Call Central");
+ testRunner.And("wants to make a call within the local country");
+#line 32
+ testRunner.When("for some reason the call is missing a destination phonenumber");
+#line 33
+ testRunner.And("the customer tries to make a Voice Call with the phone");
+#line 34
+ testRunner.Then("the service is denied with an InvalidCallException when contacting the Call Centr" +
+                    "al");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -160,16 +170,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DenyUsageOfServicesIfInvalidSourceCountryWasSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid source country was supplied", ((string[])(null)));
-#line 33
-this.ScenarioSetup(scenarioInfo);
-#line 34
- testRunner.Given("a customer has a phone subscriptions without any services");
-#line 35
- testRunner.When("for some reason the call is missing a source country");
 #line 36
- testRunner.And("the customer tries to make a Voice Call with the phone");
+this.ScenarioSetup(scenarioInfo);
 #line 37
- testRunner.Then("the service is denied when contacting the Call Central");
+ testRunner.Given("a customer has a phone subscription with the Voice Call Service");
+#line 38
+ testRunner.And("wants to make a call within the local country");
+#line 39
+ testRunner.When("for some reason the call is missing a source country");
+#line 40
+ testRunner.And("the customer tries to make a Voice Call with the phone");
+#line 41
+ testRunner.Then("the service is denied with an InvalidCallException when contacting the Call Centr" +
+                    "al");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -179,16 +192,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DenyUsageOfServicesIfInvalidDestinationCountryWasSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deny usage of services if invalid destination country was supplied", ((string[])(null)));
-#line 39
-this.ScenarioSetup(scenarioInfo);
-#line 40
- testRunner.Given("a customer has a phone subscriptions without any services");
-#line 41
- testRunner.When("for some reason the call is missing a destination country");
-#line 42
- testRunner.And("the customer tries to make a Voice Call with the phone");
 #line 43
- testRunner.Then("the service is denied when contacting the Call Central");
+this.ScenarioSetup(scenarioInfo);
+#line 44
+ testRunner.Given("a customer has a phone subscription with the Voice Call Service");
+#line 45
+ testRunner.And("wants to make a call within the local country");
+#line 46
+ testRunner.When("for some reason the call is missing a destination country");
+#line 47
+ testRunner.And("the customer tries to make a Voice Call with the phone");
+#line 48
+ testRunner.Then("the service is denied with an InvalidCallException when contacting the Call Centr" +
+                    "al");
 #line hidden
             this.ScenarioCleanup();
         }

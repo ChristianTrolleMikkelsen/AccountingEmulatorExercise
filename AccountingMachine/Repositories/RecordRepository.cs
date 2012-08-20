@@ -12,7 +12,7 @@ namespace AccountingMachine.Repositories
 
     public class RecordRepository : IRecordRepository
     {
-        private List<Record> _records;
+        private readonly List<Record> _records;
 
         public RecordRepository()
         {

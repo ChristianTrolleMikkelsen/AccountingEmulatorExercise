@@ -1,22 +1,19 @@
 using ChargeServices.Repositories;
-using StructureMap;
+using StructureMap.Configuration.DSL;
 
 namespace ChargeServices
 {
-    public class AppConfigurator
+    public class AppConfigurator : Registry
     {
-        public void Initialize()
+        public AppConfigurator()
         {
-            ObjectFactory.Configure(x =>
-                                        {
-                                             x.For<IServiceChargeRepository>().Singleton();
+            For<IServiceChargeRepository>().Singleton();
  
-                                             x.Scan(scan =>
-                                                        {
-                                                            scan.AssemblyContainingType<IServiceChargeSearch>();
-                                                            scan.WithDefaultConventions();
-                                                        });
-                                         });
+            Scan(scanner =>
+            {
+                scanner.AssemblyContainingType<IServiceChargeSearch>();
+                scanner.WithDefaultConventions();
+            });
         }
     }
 }

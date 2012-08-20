@@ -1,24 +1,21 @@
 using CallServices.Repositories;
 using CallServices.Validator.Rules;
-using StructureMap;
+using StructureMap.Configuration.DSL;
 
 namespace CallServices
 {
-    public class AppConfigurator
+    public class AppConfigurator : Registry
     {
-        public void Initialize()
+        public AppConfigurator()
         {
-            ObjectFactory.Configure(x =>
-                                         {
-                                             x.For<ICallRepository>().Singleton();
- 
-                                             x.Scan(scan =>
-                                                        {
-                                                            scan.AssemblyContainingType<ICallRegistration>();
-                                                            scan.WithDefaultConventions();
-                                                            scan.AddAllTypesOf<IRule>();
-                                                        });
-                                         });
+            For<ICallRepository>().Singleton();
+
+            Scan(scanner =>
+            {
+                scanner.AssemblyContainingType<ICallRegistration>();
+                scanner.WithDefaultConventions();
+                scanner.AddAllTypesOf<IRule>();
+            });
         }
     }
 }

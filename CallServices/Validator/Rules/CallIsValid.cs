@@ -1,4 +1,4 @@
-using System;
+using CallServices.Exceptions;
 using Core.ServiceCalls;
 
 namespace CallServices.Validator.Rules
@@ -9,7 +9,7 @@ namespace CallServices.Validator.Rules
         {
             if (call.IsValid() == false)
             {
-                throw new Exception(string.Format("Your call was dimissed as it contained invalid information: {0},", (object) call.ToString()));
+                throw new InvalidCallException(call);
             }
         }
     }

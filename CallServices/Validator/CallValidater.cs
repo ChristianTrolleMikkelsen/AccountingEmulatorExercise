@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using CallServices.Validator.Rules;
 using Core.ServiceCalls;
 using MoreLinq;
-using StructureMap;
 
 namespace CallServices.Validator
 {
@@ -15,9 +15,9 @@ namespace CallServices.Validator
     {
         private readonly IEnumerable<IRule> _rules;
 
-        public CallValidator()
+        public CallValidator(IEnumerable<IRule> rules)
         {
-            _rules = ObjectFactory.GetAllInstances<IRule>();
+            _rules = rules.OrderBy(rule => rule.GetType().Name);
         }
 
         public void ValidateCall(IServiceCall call)

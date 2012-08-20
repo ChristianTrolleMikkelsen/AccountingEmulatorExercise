@@ -1,22 +1,19 @@
-using StructureMap;
+using StructureMap.Configuration.DSL;
 using SubscriptionServices.Repositories;
 
 namespace SubscriptionServices
 {
-    public class AppConfigurator
+    public class AppConfigurator : Registry
     {
-        public void Initialize()
+        public AppConfigurator()
         {
-            ObjectFactory.Configure(x =>
-                                        {
-                                             x.For<ISubscriptionRepository>().Singleton();
+            For<ISubscriptionRepository>().Singleton();
  
-                                             x.Scan(scan =>
-                                                        {
-                                                            scan.AssemblyContainingType<ISubscriptionSearch>();
-                                                            scan.WithDefaultConventions();
-                                                        });
-                                         });
+            Scan(scan =>
+                    {
+                        scan.AssemblyContainingType<ISubscriptionSearch>();
+                        scan.WithDefaultConventions();
+                    });
         }
     }
 }

@@ -45,10 +45,11 @@ namespace ConsoleDemonstration
 
         private static void Initialize()
         {
-            new AccountingMachine.AppConfigurator().Initialize();
-            new CallServices.AppConfigurator().Initialize();
-            new SubscriptionServices.AppConfigurator().Initialize();
-            new ChargeServices.AppConfigurator().Initialize();
+            ObjectFactory.Initialize(x => x.Scan(scanner =>
+                                                     {
+                                                         scanner.AssembliesFromApplicationBaseDirectory();
+                                                         scanner.LookForRegistries();
+                                                     }));
 
             _callRegistration = ObjectFactory.GetInstance<ICallRegistration>();
             _accountingMachine = ObjectFactory.GetInstance<IAccountingMachine>();
